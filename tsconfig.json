@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": false,
+    "allowJs": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/App.tsx",
+    "src/main.tsx",
+    "src/data/**/*",
+    "src/constants/**/*",
+    "src/services/**/*",
+    "server/**/*"
+  ]
+}

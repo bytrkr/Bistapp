@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  python-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    container_name: bistapp-python-engine
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
+      - NODE_ENV=production
+      - JIRO_URL=http://jiro:8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: always
+    networks:
+      - bistapp-network
+
+  node-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: bistapp-node-core
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - PYTHON_BACKEND_URL=http://python-backend:8001
+      - JIRO_URL=http://jiro:8000
+      - REDIS_URL=redis://redis:6379
+      # Security & Auth
+      - SECRET_KEY=${SECRET_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      # LLM Proxy keys injected from host environment (Never exposed to Client)
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_API_KEY_1=${GEMINI_API_KEY_1}
+      - GEMINI_API_KEY_2=${GEMINI_API_KEY_2}
+    depends_on:
+      python-backend:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: always
+    networks:
+      - bistapp-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: bistapp-cache
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - bistapp-network
+
+  jiro:
+    build:
+      context: .
+      dockerfile: Dockerfile.jiro
+    container_name: bistapp-jiro
+    expose:
+      - "8000"
+    environment:
+      - PORT=8000
+      - JIRO_TARGETS=reddit.com,r/BIST,kap.org.tr
+    restart: always
+    networks:
+      - bistapp-network
+
+networks:
+  bistapp-network:
+    driver: bridge

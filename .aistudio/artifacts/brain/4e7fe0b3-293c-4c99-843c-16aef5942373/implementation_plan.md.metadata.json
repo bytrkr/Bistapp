@@ -1,0 +1,6 @@
+{
+  "summary": "5 kuant motorunu (Anomaly, Board/L2, Forensic, StoryCubes, Composite V2) tek bir tacticalCollector.ts (UnifiedVerdict ve Joker Override mantığı) altında birleştiren, 11 sayfalık kart yığınını tek satırlık kompakt TacticalCard.tsx ve varsayılan kapalı [Detay v] çekmecesine dönüştüren, BIST (±1.8σ) ve CRYPTO/NASDAQ (±2.0σ) pazar eşiklerini ayıran, copyForLLM.ts / .TOON / HTML5 rapor ve en yeniden eskiye canlı RSS akışı sunan mimari plan.",
+  "updatedAt": "2026-10-16T22:36:18.733950138Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

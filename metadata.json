@@ -1,0 +1,7 @@
+{
+  "name": "BIST Jüri Hedge Fund Terminali",
+  "description": "Tüm Borsa İstanbul (BIST 100 / BIST Tüm) hisseleri için Çok Zaman Dilimli Getiri, Kişisel Portföy Takibi, 9 Küp Zar Formasyonu ve Birleşik Karar Destek Sistemi.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

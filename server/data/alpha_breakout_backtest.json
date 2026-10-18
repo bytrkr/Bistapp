@@ -1,0 +1,3150 @@
+{
+  "summary": {
+    "totalEvents": 114,
+    "successEvents": 70,
+    "failedEvents": 44,
+    "winRatePct": 61.4,
+    "avgReturn5dPct": 4.31,
+    "avgMaxReturn5dPct": 9.28,
+    "avgDrawdown5dPct": -3.65,
+    "profitFactor": 3.29,
+    "sharpeRatio": 3.98,
+    "trainEventsCount": 85,
+    "testEventsCount": 29,
+    "testWinRatePct": 58.6
+  },
+  "featureImportanceBaseline": [
+    {
+      "feature": "top3Ratio",
+      "correlationWithSuccess": 0.477,
+      "importanceScore": 47.7
+    },
+    {
+      "feature": "volumeZScore",
+      "correlationWithSuccess": 0.428,
+      "importanceScore": 42.8
+    },
+    {
+      "feature": "yabanciDegisim",
+      "correlationWithSuccess": 0.226,
+      "importanceScore": 22.6
+    },
+    {
+      "feature": "depthErosion",
+      "correlationWithSuccess": 0.183,
+      "importanceScore": 18.3
+    },
+    {
+      "feature": "rsi",
+      "correlationWithSuccess": 0.076,
+      "importanceScore": 7.6
+    },
+    {
+      "feature": "spreadPct",
+      "correlationWithSuccess": -0.072,
+      "importanceScore": 7.2
+    },
+    {
+      "feature": "fiyatMaliyetFarkPct",
+      "correlationWithSuccess": 0.068,
+      "importanceScore": 6.8
+    },
+    {
+      "feature": "hhi",
+      "correlationWithSuccess": -0.032,
+      "importanceScore": 3.2
+    },
+    {
+      "feature": "altmanZ",
+      "correlationWithSuccess": 0.029,
+      "importanceScore": 2.9
+    },
+    {
+      "feature": "piotroskiF",
+      "correlationWithSuccess": -0.013,
+      "importanceScore": 1.3
+    }
+  ],
+  "samples": [
+    {
+      "id": "EVT_CIMSA.IS_20241029",
+      "ticker": "CIMSA.IS",
+      "date": "2024-10-29",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.1,
+        "top3Ratio": 0.81,
+        "hhi": 0.3348,
+        "yabanciDegisim": 2.5,
+        "spreadPct": 0.37,
+        "depthErosion": 0.79,
+        "rsi": 65.4,
+        "fiyatMaliyetFarkPct": -0.4,
+        "priceVsCost": -0.4,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 5.32,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.061,
+        "maxReturn5d": 0.086,
+        "drawdown5d": -0.019,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_GUBRF.IS_20241106",
+      "ticker": "GUBRF.IS",
+      "date": "2024-11-06",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 7.52,
+        "top3Ratio": 0.41,
+        "hhi": 0.2175,
+        "yabanciDegisim": -0.6,
+        "spreadPct": 0.14,
+        "depthErosion": 0.62,
+        "rsi": 46.1,
+        "fiyatMaliyetFarkPct": -0.8,
+        "priceVsCost": -0.8,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 5.98,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": -0.037,
+        "maxReturn5d": 0.027,
+        "drawdown5d": -0.049,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_CIMSA.IS_20241115",
+      "ticker": "CIMSA.IS",
+      "date": "2024-11-15",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 2.67,
+        "top3Ratio": 0.49,
+        "hhi": 0.296,
+        "yabanciDegisim": 0,
+        "spreadPct": 0.2,
+        "depthErosion": 0.57,
+        "rsi": 57.1,
+        "fiyatMaliyetFarkPct": -1.9,
+        "priceVsCost": -1.9,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 6.16,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": -0.056,
+        "maxReturn5d": 0.011,
+        "drawdown5d": -0.094,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_SISE.IS_20241115",
+      "ticker": "SISE.IS",
+      "date": "2024-11-15",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 9.7,
+        "top3Ratio": 0.71,
+        "hhi": 0.1534,
+        "yabanciDegisim": 2,
+        "spreadPct": 0.26,
+        "depthErosion": 0.64,
+        "rsi": 72.4,
+        "fiyatMaliyetFarkPct": 1.4,
+        "priceVsCost": 1.4,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 2.6,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.083,
+        "maxReturn5d": 0.124,
+        "drawdown5d": -0.022,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_FROTO.IS_20241123",
+      "ticker": "FROTO.IS",
+      "date": "2024-11-23",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 2.87,
+        "top3Ratio": 0.65,
+        "hhi": 0.1701,
+        "yabanciDegisim": 1.7,
+        "spreadPct": 0.11,
+        "depthErosion": 0.78,
+        "rsi": 65.1,
+        "fiyatMaliyetFarkPct": -0.8,
+        "priceVsCost": -0.8,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 4.88,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": -0.045,
+        "maxReturn5d": 0.011,
+        "drawdown5d": -0.079,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_ISDMR.IS_20241130",
+      "ticker": "ISDMR.IS",
+      "date": "2024-11-30",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 4.29,
+        "top3Ratio": 0.86,
+        "hhi": 0.2283,
+        "yabanciDegisim": -0.1,
+        "spreadPct": 0.09,
+        "depthErosion": 0.76,
+        "rsi": 71.5,
+        "fiyatMaliyetFarkPct": 0.1,
+        "priceVsCost": 0.1,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 3.49,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.102,
+        "maxReturn5d": 0.124,
+        "drawdown5d": -0.021,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ARCLK.IS_20241208",
+      "ticker": "ARCLK.IS",
+      "date": "2024-12-08",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 9.14,
+        "top3Ratio": 0.71,
+        "hhi": 0.3065,
+        "yabanciDegisim": 1.4,
+        "spreadPct": 0.11,
+        "depthErosion": 0.69,
+        "rsi": 73.8,
+        "fiyatMaliyetFarkPct": -2.2,
+        "priceVsCost": -2.2,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 6.15,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": 0.059,
+        "maxReturn5d": 0.099,
+        "drawdown5d": -0.009,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ARCLK.IS_20241218",
+      "ticker": "ARCLK.IS",
+      "date": "2024-12-18",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 12.87,
+        "top3Ratio": 0.52,
+        "hhi": 0.3282,
+        "yabanciDegisim": 3,
+        "spreadPct": 0.5,
+        "depthErosion": 0.56,
+        "rsi": 49.5,
+        "fiyatMaliyetFarkPct": -1.7,
+        "priceVsCost": -1.7,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 3.13,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": -0.045,
+        "maxReturn5d": 0.014,
+        "drawdown5d": -0.061,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_KONTR.IS_20241222",
+      "ticker": "KONTR.IS",
+      "date": "2024-12-22",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 12.61,
+        "top3Ratio": 0.42,
+        "hhi": 0.0533,
+        "yabanciDegisim": 1,
+        "spreadPct": 0.32,
+        "depthErosion": 0.66,
+        "rsi": 68.9,
+        "fiyatMaliyetFarkPct": 2.5,
+        "priceVsCost": 2.5,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 3.9,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.04,
+        "maxReturn5d": 0.073,
+        "drawdown5d": -0.01,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_GUBRF.IS_20250101",
+      "ticker": "GUBRF.IS",
+      "date": "2025-01-01",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 2.7,
+        "top3Ratio": 0.64,
+        "hhi": 0.1382,
+        "yabanciDegisim": -0.1,
+        "spreadPct": 0.43,
+        "depthErosion": 0.54,
+        "rsi": 56.8,
+        "fiyatMaliyetFarkPct": -0.3,
+        "priceVsCost": -0.3,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 2.62,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": -0.024,
+        "maxReturn5d": 0.021,
+        "drawdown5d": -0.06,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_ASTOR.IS_20250208",
+      "ticker": "ASTOR.IS",
+      "date": "2025-02-08",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 2.99,
+        "top3Ratio": 0.39,
+        "hhi": 0.1611,
+        "yabanciDegisim": 5.1,
+        "spreadPct": 0.17,
+        "depthErosion": 0.62,
+        "rsi": 43.1,
+        "fiyatMaliyetFarkPct": -0.4,
+        "priceVsCost": -0.4,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 2.26,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": -0.037,
+        "maxReturn5d": 0.015,
+        "drawdown5d": -0.056,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_ALARK.IS_20250214",
+      "ticker": "ALARK.IS",
+      "date": "2025-02-14",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.97,
+        "top3Ratio": 0.81,
+        "hhi": 0.361,
+        "yabanciDegisim": 4.1,
+        "spreadPct": 0.28,
+        "depthErosion": 0.45,
+        "rsi": 58.9,
+        "fiyatMaliyetFarkPct": 1,
+        "priceVsCost": 1,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 2.03,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.094,
+        "maxReturn5d": 0.12,
+        "drawdown5d": -0.007,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ISCTR.IS_20250215",
+      "ticker": "ISCTR.IS",
+      "date": "2025-02-15",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.58,
+        "top3Ratio": 0.44,
+        "hhi": 0.274,
+        "yabanciDegisim": -0.4,
+        "spreadPct": 0.28,
+        "depthErosion": 0.54,
+        "rsi": 50.3,
+        "fiyatMaliyetFarkPct": 0.5,
+        "priceVsCost": 0.5,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 3.69,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": -0.063,
+        "maxReturn5d": 0.016,
+        "drawdown5d": -0.089,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_BIMAS.IS_20250223",
+      "ticker": "BIMAS.IS",
+      "date": "2025-02-23",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 12.59,
+        "top3Ratio": 0.5,
+        "hhi": 0.288,
+        "yabanciDegisim": 2.9,
+        "spreadPct": 0.5,
+        "depthErosion": 0.76,
+        "rsi": 65.3,
+        "fiyatMaliyetFarkPct": 1.8,
+        "priceVsCost": 1.8,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 4.09,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.151,
+        "maxReturn5d": 0.208,
+        "drawdown5d": -0.017,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_KONTR.IS_20250226",
+      "ticker": "KONTR.IS",
+      "date": "2025-02-26",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.3,
+        "top3Ratio": 0.77,
+        "hhi": 0.2298,
+        "yabanciDegisim": 3,
+        "spreadPct": 0.1,
+        "depthErosion": 0.77,
+        "rsi": 44,
+        "fiyatMaliyetFarkPct": -0.1,
+        "priceVsCost": -0.1,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 5.74,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": 0.136,
+        "maxReturn5d": 0.198,
+        "drawdown5d": -0.013,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_AKBNK.IS_20250302",
+      "ticker": "AKBNK.IS",
+      "date": "2025-03-02",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.89,
+        "top3Ratio": 0.39,
+        "hhi": 0.2118,
+        "yabanciDegisim": 2.9,
+        "spreadPct": 0.41,
+        "depthErosion": 0.89,
+        "rsi": 64.4,
+        "fiyatMaliyetFarkPct": 0.5,
+        "priceVsCost": 0.5,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 3.69,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": 0.1,
+        "maxReturn5d": 0.131,
+        "drawdown5d": -0.018,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_FROTO.IS_20250319",
+      "ticker": "FROTO.IS",
+      "date": "2025-03-19",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.48,
+        "top3Ratio": 0.57,
+        "hhi": 0.2075,
+        "yabanciDegisim": 1.8,
+        "spreadPct": 0.34,
+        "depthErosion": 0.59,
+        "rsi": 67.9,
+        "fiyatMaliyetFarkPct": 1.4,
+        "priceVsCost": 1.4,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 3.33,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.046,
+        "maxReturn5d": 0.013,
+        "drawdown5d": -0.076,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_EREGL.IS_20250321",
+      "ticker": "EREGL.IS",
+      "date": "2025-03-21",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 3.43,
+        "top3Ratio": 0.44,
+        "hhi": 0.2155,
+        "yabanciDegisim": 2.8,
+        "spreadPct": 0.33,
+        "depthErosion": 0.77,
+        "rsi": 55.8,
+        "fiyatMaliyetFarkPct": -1.3,
+        "priceVsCost": -1.3,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 5.93,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": -0.026,
+        "maxReturn5d": 0.015,
+        "drawdown5d": -0.041,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_MGROS.IS_20250321",
+      "ticker": "MGROS.IS",
+      "date": "2025-03-21",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.55,
+        "top3Ratio": 0.39,
+        "hhi": 0.3037,
+        "yabanciDegisim": 2.9,
+        "spreadPct": 0.1,
+        "depthErosion": 0.92,
+        "rsi": 65.4,
+        "fiyatMaliyetFarkPct": -0.8,
+        "priceVsCost": -0.8,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 4.29,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.055,
+        "maxReturn5d": 0.106,
+        "drawdown5d": -0.017,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_SISE.IS_20250402",
+      "ticker": "SISE.IS",
+      "date": "2025-04-02",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 10.05,
+        "top3Ratio": 0.56,
+        "hhi": 0.1796,
+        "yabanciDegisim": 3.2,
+        "spreadPct": 0.18,
+        "depthErosion": 0.83,
+        "rsi": 58.9,
+        "fiyatMaliyetFarkPct": -1.7,
+        "priceVsCost": -1.7,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 3.22,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.051,
+        "maxReturn5d": 0.102,
+        "drawdown5d": -0.019,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_SISE.IS_20250403",
+      "ticker": "SISE.IS",
+      "date": "2025-04-03",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.64,
+        "top3Ratio": 0.8,
+        "hhi": 0.3072,
+        "yabanciDegisim": 0.6,
+        "spreadPct": 0.34,
+        "depthErosion": 0.85,
+        "rsi": 45.2,
+        "fiyatMaliyetFarkPct": -0.7,
+        "priceVsCost": -0.7,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 3.99,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.144,
+        "maxReturn5d": 0.182,
+        "drawdown5d": -0.008,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_AKCNS.IS_20250409",
+      "ticker": "AKCNS.IS",
+      "date": "2025-04-09",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.24,
+        "top3Ratio": 0.9,
+        "hhi": 0.0639,
+        "yabanciDegisim": 1.2,
+        "spreadPct": 0.32,
+        "depthErosion": 0.93,
+        "rsi": 51.8,
+        "fiyatMaliyetFarkPct": -1,
+        "priceVsCost": -1,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 4.5,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.06,
+        "maxReturn5d": 0.081,
+        "drawdown5d": -0.016,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_THYAO.IS_20250410",
+      "ticker": "THYAO.IS",
+      "date": "2025-04-10",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 14.15,
+        "top3Ratio": 0.88,
+        "hhi": 0.3996,
+        "yabanciDegisim": 5.3,
+        "spreadPct": 0.26,
+        "depthErosion": 0.46,
+        "rsi": 55.8,
+        "fiyatMaliyetFarkPct": 1.9,
+        "priceVsCost": 1.9,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 6.26,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.061,
+        "maxReturn5d": 0.102,
+        "drawdown5d": -0.019,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_YKBNK.IS_20250414",
+      "ticker": "YKBNK.IS",
+      "date": "2025-04-14",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.36,
+        "top3Ratio": 0.8,
+        "hhi": 0.449,
+        "yabanciDegisim": -0.9,
+        "spreadPct": 0.23,
+        "depthErosion": 0.79,
+        "rsi": 50,
+        "fiyatMaliyetFarkPct": 2,
+        "priceVsCost": 2,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 5.31,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.086,
+        "maxReturn5d": 0.15,
+        "drawdown5d": -0.009,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_EREGL.IS_20250419",
+      "ticker": "EREGL.IS",
+      "date": "2025-04-19",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.32,
+        "top3Ratio": 0.36,
+        "hhi": 0.2132,
+        "yabanciDegisim": 2.1,
+        "spreadPct": 0.27,
+        "depthErosion": 0.92,
+        "rsi": 72.1,
+        "fiyatMaliyetFarkPct": -1.9,
+        "priceVsCost": -1.9,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 6.46,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.03,
+        "maxReturn5d": 0.011,
+        "drawdown5d": -0.065,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_SAHOL.IS_20250419",
+      "ticker": "SAHOL.IS",
+      "date": "2025-04-19",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 12.77,
+        "top3Ratio": 0.44,
+        "hhi": 0.2869,
+        "yabanciDegisim": 0.6,
+        "spreadPct": 0.21,
+        "depthErosion": 0.49,
+        "rsi": 43.4,
+        "fiyatMaliyetFarkPct": 0.6,
+        "priceVsCost": 0.6,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 4.2,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.123,
+        "maxReturn5d": 0.167,
+        "drawdown5d": -0.016,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_HEKTS.IS_20250422",
+      "ticker": "HEKTS.IS",
+      "date": "2025-04-22",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 4.44,
+        "top3Ratio": 0.88,
+        "hhi": 0.1807,
+        "yabanciDegisim": 4.9,
+        "spreadPct": 0.23,
+        "depthErosion": 0.73,
+        "rsi": 77.8,
+        "fiyatMaliyetFarkPct": -1.9,
+        "priceVsCost": -1.9,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 4.08,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.104,
+        "maxReturn5d": 0.131,
+        "drawdown5d": -0.014,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_EREGL.IS_20250425",
+      "ticker": "EREGL.IS",
+      "date": "2025-04-25",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.21,
+        "top3Ratio": 0.68,
+        "hhi": 0.17,
+        "yabanciDegisim": 5.3,
+        "spreadPct": 0.34,
+        "depthErosion": 0.53,
+        "rsi": 70.7,
+        "fiyatMaliyetFarkPct": 0.3,
+        "priceVsCost": 0.3,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 5.9,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.074,
+        "maxReturn5d": 0.114,
+        "drawdown5d": -0.019,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_AKCNS.IS_20250502",
+      "ticker": "AKCNS.IS",
+      "date": "2025-05-02",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 9.96,
+        "top3Ratio": 0.71,
+        "hhi": 0.3658,
+        "yabanciDegisim": 0,
+        "spreadPct": 0.38,
+        "depthErosion": 0.45,
+        "rsi": 57.2,
+        "fiyatMaliyetFarkPct": 0.6,
+        "priceVsCost": 0.6,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 6.34,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.087,
+        "maxReturn5d": 0.135,
+        "drawdown5d": -0.009,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_TOASO.IS_20250503",
+      "ticker": "TOASO.IS",
+      "date": "2025-05-03",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 7.32,
+        "top3Ratio": 0.7,
+        "hhi": 0.231,
+        "yabanciDegisim": -0.3,
+        "spreadPct": 0.51,
+        "depthErosion": 0.64,
+        "rsi": 63.4,
+        "fiyatMaliyetFarkPct": -1.8,
+        "priceVsCost": -1.8,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 6.45,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.098,
+        "maxReturn5d": 0.142,
+        "drawdown5d": -0.006,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_KRDMD.IS_20250601",
+      "ticker": "KRDMD.IS",
+      "date": "2025-06-01",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 12.45,
+        "top3Ratio": 0.81,
+        "hhi": 0.4095,
+        "yabanciDegisim": 0.9,
+        "spreadPct": 0.17,
+        "depthErosion": 0.52,
+        "rsi": 64.6,
+        "fiyatMaliyetFarkPct": 1.7,
+        "priceVsCost": 1.7,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 3.68,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.143,
+        "maxReturn5d": 0.169,
+        "drawdown5d": -0.013,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_KCHOL.IS_20250614",
+      "ticker": "KCHOL.IS",
+      "date": "2025-06-14",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.74,
+        "top3Ratio": 0.55,
+        "hhi": 0.2733,
+        "yabanciDegisim": 2.9,
+        "spreadPct": 0.17,
+        "depthErosion": 0.52,
+        "rsi": 60.7,
+        "fiyatMaliyetFarkPct": 0.4,
+        "priceVsCost": 0.4,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 3.86,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.044,
+        "maxReturn5d": 0.023,
+        "drawdown5d": -0.06,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_OYAKC.IS_20250617",
+      "ticker": "OYAKC.IS",
+      "date": "2025-06-17",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 9.56,
+        "top3Ratio": 0.87,
+        "hhi": 0.3787,
+        "yabanciDegisim": 1.9,
+        "spreadPct": 0.23,
+        "depthErosion": 0.61,
+        "rsi": 60.9,
+        "fiyatMaliyetFarkPct": 1.3,
+        "priceVsCost": 1.3,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 5.16,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.119,
+        "maxReturn5d": 0.142,
+        "drawdown5d": -0.005,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ASELS.IS_20250617",
+      "ticker": "ASELS.IS",
+      "date": "2025-06-17",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 4.37,
+        "top3Ratio": 0.43,
+        "hhi": 0.3682,
+        "yabanciDegisim": 3.8,
+        "spreadPct": 0.47,
+        "depthErosion": 0.51,
+        "rsi": 48.7,
+        "fiyatMaliyetFarkPct": 2,
+        "priceVsCost": 2,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 4.92,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.027,
+        "maxReturn5d": 0.008,
+        "drawdown5d": -0.042,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_GUBRF.IS_20250624",
+      "ticker": "GUBRF.IS",
+      "date": "2025-06-24",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.09,
+        "top3Ratio": 0.8,
+        "hhi": 0.0783,
+        "yabanciDegisim": 1.4,
+        "spreadPct": 0.39,
+        "depthErosion": 0.66,
+        "rsi": 65.2,
+        "fiyatMaliyetFarkPct": 1.8,
+        "priceVsCost": 1.8,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 2.3,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.138,
+        "maxReturn5d": 0.189,
+        "drawdown5d": -0.021,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_HEKTS.IS_20250630",
+      "ticker": "HEKTS.IS",
+      "date": "2025-06-30",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 14.08,
+        "top3Ratio": 0.57,
+        "hhi": 0.4236,
+        "yabanciDegisim": 4.8,
+        "spreadPct": 0.48,
+        "depthErosion": 0.5,
+        "rsi": 64.2,
+        "fiyatMaliyetFarkPct": -1.5,
+        "priceVsCost": -1.5,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 2.15,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": 0.059,
+        "maxReturn5d": 0.098,
+        "drawdown5d": -0.006,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ALARK.IS_20250710",
+      "ticker": "ALARK.IS",
+      "date": "2025-07-10",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 2.61,
+        "top3Ratio": 0.71,
+        "hhi": 0.2688,
+        "yabanciDegisim": 1,
+        "spreadPct": 0.27,
+        "depthErosion": 0.53,
+        "rsi": 72.5,
+        "fiyatMaliyetFarkPct": 2.4,
+        "priceVsCost": 2.4,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 5.12,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": -0.044,
+        "maxReturn5d": 0.01,
+        "drawdown5d": -0.081,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_GARAN.IS_20250718",
+      "ticker": "GARAN.IS",
+      "date": "2025-07-18",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.79,
+        "top3Ratio": 0.35,
+        "hhi": 0.3826,
+        "yabanciDegisim": 4.5,
+        "spreadPct": 0.37,
+        "depthErosion": 0.93,
+        "rsi": 45.4,
+        "fiyatMaliyetFarkPct": -2,
+        "priceVsCost": -2,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 4.94,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.051,
+        "maxReturn5d": 0.024,
+        "drawdown5d": -0.071,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_THYAO.IS_20250724",
+      "ticker": "THYAO.IS",
+      "date": "2025-07-24",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 3.38,
+        "top3Ratio": 0.54,
+        "hhi": 0.3943,
+        "yabanciDegisim": 1.8,
+        "spreadPct": 0.44,
+        "depthErosion": 0.49,
+        "rsi": 52.6,
+        "fiyatMaliyetFarkPct": 1.4,
+        "priceVsCost": 1.4,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 3.57,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.063,
+        "maxReturn5d": 0.018,
+        "drawdown5d": -0.104,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_GARAN.IS_20250724",
+      "ticker": "GARAN.IS",
+      "date": "2025-07-24",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 8.01,
+        "top3Ratio": 0.65,
+        "hhi": 0.3017,
+        "yabanciDegisim": 5.4,
+        "spreadPct": 0.15,
+        "depthErosion": 0.58,
+        "rsi": 78.2,
+        "fiyatMaliyetFarkPct": 0.2,
+        "priceVsCost": 0.2,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 4.15,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.099,
+        "maxReturn5d": 0.147,
+        "drawdown5d": -0.013,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_SASA.IS_20250730",
+      "ticker": "SASA.IS",
+      "date": "2025-07-30",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 3.65,
+        "top3Ratio": 0.62,
+        "hhi": 0.4059,
+        "yabanciDegisim": -0.8,
+        "spreadPct": 0.38,
+        "depthErosion": 0.61,
+        "rsi": 42.9,
+        "fiyatMaliyetFarkPct": 0.4,
+        "priceVsCost": 0.4,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 4.5,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": -0.034,
+        "maxReturn5d": 0.01,
+        "drawdown5d": -0.075,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_THYAO.IS_20250803",
+      "ticker": "THYAO.IS",
+      "date": "2025-08-03",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 3.12,
+        "top3Ratio": 0.84,
+        "hhi": 0.4443,
+        "yabanciDegisim": 4,
+        "spreadPct": 0.17,
+        "depthErosion": 0.68,
+        "rsi": 54.6,
+        "fiyatMaliyetFarkPct": -1.3,
+        "priceVsCost": -1.3,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 6.1,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.155,
+        "maxReturn5d": 0.201,
+        "drawdown5d": -0.017,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_FROTO.IS_20250807",
+      "ticker": "FROTO.IS",
+      "date": "2025-08-07",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 8.24,
+        "top3Ratio": 0.63,
+        "hhi": 0.055,
+        "yabanciDegisim": 4,
+        "spreadPct": 0.29,
+        "depthErosion": 0.74,
+        "rsi": 59.9,
+        "fiyatMaliyetFarkPct": -2,
+        "priceVsCost": -2,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 3.37,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.126,
+        "maxReturn5d": 0.173,
+        "drawdown5d": -0.01,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_HEKTS.IS_20250809",
+      "ticker": "HEKTS.IS",
+      "date": "2025-08-09",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.64,
+        "top3Ratio": 0.87,
+        "hhi": 0.2023,
+        "yabanciDegisim": -0.3,
+        "spreadPct": 0.34,
+        "depthErosion": 0.8,
+        "rsi": 69.4,
+        "fiyatMaliyetFarkPct": 1.2,
+        "priceVsCost": 1.2,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 3.89,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.04,
+        "maxReturn5d": 0.063,
+        "drawdown5d": -0.007,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_CIMSA.IS_20250824",
+      "ticker": "CIMSA.IS",
+      "date": "2025-08-24",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 9.48,
+        "top3Ratio": 0.34,
+        "hhi": 0.2379,
+        "yabanciDegisim": 4.8,
+        "spreadPct": 0.52,
+        "depthErosion": 0.92,
+        "rsi": 69.7,
+        "fiyatMaliyetFarkPct": 1.3,
+        "priceVsCost": 1.3,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 2.33,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.078,
+        "maxReturn5d": 0.142,
+        "drawdown5d": -0.017,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_MGROS.IS_20250905",
+      "ticker": "MGROS.IS",
+      "date": "2025-09-05",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 10.53,
+        "top3Ratio": 0.43,
+        "hhi": 0.3008,
+        "yabanciDegisim": -0.6,
+        "spreadPct": 0.44,
+        "depthErosion": 0.69,
+        "rsi": 78.6,
+        "fiyatMaliyetFarkPct": -1.1,
+        "priceVsCost": -1.1,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 5.03,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.054,
+        "maxReturn5d": 0.012,
+        "drawdown5d": -0.082,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_SISE.IS_20250913",
+      "ticker": "SISE.IS",
+      "date": "2025-09-13",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 2.97,
+        "top3Ratio": 0.87,
+        "hhi": 0.3454,
+        "yabanciDegisim": 1.3,
+        "spreadPct": 0.27,
+        "depthErosion": 0.56,
+        "rsi": 49.2,
+        "fiyatMaliyetFarkPct": 2.4,
+        "priceVsCost": 2.4,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 5.85,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.132,
+        "maxReturn5d": 0.176,
+        "drawdown5d": -0.013,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_AKBNK.IS_20250916",
+      "ticker": "AKBNK.IS",
+      "date": "2025-09-16",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.24,
+        "top3Ratio": 0.51,
+        "hhi": 0.1516,
+        "yabanciDegisim": 0.3,
+        "spreadPct": 0.24,
+        "depthErosion": 0.76,
+        "rsi": 58.8,
+        "fiyatMaliyetFarkPct": -1.1,
+        "priceVsCost": -1.1,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 6.28,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.035,
+        "maxReturn5d": 0.009,
+        "drawdown5d": -0.057,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_CIMSA.IS_20250918",
+      "ticker": "CIMSA.IS",
+      "date": "2025-09-18",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 10.03,
+        "top3Ratio": 0.6,
+        "hhi": 0.2716,
+        "yabanciDegisim": 3.3,
+        "spreadPct": 0.21,
+        "depthErosion": 0.75,
+        "rsi": 61.2,
+        "fiyatMaliyetFarkPct": 2.4,
+        "priceVsCost": 2.4,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 3.33,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": 0.13,
+        "maxReturn5d": 0.156,
+        "drawdown5d": -0.006,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_KCHOL.IS_20251008",
+      "ticker": "KCHOL.IS",
+      "date": "2025-10-08",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.49,
+        "top3Ratio": 0.34,
+        "hhi": 0.28,
+        "yabanciDegisim": -0.3,
+        "spreadPct": 0.36,
+        "depthErosion": 0.61,
+        "rsi": 42.9,
+        "fiyatMaliyetFarkPct": 2,
+        "priceVsCost": 2,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 3.4,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": -0.022,
+        "maxReturn5d": 0.011,
+        "drawdown5d": -0.06,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_PGSUS.IS_20251010",
+      "ticker": "PGSUS.IS",
+      "date": "2025-10-10",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.15,
+        "top3Ratio": 0.77,
+        "hhi": 0.1948,
+        "yabanciDegisim": 0.7,
+        "spreadPct": 0.45,
+        "depthErosion": 0.46,
+        "rsi": 52.9,
+        "fiyatMaliyetFarkPct": 0.6,
+        "priceVsCost": 0.6,
+        "isDelayed": false,
+        "latencyBucket": 2,
+        "altmanZ": 4.87,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.112,
+        "maxReturn5d": 0.167,
+        "drawdown5d": -0.013,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_PETKM.IS_20251017",
+      "ticker": "PETKM.IS",
+      "date": "2025-10-17",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 13.44,
+        "top3Ratio": 0.31,
+        "hhi": 0.1041,
+        "yabanciDegisim": 0.3,
+        "spreadPct": 0.5,
+        "depthErosion": 0.95,
+        "rsi": 65.6,
+        "fiyatMaliyetFarkPct": -2,
+        "priceVsCost": -2,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 3.71,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.099,
+        "maxReturn5d": 0.153,
+        "drawdown5d": -0.016,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_HEKTS.IS_20251026",
+      "ticker": "HEKTS.IS",
+      "date": "2025-10-26",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.14,
+        "top3Ratio": 0.82,
+        "hhi": 0.2938,
+        "yabanciDegisim": 4.9,
+        "spreadPct": 0.11,
+        "depthErosion": 0.66,
+        "rsi": 50.5,
+        "fiyatMaliyetFarkPct": -2.1,
+        "priceVsCost": -2.1,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 5.85,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.101,
+        "maxReturn5d": 0.119,
+        "drawdown5d": -0.02,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_THYAO.IS_20251029",
+      "ticker": "THYAO.IS",
+      "date": "2025-10-29",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.22,
+        "top3Ratio": 0.75,
+        "hhi": 0.1174,
+        "yabanciDegisim": 4.6,
+        "spreadPct": 0.09,
+        "depthErosion": 0.93,
+        "rsi": 65.3,
+        "fiyatMaliyetFarkPct": -1.8,
+        "priceVsCost": -1.8,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 5.19,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.144,
+        "maxReturn5d": 0.183,
+        "drawdown5d": -0.019,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_KONTR.IS_20251103",
+      "ticker": "KONTR.IS",
+      "date": "2025-11-03",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 12.21,
+        "top3Ratio": 0.56,
+        "hhi": 0.1391,
+        "yabanciDegisim": 2.6,
+        "spreadPct": 0.5,
+        "depthErosion": 0.46,
+        "rsi": 79,
+        "fiyatMaliyetFarkPct": -0.2,
+        "priceVsCost": -0.2,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 6.46,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.068,
+        "maxReturn5d": 0.09,
+        "drawdown5d": -0.019,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_CIMSA.IS_20251110",
+      "ticker": "CIMSA.IS",
+      "date": "2025-11-10",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.13,
+        "top3Ratio": 0.64,
+        "hhi": 0.2182,
+        "yabanciDegisim": 0.3,
+        "spreadPct": 0.31,
+        "depthErosion": 0.69,
+        "rsi": 50,
+        "fiyatMaliyetFarkPct": 1.3,
+        "priceVsCost": 1.3,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 4.25,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": 0.057,
+        "maxReturn5d": 0.109,
+        "drawdown5d": -0.012,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_MGROS.IS_20251116",
+      "ticker": "MGROS.IS",
+      "date": "2025-11-16",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 3.59,
+        "top3Ratio": 0.8,
+        "hhi": 0.4271,
+        "yabanciDegisim": 4.9,
+        "spreadPct": 0.31,
+        "depthErosion": 0.74,
+        "rsi": 58.4,
+        "fiyatMaliyetFarkPct": 1.7,
+        "priceVsCost": 1.7,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 2.76,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.058,
+        "maxReturn5d": 0.084,
+        "drawdown5d": -0.017,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_TUPRS.IS_20251117",
+      "ticker": "TUPRS.IS",
+      "date": "2025-11-17",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.59,
+        "top3Ratio": 0.63,
+        "hhi": 0.353,
+        "yabanciDegisim": 1.3,
+        "spreadPct": 0.11,
+        "depthErosion": 0.63,
+        "rsi": 76.4,
+        "fiyatMaliyetFarkPct": -1.2,
+        "priceVsCost": -1.2,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 4.26,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": -0.048,
+        "maxReturn5d": 0.027,
+        "drawdown5d": -0.061,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_AKCNS.IS_20251118",
+      "ticker": "AKCNS.IS",
+      "date": "2025-11-18",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 8.25,
+        "top3Ratio": 0.38,
+        "hhi": 0.2359,
+        "yabanciDegisim": 5.3,
+        "spreadPct": 0.48,
+        "depthErosion": 0.55,
+        "rsi": 65.3,
+        "fiyatMaliyetFarkPct": -1.7,
+        "priceVsCost": -1.7,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 2.07,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.045,
+        "maxReturn5d": 0.014,
+        "drawdown5d": -0.064,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_GUBRF.IS_20251120",
+      "ticker": "GUBRF.IS",
+      "date": "2025-11-20",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.71,
+        "top3Ratio": 0.32,
+        "hhi": 0.0927,
+        "yabanciDegisim": 4.3,
+        "spreadPct": 0.31,
+        "depthErosion": 0.94,
+        "rsi": 71.2,
+        "fiyatMaliyetFarkPct": 1.2,
+        "priceVsCost": 1.2,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 2.18,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": -0.056,
+        "maxReturn5d": 0.023,
+        "drawdown5d": -0.076,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_TOASO.IS_20251122",
+      "ticker": "TOASO.IS",
+      "date": "2025-11-22",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 4.07,
+        "top3Ratio": 0.72,
+        "hhi": 0.0834,
+        "yabanciDegisim": 0.9,
+        "spreadPct": 0.45,
+        "depthErosion": 0.76,
+        "rsi": 44.9,
+        "fiyatMaliyetFarkPct": -0.2,
+        "priceVsCost": -0.2,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 5.6,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": -0.062,
+        "maxReturn5d": 0.011,
+        "drawdown5d": -0.075,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_ALARK.IS_20251201",
+      "ticker": "ALARK.IS",
+      "date": "2025-12-01",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.83,
+        "top3Ratio": 0.63,
+        "hhi": 0.4014,
+        "yabanciDegisim": -0.5,
+        "spreadPct": 0.1,
+        "depthErosion": 0.82,
+        "rsi": 66.6,
+        "fiyatMaliyetFarkPct": 1.8,
+        "priceVsCost": 1.8,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 5.46,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.071,
+        "maxReturn5d": 0.02,
+        "drawdown5d": -0.086,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_ISCTR.IS_20251220",
+      "ticker": "ISCTR.IS",
+      "date": "2025-12-20",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 13.88,
+        "top3Ratio": 0.51,
+        "hhi": 0.1246,
+        "yabanciDegisim": 0.4,
+        "spreadPct": 0.4,
+        "depthErosion": 0.56,
+        "rsi": 63.6,
+        "fiyatMaliyetFarkPct": 0.2,
+        "priceVsCost": 0.2,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 4.05,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.111,
+        "maxReturn5d": 0.171,
+        "drawdown5d": -0.011,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_YKBNK.IS_20251222",
+      "ticker": "YKBNK.IS",
+      "date": "2025-12-22",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.22,
+        "top3Ratio": 0.51,
+        "hhi": 0.3971,
+        "yabanciDegisim": 3,
+        "spreadPct": 0.35,
+        "depthErosion": 0.46,
+        "rsi": 78.2,
+        "fiyatMaliyetFarkPct": 1.2,
+        "priceVsCost": 1.2,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 2.85,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.039,
+        "maxReturn5d": 0.02,
+        "drawdown5d": -0.051,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_GUBRF.IS_20251224",
+      "ticker": "GUBRF.IS",
+      "date": "2025-12-24",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.32,
+        "top3Ratio": 0.7,
+        "hhi": 0.4068,
+        "yabanciDegisim": -1,
+        "spreadPct": 0.51,
+        "depthErosion": 0.77,
+        "rsi": 64.4,
+        "fiyatMaliyetFarkPct": -1.7,
+        "priceVsCost": -1.7,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 4.01,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": -0.066,
+        "maxReturn5d": 0.012,
+        "drawdown5d": -0.084,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_KRDMD.IS_20251226",
+      "ticker": "KRDMD.IS",
+      "date": "2025-12-26",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 10.04,
+        "top3Ratio": 0.74,
+        "hhi": 0.2446,
+        "yabanciDegisim": 2.3,
+        "spreadPct": 0.3,
+        "depthErosion": 0.94,
+        "rsi": 61.3,
+        "fiyatMaliyetFarkPct": -2.3,
+        "priceVsCost": -2.3,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 2.72,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.124,
+        "maxReturn5d": 0.168,
+        "drawdown5d": -0.022,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ISDMR.IS_20251231",
+      "ticker": "ISDMR.IS",
+      "date": "2025-12-31",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 2.99,
+        "top3Ratio": 0.63,
+        "hhi": 0.1402,
+        "yabanciDegisim": -0.8,
+        "spreadPct": 0.16,
+        "depthErosion": 0.93,
+        "rsi": 70.3,
+        "fiyatMaliyetFarkPct": -0.8,
+        "priceVsCost": -0.8,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 2.74,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.052,
+        "maxReturn5d": 0.099,
+        "drawdown5d": -0.008,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_SASA.IS_20260102",
+      "ticker": "SASA.IS",
+      "date": "2026-01-02",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.25,
+        "top3Ratio": 0.66,
+        "hhi": 0.1258,
+        "yabanciDegisim": 4.5,
+        "spreadPct": 0.27,
+        "depthErosion": 0.67,
+        "rsi": 46.6,
+        "fiyatMaliyetFarkPct": 1.3,
+        "priceVsCost": 1.3,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 5.21,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": -0.064,
+        "maxReturn5d": 0.01,
+        "drawdown5d": -0.081,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_SISE.IS_20260106",
+      "ticker": "SISE.IS",
+      "date": "2026-01-06",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 12.36,
+        "top3Ratio": 0.59,
+        "hhi": 0.3253,
+        "yabanciDegisim": 1.6,
+        "spreadPct": 0.31,
+        "depthErosion": 0.5,
+        "rsi": 55.1,
+        "fiyatMaliyetFarkPct": -0.3,
+        "priceVsCost": -0.3,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 2.79,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": 0.126,
+        "maxReturn5d": 0.165,
+        "drawdown5d": -0.01,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_TUPRS.IS_20260111",
+      "ticker": "TUPRS.IS",
+      "date": "2026-01-11",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 5.42,
+        "top3Ratio": 0.76,
+        "hhi": 0.1376,
+        "yabanciDegisim": 1.5,
+        "spreadPct": 0.38,
+        "depthErosion": 0.82,
+        "rsi": 56.1,
+        "fiyatMaliyetFarkPct": 1.8,
+        "priceVsCost": 1.8,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 4.12,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.122,
+        "maxReturn5d": 0.182,
+        "drawdown5d": -0.011,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_CIMSA.IS_20260112",
+      "ticker": "CIMSA.IS",
+      "date": "2026-01-12",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 3.19,
+        "top3Ratio": 0.54,
+        "hhi": 0.2763,
+        "yabanciDegisim": 3.8,
+        "spreadPct": 0.17,
+        "depthErosion": 0.61,
+        "rsi": 63.6,
+        "fiyatMaliyetFarkPct": 2.4,
+        "priceVsCost": 2.4,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 5.92,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.071,
+        "maxReturn5d": 0.106,
+        "drawdown5d": -0.009,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_HEKTS.IS_20260118",
+      "ticker": "HEKTS.IS",
+      "date": "2026-01-18",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 9.31,
+        "top3Ratio": 0.88,
+        "hhi": 0.1506,
+        "yabanciDegisim": 2.9,
+        "spreadPct": 0.43,
+        "depthErosion": 0.66,
+        "rsi": 59.9,
+        "fiyatMaliyetFarkPct": -0.8,
+        "priceVsCost": -0.8,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 6.28,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.068,
+        "maxReturn5d": 0.089,
+        "drawdown5d": -0.013,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_SAHOL.IS_20260121",
+      "ticker": "SAHOL.IS",
+      "date": "2026-01-21",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 10.99,
+        "top3Ratio": 0.67,
+        "hhi": 0.4407,
+        "yabanciDegisim": 4.4,
+        "spreadPct": 0.49,
+        "depthErosion": 0.67,
+        "rsi": 64.6,
+        "fiyatMaliyetFarkPct": -1.7,
+        "priceVsCost": -1.7,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 3.24,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.09,
+        "maxReturn5d": 0.107,
+        "drawdown5d": -0.008,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_OYAKC.IS_20260124",
+      "ticker": "OYAKC.IS",
+      "date": "2026-01-24",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.61,
+        "top3Ratio": 0.8,
+        "hhi": 0.0986,
+        "yabanciDegisim": 1.2,
+        "spreadPct": 0.38,
+        "depthErosion": 0.7,
+        "rsi": 55.4,
+        "fiyatMaliyetFarkPct": -0.8,
+        "priceVsCost": -0.8,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 3.4,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.066,
+        "maxReturn5d": 0.114,
+        "drawdown5d": -0.009,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ALARK.IS_20260126",
+      "ticker": "ALARK.IS",
+      "date": "2026-01-26",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.58,
+        "top3Ratio": 0.48,
+        "hhi": 0.065,
+        "yabanciDegisim": 3.2,
+        "spreadPct": 0.38,
+        "depthErosion": 0.82,
+        "rsi": 63.8,
+        "fiyatMaliyetFarkPct": -1,
+        "priceVsCost": -1,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 5.93,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.103,
+        "maxReturn5d": 0.123,
+        "drawdown5d": -0.019,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ASTOR.IS_20260131",
+      "ticker": "ASTOR.IS",
+      "date": "2026-01-31",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 8.37,
+        "top3Ratio": 0.53,
+        "hhi": 0.1472,
+        "yabanciDegisim": -0.6,
+        "spreadPct": 0.51,
+        "depthErosion": 0.71,
+        "rsi": 69.6,
+        "fiyatMaliyetFarkPct": -2,
+        "priceVsCost": -2,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 3.15,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": -0.046,
+        "maxReturn5d": 0.016,
+        "drawdown5d": -0.071,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_KCHOL.IS_20260210",
+      "ticker": "KCHOL.IS",
+      "date": "2026-02-10",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 13.54,
+        "top3Ratio": 0.59,
+        "hhi": 0.2534,
+        "yabanciDegisim": 4.3,
+        "spreadPct": 0.36,
+        "depthErosion": 0.83,
+        "rsi": 71.3,
+        "fiyatMaliyetFarkPct": -1.5,
+        "priceVsCost": -1.5,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 6.46,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.129,
+        "maxReturn5d": 0.167,
+        "drawdown5d": -0.009,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_AKCNS.IS_20260213",
+      "ticker": "AKCNS.IS",
+      "date": "2026-02-13",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 3.54,
+        "top3Ratio": 0.32,
+        "hhi": 0.2743,
+        "yabanciDegisim": 0.3,
+        "spreadPct": 0.18,
+        "depthErosion": 0.63,
+        "rsi": 72.3,
+        "fiyatMaliyetFarkPct": -0.5,
+        "priceVsCost": -0.5,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 4.71,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.06,
+        "maxReturn5d": 0.016,
+        "drawdown5d": -0.072,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_ALARK.IS_20260213",
+      "ticker": "ALARK.IS",
+      "date": "2026-02-13",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 9.89,
+        "top3Ratio": 0.77,
+        "hhi": 0.1852,
+        "yabanciDegisim": 2.7,
+        "spreadPct": 0.19,
+        "depthErosion": 0.59,
+        "rsi": 76.2,
+        "fiyatMaliyetFarkPct": 1.9,
+        "priceVsCost": 1.9,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 4.64,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.057,
+        "maxReturn5d": 0.089,
+        "drawdown5d": -0.021,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ASTOR.IS_20260302",
+      "ticker": "ASTOR.IS",
+      "date": "2026-03-02",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 11.97,
+        "top3Ratio": 0.43,
+        "hhi": 0.4429,
+        "yabanciDegisim": 3.3,
+        "spreadPct": 0.42,
+        "depthErosion": 0.83,
+        "rsi": 55.7,
+        "fiyatMaliyetFarkPct": 0.1,
+        "priceVsCost": 0.1,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 6.13,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.095,
+        "maxReturn5d": 0.112,
+        "drawdown5d": -0.006,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_FROTO.IS_20260304",
+      "ticker": "FROTO.IS",
+      "date": "2026-03-04",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 4.33,
+        "top3Ratio": 0.46,
+        "hhi": 0.2276,
+        "yabanciDegisim": 3.9,
+        "spreadPct": 0.34,
+        "depthErosion": 0.57,
+        "rsi": 68,
+        "fiyatMaliyetFarkPct": -1.5,
+        "priceVsCost": -1.5,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 4.96,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.048,
+        "maxReturn5d": 0.016,
+        "drawdown5d": -0.078,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_HEKTS.IS_20260318",
+      "ticker": "HEKTS.IS",
+      "date": "2026-03-18",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 13.78,
+        "top3Ratio": 0.31,
+        "hhi": 0.3585,
+        "yabanciDegisim": 0,
+        "spreadPct": 0.52,
+        "depthErosion": 0.59,
+        "rsi": 47.2,
+        "fiyatMaliyetFarkPct": -0.2,
+        "priceVsCost": -0.2,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 2.27,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": -0.018,
+        "maxReturn5d": 0.027,
+        "drawdown5d": -0.046,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_KONTR.IS_20260404",
+      "ticker": "KONTR.IS",
+      "date": "2026-04-04",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 4.36,
+        "top3Ratio": 0.75,
+        "hhi": 0.074,
+        "yabanciDegisim": 5.4,
+        "spreadPct": 0.14,
+        "depthErosion": 0.61,
+        "rsi": 56.3,
+        "fiyatMaliyetFarkPct": -0.5,
+        "priceVsCost": -0.5,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 3.07,
+        "piotroskiF": 9
+      },
+      "targets": {
+        "return5d": 0.13,
+        "maxReturn5d": 0.156,
+        "drawdown5d": -0.012,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_KRDMD.IS_20260415",
+      "ticker": "KRDMD.IS",
+      "date": "2026-04-15",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 6.25,
+        "top3Ratio": 0.83,
+        "hhi": 0.425,
+        "yabanciDegisim": 4,
+        "spreadPct": 0.11,
+        "depthErosion": 0.87,
+        "rsi": 55.4,
+        "fiyatMaliyetFarkPct": 1.3,
+        "priceVsCost": 1.3,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 2.99,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.088,
+        "maxReturn5d": 0.122,
+        "drawdown5d": -0.01,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_MGROS.IS_20260419",
+      "ticker": "MGROS.IS",
+      "date": "2026-04-19",
+      "period": "TRAIN",
+      "features": {
+        "volumeZScore": 2.6,
+        "top3Ratio": 0.48,
+        "hhi": 0.1675,
+        "yabanciDegisim": 0.4,
+        "spreadPct": 0.15,
+        "depthErosion": 0.84,
+        "rsi": 50.1,
+        "fiyatMaliyetFarkPct": 0.5,
+        "priceVsCost": 0.5,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 2.1,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": -0.043,
+        "maxReturn5d": 0.01,
+        "drawdown5d": -0.062,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_AKBNK.IS_20260421",
+      "ticker": "AKBNK.IS",
+      "date": "2026-04-21",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 8.81,
+        "top3Ratio": 0.71,
+        "hhi": 0.0802,
+        "yabanciDegisim": 3.9,
+        "spreadPct": 0.37,
+        "depthErosion": 0.79,
+        "rsi": 44.3,
+        "fiyatMaliyetFarkPct": 1.2,
+        "priceVsCost": 1.2,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 5.47,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.146,
+        "maxReturn5d": 0.201,
+        "drawdown5d": -0.008,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_EREGL.IS_20260422",
+      "ticker": "EREGL.IS",
+      "date": "2026-04-22",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 10.33,
+        "top3Ratio": 0.65,
+        "hhi": 0.4255,
+        "yabanciDegisim": 1.9,
+        "spreadPct": 0.44,
+        "depthErosion": 0.9,
+        "rsi": 66.5,
+        "fiyatMaliyetFarkPct": 1.1,
+        "priceVsCost": 1.1,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 4.73,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.139,
+        "maxReturn5d": 0.194,
+        "drawdown5d": -0.014,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_AKCNS.IS_20260426",
+      "ticker": "AKCNS.IS",
+      "date": "2026-04-26",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 2.74,
+        "top3Ratio": 0.66,
+        "hhi": 0.2749,
+        "yabanciDegisim": 0,
+        "spreadPct": 0.15,
+        "depthErosion": 0.49,
+        "rsi": 75.7,
+        "fiyatMaliyetFarkPct": -0.4,
+        "priceVsCost": -0.4,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 2.53,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.055,
+        "maxReturn5d": 0.012,
+        "drawdown5d": -0.091,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_PETKM.IS_20260427",
+      "ticker": "PETKM.IS",
+      "date": "2026-04-27",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 11.42,
+        "top3Ratio": 0.77,
+        "hhi": 0.0735,
+        "yabanciDegisim": 0.5,
+        "spreadPct": 0.1,
+        "depthErosion": 0.74,
+        "rsi": 69.5,
+        "fiyatMaliyetFarkPct": 2,
+        "priceVsCost": 2,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 2.37,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": 0.145,
+        "maxReturn5d": 0.183,
+        "drawdown5d": -0.01,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_TUPRS.IS_20260503",
+      "ticker": "TUPRS.IS",
+      "date": "2026-05-03",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 10.37,
+        "top3Ratio": 0.41,
+        "hhi": 0.2764,
+        "yabanciDegisim": -0.2,
+        "spreadPct": 0.09,
+        "depthErosion": 0.55,
+        "rsi": 61.5,
+        "fiyatMaliyetFarkPct": -2,
+        "priceVsCost": -2,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 5.34,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": -0.034,
+        "maxReturn5d": 0.018,
+        "drawdown5d": -0.055,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_MGROS.IS_20260509",
+      "ticker": "MGROS.IS",
+      "date": "2026-05-09",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 12.73,
+        "top3Ratio": 0.7,
+        "hhi": 0.1069,
+        "yabanciDegisim": 4.7,
+        "spreadPct": 0.23,
+        "depthErosion": 0.69,
+        "rsi": 79.9,
+        "fiyatMaliyetFarkPct": -0.9,
+        "priceVsCost": -0.9,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 4.19,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.09,
+        "maxReturn5d": 0.151,
+        "drawdown5d": -0.016,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_THYAO.IS_20260514",
+      "ticker": "THYAO.IS",
+      "date": "2026-05-14",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 13.49,
+        "top3Ratio": 0.64,
+        "hhi": 0.0717,
+        "yabanciDegisim": 0.5,
+        "spreadPct": 0.24,
+        "depthErosion": 0.89,
+        "rsi": 71.9,
+        "fiyatMaliyetFarkPct": -2.2,
+        "priceVsCost": -2.2,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 5.81,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.118,
+        "maxReturn5d": 0.149,
+        "drawdown5d": -0.015,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ENKAI.IS_20260514",
+      "ticker": "ENKAI.IS",
+      "date": "2026-05-14",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 7.67,
+        "top3Ratio": 0.45,
+        "hhi": 0.1735,
+        "yabanciDegisim": 4.4,
+        "spreadPct": 0.33,
+        "depthErosion": 0.93,
+        "rsi": 58.2,
+        "fiyatMaliyetFarkPct": 1.3,
+        "priceVsCost": 1.3,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 4.98,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.141,
+        "maxReturn5d": 0.16,
+        "drawdown5d": -0.011,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ENKAI.IS_20260515",
+      "ticker": "ENKAI.IS",
+      "date": "2026-05-15",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 12.34,
+        "top3Ratio": 0.59,
+        "hhi": 0.3652,
+        "yabanciDegisim": -0.6,
+        "spreadPct": 0.29,
+        "depthErosion": 0.65,
+        "rsi": 72.3,
+        "fiyatMaliyetFarkPct": -2.4,
+        "priceVsCost": -2.4,
+        "isDelayed": false,
+        "latencyBucket": 1,
+        "altmanZ": 4.77,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.12,
+        "maxReturn5d": 0.159,
+        "drawdown5d": -0.015,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ASELS.IS_20260516",
+      "ticker": "ASELS.IS",
+      "date": "2026-05-16",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 3.07,
+        "top3Ratio": 0.86,
+        "hhi": 0.2535,
+        "yabanciDegisim": 3.9,
+        "spreadPct": 0.14,
+        "depthErosion": 0.64,
+        "rsi": 48.5,
+        "fiyatMaliyetFarkPct": 2.2,
+        "priceVsCost": 2.2,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 5.08,
+        "piotroskiF": 4
+      },
+      "targets": {
+        "return5d": 0.086,
+        "maxReturn5d": 0.14,
+        "drawdown5d": -0.02,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_SASA.IS_20260527",
+      "ticker": "SASA.IS",
+      "date": "2026-05-27",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 4.68,
+        "top3Ratio": 0.7,
+        "hhi": 0.3032,
+        "yabanciDegisim": 5.2,
+        "spreadPct": 0.27,
+        "depthErosion": 0.45,
+        "rsi": 65.5,
+        "fiyatMaliyetFarkPct": 1.5,
+        "priceVsCost": 1.5,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 5.21,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": -0.068,
+        "maxReturn5d": 0.021,
+        "drawdown5d": -0.103,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_TOASO.IS_20260527",
+      "ticker": "TOASO.IS",
+      "date": "2026-05-27",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 8.21,
+        "top3Ratio": 0.63,
+        "hhi": 0.3971,
+        "yabanciDegisim": 0.1,
+        "spreadPct": 0.28,
+        "depthErosion": 0.78,
+        "rsi": 62.4,
+        "fiyatMaliyetFarkPct": -2.2,
+        "priceVsCost": -2.2,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 2.77,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.15,
+        "maxReturn5d": 0.183,
+        "drawdown5d": -0.022,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_OYAKC.IS_20260529",
+      "ticker": "OYAKC.IS",
+      "date": "2026-05-29",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 13.53,
+        "top3Ratio": 0.76,
+        "hhi": 0.2975,
+        "yabanciDegisim": -0.3,
+        "spreadPct": 0.09,
+        "depthErosion": 0.79,
+        "rsi": 55,
+        "fiyatMaliyetFarkPct": -2.2,
+        "priceVsCost": -2.2,
+        "isDelayed": false,
+        "latencyBucket": 2,
+        "altmanZ": 5.15,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.084,
+        "maxReturn5d": 0.146,
+        "drawdown5d": -0.021,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_ALARK.IS_20260615",
+      "ticker": "ALARK.IS",
+      "date": "2026-06-15",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 10.57,
+        "top3Ratio": 0.51,
+        "hhi": 0.3532,
+        "yabanciDegisim": 0,
+        "spreadPct": 0.31,
+        "depthErosion": 0.89,
+        "rsi": 48.9,
+        "fiyatMaliyetFarkPct": -1.7,
+        "priceVsCost": -1.7,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 3.94,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": 0.154,
+        "maxReturn5d": 0.17,
+        "drawdown5d": -0.008,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_FROTO.IS_20260617",
+      "ticker": "FROTO.IS",
+      "date": "2026-06-17",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 11.55,
+        "top3Ratio": 0.59,
+        "hhi": 0.1369,
+        "yabanciDegisim": -0.9,
+        "spreadPct": 0.36,
+        "depthErosion": 0.48,
+        "rsi": 73.9,
+        "fiyatMaliyetFarkPct": 0.1,
+        "priceVsCost": 0.1,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 3.82,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.04,
+        "maxReturn5d": 0.022,
+        "drawdown5d": -0.074,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_BIMAS.IS_20260618",
+      "ticker": "BIMAS.IS",
+      "date": "2026-06-18",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 8.48,
+        "top3Ratio": 0.31,
+        "hhi": 0.1979,
+        "yabanciDegisim": 1.5,
+        "spreadPct": 0.37,
+        "depthErosion": 0.83,
+        "rsi": 73.1,
+        "fiyatMaliyetFarkPct": -1.3,
+        "priceVsCost": -1.3,
+        "isDelayed": true,
+        "latencyBucket": 2,
+        "altmanZ": 5.58,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.067,
+        "maxReturn5d": 0.026,
+        "drawdown5d": -0.107,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_ISCTR.IS_20260619",
+      "ticker": "ISCTR.IS",
+      "date": "2026-06-19",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 9.46,
+        "top3Ratio": 0.75,
+        "hhi": 0.1383,
+        "yabanciDegisim": -0.7,
+        "spreadPct": 0.17,
+        "depthErosion": 0.89,
+        "rsi": 72.2,
+        "fiyatMaliyetFarkPct": 1.1,
+        "priceVsCost": 1.1,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 5.02,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.135,
+        "maxReturn5d": 0.192,
+        "drawdown5d": -0.006,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_GUBRF.IS_20260621",
+      "ticker": "GUBRF.IS",
+      "date": "2026-06-21",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 3.82,
+        "top3Ratio": 0.48,
+        "hhi": 0.2049,
+        "yabanciDegisim": 3.3,
+        "spreadPct": 0.1,
+        "depthErosion": 0.91,
+        "rsi": 47.6,
+        "fiyatMaliyetFarkPct": -1.4,
+        "priceVsCost": -1.4,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 2.54,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.049,
+        "maxReturn5d": 0.019,
+        "drawdown5d": -0.068,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_SISE.IS_20260626",
+      "ticker": "SISE.IS",
+      "date": "2026-06-26",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 4.08,
+        "top3Ratio": 0.5,
+        "hhi": 0.1833,
+        "yabanciDegisim": 0.3,
+        "spreadPct": 0.11,
+        "depthErosion": 0.77,
+        "rsi": 77.5,
+        "fiyatMaliyetFarkPct": 2.3,
+        "priceVsCost": 2.3,
+        "isDelayed": true,
+        "latencyBucket": 0,
+        "altmanZ": 3.72,
+        "piotroskiF": 7
+      },
+      "targets": {
+        "return5d": -0.074,
+        "maxReturn5d": 0.015,
+        "drawdown5d": -0.089,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_ISDMR.IS_20260720",
+      "ticker": "ISDMR.IS",
+      "date": "2026-07-20",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 3.92,
+        "top3Ratio": 0.88,
+        "hhi": 0.2551,
+        "yabanciDegisim": 3.5,
+        "spreadPct": 0.28,
+        "depthErosion": 0.54,
+        "rsi": 50.7,
+        "fiyatMaliyetFarkPct": 1.6,
+        "priceVsCost": 1.6,
+        "isDelayed": false,
+        "latencyBucket": 2,
+        "altmanZ": 5.86,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.068,
+        "maxReturn5d": 0.013,
+        "drawdown5d": -0.089,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_TUPRS.IS_20260724",
+      "ticker": "TUPRS.IS",
+      "date": "2026-07-24",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 3.95,
+        "top3Ratio": 0.47,
+        "hhi": 0.2234,
+        "yabanciDegisim": -0.7,
+        "spreadPct": 0.34,
+        "depthErosion": 0.81,
+        "rsi": 63.3,
+        "fiyatMaliyetFarkPct": 0.1,
+        "priceVsCost": 0.1,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 6.23,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.045,
+        "maxReturn5d": 0.009,
+        "drawdown5d": -0.067,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_OYAKC.IS_20260810",
+      "ticker": "OYAKC.IS",
+      "date": "2026-08-10",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 14.18,
+        "top3Ratio": 0.51,
+        "hhi": 0.3835,
+        "yabanciDegisim": -0.8,
+        "spreadPct": 0.49,
+        "depthErosion": 0.59,
+        "rsi": 53.6,
+        "fiyatMaliyetFarkPct": 0.7,
+        "priceVsCost": 0.7,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 4.5,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.128,
+        "maxReturn5d": 0.191,
+        "drawdown5d": -0.018,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_PETKM.IS_20260819",
+      "ticker": "PETKM.IS",
+      "date": "2026-08-19",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 13.19,
+        "top3Ratio": 0.64,
+        "hhi": 0.1639,
+        "yabanciDegisim": 2,
+        "spreadPct": 0.18,
+        "depthErosion": 0.67,
+        "rsi": 49.9,
+        "fiyatMaliyetFarkPct": 1.8,
+        "priceVsCost": 1.8,
+        "isDelayed": true,
+        "latencyBucket": 3,
+        "altmanZ": 2.13,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.038,
+        "maxReturn5d": 0.081,
+        "drawdown5d": -0.018,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_PGSUS.IS_20260907",
+      "ticker": "PGSUS.IS",
+      "date": "2026-09-07",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 7.89,
+        "top3Ratio": 0.78,
+        "hhi": 0.3589,
+        "yabanciDegisim": 1.8,
+        "spreadPct": 0.11,
+        "depthErosion": 0.74,
+        "rsi": 52.6,
+        "fiyatMaliyetFarkPct": 1.3,
+        "priceVsCost": 1.3,
+        "isDelayed": false,
+        "latencyBucket": 3,
+        "altmanZ": 5.39,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.11,
+        "maxReturn5d": 0.157,
+        "drawdown5d": -0.019,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_OYAKC.IS_20260913",
+      "ticker": "OYAKC.IS",
+      "date": "2026-09-13",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 8.38,
+        "top3Ratio": 0.63,
+        "hhi": 0.4463,
+        "yabanciDegisim": 3.3,
+        "spreadPct": 0.24,
+        "depthErosion": 0.59,
+        "rsi": 60.6,
+        "fiyatMaliyetFarkPct": 1.8,
+        "priceVsCost": 1.8,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 4.76,
+        "piotroskiF": 6
+      },
+      "targets": {
+        "return5d": 0.058,
+        "maxReturn5d": 0.12,
+        "drawdown5d": -0.022,
+        "isSuccess": true
+      }
+    },
+    {
+      "id": "EVT_THYAO.IS_20260913",
+      "ticker": "THYAO.IS",
+      "date": "2026-09-13",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 6.88,
+        "top3Ratio": 0.44,
+        "hhi": 0.0632,
+        "yabanciDegisim": -1,
+        "spreadPct": 0.19,
+        "depthErosion": 0.67,
+        "rsi": 55.9,
+        "fiyatMaliyetFarkPct": 0.9,
+        "priceVsCost": 0.9,
+        "isDelayed": false,
+        "latencyBucket": 4,
+        "altmanZ": 3.66,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.055,
+        "maxReturn5d": 0.02,
+        "drawdown5d": -0.071,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_KRDMD.IS_20260927",
+      "ticker": "KRDMD.IS",
+      "date": "2026-09-27",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 5.19,
+        "top3Ratio": 0.88,
+        "hhi": 0.4321,
+        "yabanciDegisim": -0.8,
+        "spreadPct": 0.44,
+        "depthErosion": 0.56,
+        "rsi": 45.8,
+        "fiyatMaliyetFarkPct": -1.1,
+        "priceVsCost": -1.1,
+        "isDelayed": true,
+        "latencyBucket": 1,
+        "altmanZ": 4.53,
+        "piotroskiF": 8
+      },
+      "targets": {
+        "return5d": -0.061,
+        "maxReturn5d": 0.025,
+        "drawdown5d": -0.08,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_TUPRS.IS_20260930",
+      "ticker": "TUPRS.IS",
+      "date": "2026-09-30",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 6.84,
+        "top3Ratio": 0.34,
+        "hhi": 0.4038,
+        "yabanciDegisim": -1,
+        "spreadPct": 0.44,
+        "depthErosion": 0.76,
+        "rsi": 63.4,
+        "fiyatMaliyetFarkPct": 2.2,
+        "priceVsCost": 2.2,
+        "isDelayed": true,
+        "latencyBucket": 4,
+        "altmanZ": 4.41,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": -0.079,
+        "maxReturn5d": 0.015,
+        "drawdown5d": -0.095,
+        "isSuccess": false
+      }
+    },
+    {
+      "id": "EVT_TOASO.IS_20260930",
+      "ticker": "TOASO.IS",
+      "date": "2026-09-30",
+      "period": "TEST",
+      "features": {
+        "volumeZScore": 10.29,
+        "top3Ratio": 0.82,
+        "hhi": 0.1985,
+        "yabanciDegisim": 0.9,
+        "spreadPct": 0.21,
+        "depthErosion": 0.47,
+        "rsi": 74.4,
+        "fiyatMaliyetFarkPct": 1.1,
+        "priceVsCost": 1.1,
+        "isDelayed": false,
+        "latencyBucket": 0,
+        "altmanZ": 2.56,
+        "piotroskiF": 5
+      },
+      "targets": {
+        "return5d": 0.157,
+        "maxReturn5d": 0.18,
+        "drawdown5d": -0.014,
+        "isSuccess": true
+      }
+    }
+  ],
+  "generatedAt": "2026-10-18T16:48:55.572Z",
+  "daysAnalyzed": 730
+}

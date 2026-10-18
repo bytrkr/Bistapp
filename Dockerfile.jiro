@@ -1,0 +1,41 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+RUN pip install --no-cache-dir fastapi uvicorn requests
+
+COPY <<EOF /app/jiro_service.py
+from fastapi import FastAPI, Query
+import random
+import os
+
+app = FastAPI(title="JIRO Social Intelligence Service - BIST Optimized")
+
+@app.get("/health")
+def health():
+    targets = os.getenv("JIRO_TARGETS", "reddit.com,r/BIST,kap.org.tr")
+    return {"status": "ok", "service": "jiro", "targets": targets.split(",")}
+
+@app.get("/social/search")
+def social_search(q: str = Query(None), ticker: str = Query(None)):
+    query = q or ticker or "BIST"
+    items = [
+        {"source": "kap.org.tr", "text": f"{query} şirketinden resmi KAP özel durum açıklaması ve bilanço duyurusu.", "sentiment": "POSITIVE", "score": 0.85},
+        {"source": "reddit.com", "text": f"r/BIST topluluğunda {query} için destek direnç seviyeleri değerlendiriliyor.", "sentiment": "NEUTRAL", "score": 0.25},
+        {"source": "Haber", "text": f"Finans portallarında {query} hissesi için aracı kurum hedef fiyat revizyonu.", "sentiment": "POSITIVE", "score": 0.65},
+        {"source": "reddit.com", "text": f"{query} için bedava tüyolar ve şüpheli dolandırıcılık içerikleri.", "sentiment": "NEGATIVE", "score": -0.95},
+        {"source": "r/BIST", "text": f"{query} hacim patlaması yaşıyor, kısa vadeli görünüm güçlü.", "sentiment": "POSITIVE", "score": 0.70}
+    ]
+    return {
+        "query": query,
+        "items": items,
+        "mention_count": len(items)
+    }
+EOF
+
+EXPOSE 8000
+
+CMD ["uvicorn", "jiro_service:app", "--host", "0.0.0.0", "--port", "8000"]

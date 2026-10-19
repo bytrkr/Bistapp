@@ -240,6 +240,26 @@ export class ManipulationEngine {
       toon: rawTax.toon || '',
     };
   }
+
+  public formatRiskViewModel(rawDecision: any) {
+    const pos = rawDecision?.positionSizing || rawDecision?.position_sizing || rawDecision?.metadata?.position_sizing || {};
+    const guard = rawDecision?.portfolioGuardStatus || rawDecision?.portfolio_guard_status || { approved: true, max_correlation: 0.12, reason: 'Korelasyon riski bulunmuyor.' };
+    const slip = rawDecision?.slippageImpact || rawDecision?.slippage_impact || { executed_price: 100, fee_amount: 15.0, slippage_bps: 5.0 };
+
+    return {
+      capital: Number(pos.capital ?? 100000),
+      kellyFraction: Number(pos.kelly_fraction ?? pos.kellyFraction ?? 0.15),
+      recommendedAllocationUsd: Number(pos.recommended_allocation_usd ?? pos.recommendedAllocationUsd ?? 15000),
+      recommendedLots: Number(pos.recommended_lots ?? pos.recommendedLots ?? 100),
+      suggestedStopPrice: Number(pos.suggested_stop_price ?? pos.suggestedStopPrice ?? 0),
+      atr: Number(pos.atr ?? 2.5),
+      guardApproved: Boolean(guard.approved ?? true),
+      guardCorrelation: Number(guard.max_correlation ?? guard.maxCorrelation ?? 0.15),
+      guardReason: guard.reason || 'Portföy riski dengeli.',
+      slippageBps: Number(slip.slippage_bps ?? slip.slippageBps ?? 5.0),
+      feeAmount: Number(slip.fee_amount ?? slip.feeAmount ?? 12.5),
+    };
+  }
 }
 
 export const manipulationEngine = new ManipulationEngine();

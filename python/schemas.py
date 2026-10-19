@@ -70,12 +70,18 @@ class MarketData(BaseModel):
 
 class DepthData(BaseModel):
     ticker: str
+    best_bid: Optional[float] = None
+    best_ask: Optional[float] = None
     bid_depth_total: float = 500_000.0
     ask_depth_total: float = 400_000.0
     wall_pressure_ratio: float = 1.0
     bofa_net_lot: float = 0.0
     is_wall_spoofing: bool = False
     hhi_concentration: float = 0.10
+    obi: float = 0.0
+    data_source: str = "SIMULATED"
+    is_suspicious: bool = False
+    suspicious_reason: Optional[str] = None
 
 
 class FundamentalData(BaseModel):

@@ -15,12 +15,14 @@ from pathlib import Path
 from typing import Optional, List, Dict, Any
 
 try:
-    from fastapi import FastAPI, HTTPException, Query, File, UploadFile, Form, Header, Depends, Request
+    from fastapi import FastAPI, HTTPException, Query, File, UploadFile, Form, Header, Depends, Request, BackgroundTasks
     from fastapi.responses import PlainTextResponse, FileResponse
     from fastapi.middleware.cors import CORSMiddleware
     from pydantic import BaseModel, Field
 except ImportError:
     class Request: pass
+    class BackgroundTasks:
+        def add_task(self, *args, **kwargs): pass
     class FastAPI:
         def __init__(self, *args, **kwargs): pass
         def add_middleware(self, *args, **kwargs): pass
@@ -113,6 +115,216 @@ except ImportError:
         @staticmethod
         def analyze_akd_takas(ticker):
             return {"ticker": ticker, "signal_type": "NEUTRAL", "toon": "MOCK_AKD"}
+
+try:
+    from riskEngine import RiskEngine
+    from backtestEngine import BacktestEngine
+    from portfolioGuard import PortfolioGuard
+    from heatmapEngine import HeatmapEngine
+    from slippageModel import SlippageAccountant
+    from systemHealth import SystemHealthMonitor
+    from rag_engine import RagEngine
+except ImportError:
+    class RiskEngine:
+        @staticmethod
+        def calculate_position_size(*args, **kwargs): return {}
+    class BacktestEngine:
+        @staticmethod
+        def run_backtest(*args, **kwargs): return {}
+    class PortfolioGuard:
+        @staticmethod
+        def check_trade_approval(*args, **kwargs): return {"approved": True}
+    class HeatmapEngine:
+        @staticmethod
+        def analyze_depth_heatmap(*args, **kwargs): return {}
+    class SlippageAccountant:
+        @staticmethod
+        def calculate_net_execution(*args, **kwargs): return {}
+    class SystemHealthMonitor:
+        @staticmethod
+        def ping(): return 1.0
+        @staticmethod
+        def check_health(): return {"status": "HEALTHY"}
+    class RagEngine:
+        @staticmethod
+        def add_documents(texts): return 0
+        @staticmethod
+        def search_similar(query, top_k=3): return []
+        @staticmethod
+        def build_context(query, top_k=3): return ""
+
+try:
+    from post_mortem_engine import PostMortemEngine
+except ImportError:
+    class PostMortemEngine:
+        @staticmethod
+        def log_decision(*args, **kwargs): return 1
+        @staticmethod
+        def evaluate_past_decisions(*args, **kwargs): return {}
+        @staticmethod
+        def adjust_agent_weights(*args, **kwargs): return {}
+        @staticmethod
+        def get_audit_trail(*args, **kwargs): return {"records": [], "win_rate_pct": 0.0}
+
+try:
+    from macro_shock_engine import MacroShockEngine
+except ImportError:
+    class MacroShockEngine:
+        @staticmethod
+        def simulate_shock(ticker, scenario="FAIZ_ARTISI_250BP"):
+            return {"ticker": ticker, "scenario": scenario, "macro_vulnerability_score": 40.0}
+        @staticmethod
+        def simulate_all_shocks(ticker):
+            return {"ticker": ticker, "max_vulnerability_score": 40.0, "scenarios": {}}
+
+try:
+    from behavioral_guard import BehavioralGuard
+except ImportError:
+    class BehavioralGuard:
+        @staticmethod
+        def check_execution_guard(*args, **kwargs):
+            return {"approval_status": "APPROVED", "reason": "Psikoloji denetimi onaylandı.", "detected_bias": None}
+
+try:
+    from smart_order_router import SmartOrderRouter
+except ImportError:
+    class SmartOrderRouter:
+        @staticmethod
+        def generate_execution_plan(*args, **kwargs):
+            return {"execution_strategy": "DIRECT_EXECUTION", "slices": []}
+
+try:
+    from analyst_consensus_engine import AnalystConsensusEngine
+except ImportError:
+    class AnalystConsensusEngine:
+        @staticmethod
+        def check_earnings_surprise(*args, **kwargs):
+            return {"signal": "BEKLENTİYE_PARALEL", "surprise_pct": 0.0, "summary": "Beklentiye paralel."}
+        @staticmethod
+        def get_simulated_earnings_surprise(*args, **kwargs):
+            return {"signal": "BEKLENTİYE_PARALEL", "surprise_pct": 0.0, "summary": "Beklentiye paralel."}
+
+try:
+    from factor_risk_engine import FactorRiskEngine
+except ImportError:
+    class FactorRiskEngine:
+        @staticmethod
+        def calculate_beta_alpha(*args, **kwargs):
+            return {"beta": 1.0, "alpha_annualized_pct": 0.0, "crisis_resilience_score": 50.0}
+
+try:
+    from peer_valuation_engine import PeerValuationEngine
+except ImportError:
+    class PeerValuationEngine:
+        @staticmethod
+        def calculate_sector_heatmap(*args, **kwargs):
+            return {"valuation_status": "SEKTÖRLE_PARALEL", "composite_z_score": 0.0, "summary": ""}
+
+try:
+    from content_generator import ContentGenerator
+except ImportError:
+    class ContentGenerator:
+        @staticmethod
+        def generate_post(*args, **kwargs): return "BISTAPP Analiz Postu"
+        @staticmethod
+        def generate_all_formats(*args, **kwargs): return {"telegram": "", "twitter": ""}
+
+try:
+    from social_publisher import SocialPublisher
+except ImportError:
+    class SocialPublisher:
+        @staticmethod
+        def publish_to_telegram(*args, **kwargs): return {"status": "SIMULATED", "success": True}
+        @staticmethod
+        def publish_to_twitter(*args, **kwargs): return {"status": "DRAFT_READY", "success": True}
+        @staticmethod
+        def publish_auto(*args, **kwargs): return {"results": {}}
+
+try:
+    from agent_telemetry import AgentTelemetry
+except ImportError:
+    class AgentTelemetry:
+        @staticmethod
+        def log_execution(*args, **kwargs): pass
+        @staticmethod
+        def get_system_health(*args, **kwargs): return {"status": "HEALTHY"}
+
+try:
+    from durable_executor import DurableExecutor
+except ImportError:
+    class DurableExecutor:
+        @staticmethod
+        def execute_with_recovery(task_id, task_func, *args, **kwargs): return task_func(*args, **kwargs)
+
+try:
+    from mcp_server import BistappMcpServer
+except ImportError:
+    class BistappMcpServer:
+        @staticmethod
+        def list_tools(): return []
+        @staticmethod
+        async def call_tool(*args, **kwargs): return {}
+        @staticmethod
+        async def handle_jsonrpc(*args, **kwargs): return {}
+
+try:
+    from data_quality_gate import DataQualityGate
+except ImportError:
+    class DataQualityGate:
+        @staticmethod
+        def validate_market_data(*args, **kwargs): return True, ""
+        @staticmethod
+        def validate_social_data(*args, **kwargs): return True, ""
+
+try:
+    from sandbox import Sandbox
+except ImportError:
+    class Sandbox:
+        @staticmethod
+        def execute_safely(file_path, file_type="document"):
+            return {"is_safe": True, "isolated_path": str(file_path)}
+
+try:
+    from task_queue import TaskQueue
+except ImportError:
+    class TaskQueue:
+        @staticmethod
+        def add_task(task_type, payload): return "task_mock_1"
+        @staticmethod
+        def get_task_status(task_id): return {"task_id": task_id, "status": "BEKLIYOR"}
+
+try:
+    from var_engine import VaREngine
+except ImportError:
+    class VaREngine:
+        @staticmethod
+        def calculate_portfolio_var(*args, **kwargs): return {"var_tl": 0.0, "var_pct": 0.0}
+        @staticmethod
+        def calculate_marginal_var(*args, **kwargs): return {"marginal_var_tl": 0.0, "is_excessive_risk": False}
+
+try:
+    from factor_attribution_engine import FactorAttributionEngine
+except ImportError:
+    class FactorAttributionEngine:
+        @staticmethod
+        def decompose_returns(*args, **kwargs):
+            return {"is_beta_driven": False, "market_component_pct": 5.0, "alpha_component_pct": 3.0}
+
+try:
+    from regime_backtest_engine import RegimeBacktestEngine
+except ImportError:
+    class RegimeBacktestEngine:
+        @staticmethod
+        def run_out_of_sample_test(*args, **kwargs):
+            return {"robustness_score": 50.0, "rating": "ORTA"}
+
+try:
+    from feature_importance_engine import FeatureImportanceEngine
+except ImportError:
+    class FeatureImportanceEngine:
+        @staticmethod
+        def calculate_feature_importance(*args, **kwargs):
+            return {"dominant_factor": "Takas/Derinlik", "weights_pct": {"depth": 35.0, "technical": 25.0, "fundamental": 20.0, "sentiment": 20.0}}
 
 try:
     from schemas import (
@@ -296,6 +508,8 @@ class GlobalEvaluateRequest(BaseModel):
 
 
 class MacroEvaluateRequest(BaseModel):
+    ticker: Optional[str] = Field(default="ASELS", description="BIST Hisse Kodu (orn: ASELS, GARAN, THYAO)")
+    scenario: Optional[str] = Field(default="FAIZ_ARTISI_250BP", description="Makro senaryo (FAIZ_ARTISI_250BP, DOLAR_10_ARTIS, JEOPOLITIK_KRİZ)")
     usd_try_change: Optional[float] = Field(default=0.85, description="USD/TRY değişim yüzdesi")
     brent_change: Optional[float] = Field(default=1.20, description="Brent ham petrol değişim yüzdesi")
     xbank_change: Optional[float] = Field(default=-1.40, description="XBANK bankacılık endeksi değişim yüzdesi")
@@ -349,16 +563,22 @@ def build_default_context(req: AnalyzeRequest) -> UnifiedContext:
         mtf_alignment=3,
     )
 
+    bid_tot = 500_000.0
+    ask_tot = 420_000.0
+    calc_obi = round((bid_tot - ask_tot) / (bid_tot + ask_tot), 4)
+
     d_data = req.depth_data or DepthData(
         ticker=clean_ticker,
         best_bid=ref["p"] - 0.10,
         best_ask=ref["p"] + 0.10,
-        bid_depth_total=500_000,
-        ask_depth_total=420_000,
-        wall_pressure_ratio=1.19,
+        bid_depth_total=bid_tot,
+        ask_depth_total=ask_tot,
+        wall_pressure_ratio=round(bid_tot / ask_tot, 2),
         bofa_net_lot=85_000,
         is_wall_spoofing=False,
         hhi_concentration=0.12,
+        obi=calc_obi,
+        data_source="SIMULATED",
     )
 
     f_data = req.fundamental_data or FundamentalData(
@@ -608,12 +828,14 @@ async def stripe_webhook(request: Request):
 @app.get("/api/health")
 async def health_check():
     """Sunucu, bellek durumu ve aktif ajan saglik kontrolu."""
+    SystemHealthMonitor.ping()
     return {
         "status": "ok",
         "service": "bist-multi-agent-kernel",
         "version": "4.0.0",
         "timestamp": time.time(),
         "cached_decisions_count": len(RECENT_DECISIONS),
+        "system_health": SystemHealthMonitor.check_health(),
         "agents_available": [
             "TechnicalAgent", "DepthAgent", "FundamentalAgent", 
             "KapSentimentAgent", "CompanyDirectAgent", "TrendAgent"
@@ -695,7 +917,11 @@ async def analyze_stock(req: AnalyzeRequest):
 # EVALUATE_V2: CANLI ALPACA & GOOGLE TREND ENTEGRASYONLU ÇOKLU AJAN DEĞERLENDİRME
 # ============================================================================
 
-async def execute_evaluate_v2(req: AnalyzeRequest, force_fomo: bool = False) -> FinalDecision:
+async def execute_evaluate_v2(
+    req: AnalyzeRequest,
+    force_fomo: bool = False,
+    background_tasks: Optional[BackgroundTasks] = None
+) -> FinalDecision:
     """
     6-Boyutlu Otonom Degerlendirme Motoru:
     1. NASDAQ/US ve Kripto için Alpaca API üzerinden canlı fiyat/hacim çeker.
@@ -759,6 +985,23 @@ async def execute_evaluate_v2(req: AnalyzeRequest, force_fomo: bool = False) -> 
     # 3. Çoklu Ajan ve Münazara Pipeline'ını Çalıştır
     decision = await run_multi_agent_pipeline(ctx)
 
+    # RiskEngine (Kelly Kriteri & ATR) Pozisyon Boyutlandırma Hesabı
+    try:
+        pos_size = RiskEngine.calculate_position_size(
+            capital=100_000.0,
+            risk_free_pct=4.0,
+            win_probability=0.58,
+            win_loss_ratio=1.5,
+            atr=ctx.market_data.price * 0.03,
+            current_price=ctx.market_data.price,
+            z_score=1.0 if ctx.market_data.rsi > 70 or ctx.market_data.rsi < 30 else 0.2
+        )
+        if decision.metadata is None:
+            decision.metadata = {}
+        decision.metadata["position_sizing"] = pos_size
+    except Exception as e:
+        print(f"[RISK_ENGINE] Pozisyon boyutlandırma hatası: {e}")
+
     # In-memory FIFO önbelleğe kaydet
     RECENT_DECISIONS.append({
         "ticker": ctx.ticker,
@@ -769,6 +1012,17 @@ async def execute_evaluate_v2(req: AnalyzeRequest, force_fomo: bool = False) -> 
         "decision": decision.model_dump() if hasattr(decision, "model_dump") else decision.dict(),
     })
 
+    # PostMortemEngine: Kararı SQLite veritabanına kaydet (Geri bildirim döngüsü)
+    try:
+        dec_payload = decision.model_dump() if hasattr(decision, "model_dump") else decision.dict()
+        dec_payload["price"] = ctx.market_data.price
+        if background_tasks is not None:
+            background_tasks.add_task(PostMortemEngine.log_decision, dec_payload)
+        else:
+            PostMortemEngine.log_decision(dec_payload)
+    except Exception as e:
+        print(f"[POST_MORTEM] Karar loglama hatası: {e}")
+
     return decision
 
 
@@ -776,26 +1030,52 @@ async def execute_evaluate_v2(req: AnalyzeRequest, force_fomo: bool = False) -> 
 async def evaluate_v2_get(
     ticker: str = "AAPL",
     market_regime: Optional[MarketRegime] = MarketRegime.BULL,
-    force_fomo: Optional[bool] = False
+    force_fomo: Optional[bool] = False,
+    background_tasks: Optional[BackgroundTasks] = None
 ):
     """
     GET /api/agents/evaluate_v2?ticker=AAPL
-    Alpaca ve Google Trends canlı verileriyle 6 ajanlı değerlendirmeyi ve münazarayı koşturur.
+    Alpaca ve Google Trends canlı verileriyle değerlendirmeyi ve münazarayı koşturur, PostMortemEngine'e kaydeder.
     """
     req = AnalyzeRequest(ticker=ticker, market_regime=market_regime)
-    return await execute_evaluate_v2(req, force_fomo=force_fomo)
+    return await execute_evaluate_v2(req, force_fomo=force_fomo, background_tasks=background_tasks)
 
 
 @app.post("/api/agents/evaluate_v2", response_model=FinalDecision)
 async def evaluate_v2_post(
     req: AnalyzeRequest,
-    force_fomo: Optional[bool] = False
+    force_fomo: Optional[bool] = False,
+    background_tasks: Optional[BackgroundTasks] = None
 ):
     """
     POST /api/agents/evaluate_v2
     JSON gövdesiyle çağrılan otonom değerlendirme.
     """
-    return await execute_evaluate_v2(req, force_fomo=force_fomo)
+    return await execute_evaluate_v2(req, force_fomo=force_fomo, background_tasks=background_tasks)
+
+
+@app.get("/api/system/audit-trail")
+async def get_system_audit_trail(limit: int = 50, evaluate: bool = True):
+    """
+    decision_logs tablosundaki geçmiş kararları ve doğruluk oranlarını (Win Rate) döner.
+    evaluate=True ise geçmiş kararların pnl durumunu değerlendirir.
+    """
+    try:
+        if evaluate:
+            PostMortemEngine.evaluate_past_decisions(days_ago=1)
+        audit = PostMortemEngine.get_audit_trail(limit=limit)
+        return audit
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Audit trail hatası: {str(e)}")
+
+
+@app.post("/api/system/adjust-weights")
+async def trigger_adjust_weights():
+    """Ajanların geçmiş başarı oranlarına göre dinamik ağırlık güncellemesini tetikler."""
+    try:
+        return PostMortemEngine.adjust_agent_weights()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Ağırlık ayarlama hatası: {str(e)}")
 
 
 # ============================================================================
@@ -838,8 +1118,15 @@ async def upload_and_analyze(
         with open(temp_file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
+        # 🛡️ Sandbox Güvenlik İzolasyonu & Magic Byte Kontrolü
+        sandbox_res = Sandbox.execute_safely(str(temp_file_path), file_type="document")
+        if not sandbox_res.get("is_safe", False):
+            raise HTTPException(status_code=400, detail=sandbox_res.get("error", "Güvenlik izolasyon hatası"))
+
+        target_file_to_parse = sandbox_res.get("isolated_path") or str(temp_file_path)
+
         # doc_parser ile TOON formatında metni çıkar (Önbellek destekli)
-        doc_toon = parse_document(temp_file_path, source_url=f"upload://{filename}")
+        doc_toon = parse_document(target_file_to_parse, source_url=f"upload://{filename}")
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Belge okuma ve ayrıştırma hatası: {str(e)}")
@@ -853,6 +1140,15 @@ async def upload_and_analyze(
 
     # Belge içeriğinden duygu skoru ve özet çıkar
     raw_content = doc_toon.raw_text
+
+    # RAG Motoru Entegrasyonu (Vektör / Metin Benzerlik Araması)
+    try:
+        RagEngine.add_documents([raw_content])
+        rag_context = RagEngine.build_context(raw_content, top_k=2)
+    except Exception as e:
+        print(f"[RAG] Hata: {e}")
+        rag_context = "RAG bağlamı oluşturulamadı."
+
     pos_words = ["kar", "artış", "ihracat", "büyüme", "anlaşma", "sözleşme", "onay", "rekor", "temettü", "sipariş", "ihale", "olumlu", "kazanç", "gelir"]
     neg_words = ["zarar", "düşüş", "iptal", "ceza", "dava", "soruşturma", "risk", "fesih", "kayıp", "yaptırım", "olumsuz"]
 
@@ -881,7 +1177,7 @@ async def upload_and_analyze(
 
     decision = await execute_evaluate_v2(req)
 
-    # Karara yüklenen belge meta verilerini ekle
+    # Karara yüklenen belge ve RAG meta verilerini ekle
     decision.metadata["uploaded_file"] = {
         "filename": filename,
         "source_type": doc_toon.source_type,
@@ -890,7 +1186,8 @@ async def upload_and_analyze(
         "doc_sentiment": doc_sentiment,
         "doc_toon_line": doc_toon.to_toon_line()
     }
-    decision.summary += f" [Belge Entegrasyonu]: '{filename}' ({doc_toon.source_type}) başarıyla ayrıştırıldı ve KAP/Duygu ajanına beslendi."
+    decision.metadata["rag_context"] = rag_context
+    decision.summary += f" [Belge & RAG Entegrasyonu]: '{filename}' ({doc_toon.source_type}) ayrıştırıldı ve RAG hafızasına eklendi."
 
     return decision
 
@@ -1148,6 +1445,20 @@ async def run_backtest_endpoint(req: BacktestRequest):
         raise HTTPException(status_code=500, detail=f"Backtest motoru hatasi: {str(e)}")
 
 
+@app.get("/api/backtest/regime_test")
+async def get_regime_backtest(ticker: str = "ASELS"):
+    """
+    [OUT-OF-SAMPLE REGIME ROBUSTNESS ENGINE]
+    Hissenin stratejisini 3 farklı piyasa rejiminde (KRİZ, BELİRSİZLİK, BOĞA)
+    ayrı ayrı test eder ve aşırı uyum (Overfitting) riskini ölçerek Sağlamlık Skorunu döner.
+    """
+    try:
+        result = RegimeBacktestEngine.run_out_of_sample_test(ticker)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Rejim odaklı backtest hatası: {str(e)}")
+
+
 @app.get("/api/memory/stats")
 async def get_memory_stats():
     """Tum ajanlarin hafizadaki basari ve alpha carpanlarini dondurur."""
@@ -1202,6 +1513,47 @@ async def run_portfolio_stress_test(req: StressTestRequest):
         raise HTTPException(status_code=500, detail=f"Stres testi simülasyon hatası: {str(e)}")
 
 
+class PortfolioVaRRequest(BaseModel):
+    portfolio: List[Dict[str, Any]] = Field(default_factory=lambda: [
+        {"ticker": "THYAO", "value_tl": 300000.0},
+        {"ticker": "ASELS", "value_tl": 250000.0},
+        {"ticker": "KCHOL", "value_tl": 200000.0},
+    ], description="Mevcut portföy varlık listesi")
+    new_asset: Optional[Dict[str, Any]] = Field(default=None, description="Opsiyonel olası yeni alım (ticker, value_tl)")
+    confidence_level: Optional[float] = Field(default=0.95, description="Güven seviyesi (0.90, 0.95, 0.99)")
+    time_horizon_days: Optional[int] = Field(default=1, description="Zaman ufku (gün)")
+
+
+@app.post("/api/portfolio/var_analysis")
+async def analyze_portfolio_var(req: PortfolioVaRRequest):
+    """
+    [PARAMETRIC VaR & MARGINAL RISK GUARD]
+    Portföyün Parametrik VaR, CVaR ve olası yeni alımın Marjinal VaR etkisini hesaplar.
+    """
+    try:
+        var_res = VaREngine.calculate_portfolio_var(
+            portfolio=req.portfolio,
+            confidence_level=req.confidence_level or 0.95,
+            time_horizon_days=req.time_horizon_days or 1
+        )
+
+        marginal_res = None
+        if req.new_asset:
+            marginal_res = VaREngine.calculate_marginal_var(
+                new_asset=req.new_asset,
+                portfolio=req.portfolio,
+                confidence_level=req.confidence_level or 0.95
+            )
+
+        return {
+            "status": "success",
+            "portfolio_var": var_res,
+            "marginal_var": marginal_res,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Portföy VaR analizi hatası: {str(e)}")
+
+
 @app.post("/api/notifications/test_alert")
 async def test_notification_alert(req: NotificationTestRequest):
     """
@@ -1244,20 +1596,45 @@ async def toggle_kill_switch(req: KillSwitchRequest):
         raise HTTPException(status_code=500, detail=f"Kill-switch hatası: {str(e)}")
 
 
+@app.get("/api/macro/evaluate")
 @app.post("/api/macro/evaluate")
-async def evaluate_macro_shield(req: MacroEvaluateRequest):
+async def evaluate_macro_shield(
+    req: Optional[MacroEvaluateRequest] = None,
+    ticker: Optional[str] = "ASELS",
+    scenario: Optional[str] = "FAIZ_ARTISI_250BP"
+):
     """
-    [PHASE 12] Çapraz Varlık Makro Şok Matrisi ve Sıkışma Kalkanı:
-    USD/TRY, Brent ve XBANK şoklarını değerlendirir.
+    [PHASE 12 & STRESS ENGINE] Makro-Mikro Şok ve Stres Senaryo Jeneratörü:
+    MacroShockEngine ile hisse bazında Faiz Artışı, Dolar Şoku ve Jeopolitik Kriz senaryolarını test eder.
     """
     try:
-        from macro_shock import CrossAssetShockEngine
-        result = CrossAssetShockEngine.evaluate_macro_shock(
-            usd_try_change=req.usd_try_change,
-            brent_change=req.brent_change,
-            xbank_change=req.xbank_change
-        )
-        return result
+        req_ticker = req.ticker if req and req.ticker else (ticker or "ASELS")
+        req_scenario = req.scenario if req and req.scenario else (scenario or "FAIZ_ARTISI_250BP")
+
+        # 1. MacroShockEngine ile hisse bazlı senaryo simülasyonu
+        single_shock = MacroShockEngine.simulate_shock(req_ticker, req_scenario)
+        all_shocks = MacroShockEngine.simulate_all_shocks(req_ticker)
+
+        # 2. Çapraz varlık şok matrisi (varsa)
+        cross_asset = None
+        try:
+            from macro_shock import CrossAssetShockEngine
+            cross_asset = CrossAssetShockEngine.evaluate_macro_shock(
+                usd_try_change=req.usd_try_change if req else 0.85,
+                brent_change=req.brent_change if req else 1.20,
+                xbank_change=req.xbank_change if req else -1.40
+            )
+        except Exception:
+            pass
+
+        return {
+            "status": "success",
+            "ticker": req_ticker,
+            "scenario": req_scenario,
+            "simulation": single_shock,
+            "stress_matrix": all_shocks,
+            "cross_asset_matrix": cross_asset,
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Makro şok değerlendirme hatası: {str(e)}")
 
@@ -1313,8 +1690,10 @@ async def nlp_market_search(req: NlpSearchRequest):
 
 
 class ValidatePsychologyRequest(BaseModel):
-    ticker: str
+    user_id: Optional[str] = "trader_1"
+    ticker: str = "ASELS"
     side: str = "BUY"
+    order_type: Optional[str] = "LIMIT"
     order_amount_tl: Optional[float] = 0.0
     lot: Optional[float] = 0.0
     price: Optional[float] = 0.0
@@ -1323,17 +1702,20 @@ class ValidatePsychologyRequest(BaseModel):
     three_day_change_pct: Optional[float] = 0.0
     current_price: Optional[float] = 100.0
     high_price: Optional[float] = None
+    unrealized_pnl_pct: Optional[float] = 0.0
+    recent_trades: Optional[List[Dict[str, Any]]] = None
+    current_market_state: Optional[Dict[str, Any]] = None
 
 
 @app.post("/api/execution/validate_psychology")
 async def validate_order_psychology(req: ValidatePsychologyRequest):
     """
-    [FOMO SHIELD] Emir öncesi psikoloji ve bilişsel risk denetimi:
-    Konsantrasyon riski (>%35 portföy) ve FOMO tepeden alım riski (3 günde >%15 primli) denetler.
+    [BEHAVIORAL GUARD & FOMO SHIELD] Emir öncesi psikoloji ve bilişsel risk denetimi:
+    1. Revenge Trading (Üst üste 2 kayıp sonrası 3x pozisyon büyütme engelleme).
+    2. FOMO Alımı (Son 3 günde %15+ primli hisseye piyasa emri uyarısı).
+    3. Panik Satışı (Piyasa düşerken sağlam hisseyi zararına satma uyarısı).
     """
     try:
-        from agents import PsychologyAgent
-
         order_amount = req.order_amount_tl or 0.0
         if order_amount <= 0.0 and (req.lot or 0.0) > 0 and (req.price or 0.0) > 0:
             order_amount = float(req.lot) * float(req.price)
@@ -1341,19 +1723,53 @@ async def validate_order_psychology(req: ValidatePsychologyRequest):
         c_price = req.price or req.current_price or 100.0
         h_price = req.high_price or (c_price * 1.02)
 
-        eval_result = PsychologyAgent.evaluate_order(
-            ticker=req.ticker,
-            side=req.side,
-            order_amount_tl=order_amount,
-            portfolio_total_tl=req.portfolio_total_tl or 1000000.0,
-            current_position_tl=req.current_position_tl or 0.0,
-            three_day_change_pct=req.three_day_change_pct or 0.0,
-            current_price=c_price,
-            high_price=h_price,
+        # 1. BehavioralGuard Denetimi
+        trade_req = {
+            "ticker": req.ticker,
+            "side": req.side,
+            "order_type": req.order_type or "LIMIT",
+            "amount_tl": order_amount,
+            "lot": req.lot or 0.0,
+            "price": c_price,
+            "three_day_change_pct": req.three_day_change_pct or 0.0,
+            "unrealized_pnl_pct": req.unrealized_pnl_pct or 0.0,
+        }
+        market_state = req.current_market_state or {
+            "three_day_change_pct": req.three_day_change_pct or 0.0,
+            "current_price": c_price,
+            "altman_z_score": 3.2,
+            "piotroski_f_score": 7.0,
+            "market_change_pct": -2.0 if req.side == "SELL" else 0.5,
+        }
+
+        guard_result = BehavioralGuard.check_execution_guard(
+            user_id=req.user_id or "trader_1",
+            trade_request=trade_req,
+            recent_trades=req.recent_trades or [],
+            current_market_state=market_state
         )
+
+        # 2. Geriye uyumluluk için PsychologyAgent
+        agent_result = {}
+        try:
+            from agents import PsychologyAgent
+            agent_result = PsychologyAgent.evaluate_order(
+                ticker=req.ticker,
+                side=req.side,
+                order_amount_tl=order_amount,
+                portfolio_total_tl=req.portfolio_total_tl or 1000000.0,
+                current_position_tl=req.current_position_tl or 0.0,
+                three_day_change_pct=req.three_day_change_pct or 0.0,
+                current_price=c_price,
+                high_price=h_price,
+            )
+        except Exception:
+            pass
+
         return {
             "success": True,
-            **eval_result
+            **guard_result,
+            "psychology_agent": agent_result,
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Psikoloji denetim hatası: {str(e)}")
@@ -1534,6 +1950,267 @@ async def execute_smart_order_calculation(req: SmartOrderRequest):
         raise HTTPException(status_code=500, detail=f"Akıllı emir hesaplama hatası: {str(e)}")
 
 
+class SmartOrderPlanRequest(BaseModel):
+    ticker: str = Field(default="ASELS", description="BIST Hisse Kodu")
+    quantity: int = Field(default=5000, description="Toplam emir adedi (lot)")
+    side: str = Field(default="BUY", description="Emir yönü (BUY / SELL)")
+    current_price: Optional[float] = Field(default=120.0, description="Cari hisse fiyatı")
+    order_book_bids: Optional[List[Dict[str, float]]] = None
+    order_book_asks: Optional[List[Dict[str, float]]] = None
+
+
+@app.post("/api/execution/smart_order_plan")
+async def get_smart_order_execution_plan(req: SmartOrderPlanRequest):
+    """
+    [SMART ORDER ROUTER - BTCA]
+    L2 tahta derinliğine ve ilk 3 kademe likiditesine göre akıllı emir bölme (TWAP/Iceberg)
+    veya doğrudan tek emir icra planı üretir.
+    """
+    try:
+        plan = SmartOrderRouter.generate_execution_plan(
+            ticker=req.ticker,
+            total_quantity=req.quantity,
+            current_price=req.current_price or 100.0,
+            order_book_bids=req.order_book_bids,
+            order_book_asks=req.order_book_asks,
+            side=req.side or "BUY"
+        )
+        return plan
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Akıllı emir planı oluşturulamadı: {str(e)}")
+
+
+class AnalystSurpriseRequest(BaseModel):
+    ticker: str = Field(default="ASELS", description="BIST Hisse Kodu")
+    actual_net_income: float = Field(default=7800.0, description="Açıklanan net kâr (Milyon TL)")
+    consensus_estimate: float = Field(default=6400.0, description="Konsensüs piyasa beklentisi (Milyon TL)")
+
+
+@app.post("/api/analyst/surprise_check")
+async def check_analyst_surprise(req: AnalystSurpriseRequest):
+    """
+    [EARNINGS & ANALYST SURPRISE RADAR]
+    Açıklanan kâr ile analist konsensüsünü kıyaslar. %15+ sapmalarda POZİTİF_SURPRIZ veya NEGATİF_SURPRIZ döner.
+    """
+    try:
+        result = AnalystConsensusEngine.check_earnings_surprise(
+            ticker=req.ticker,
+            actual_net_income=req.actual_net_income,
+            consensus_estimate=req.consensus_estimate
+        )
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Analist sürpriz analizi hatası: {str(e)}")
+
+
+@app.get("/api/risk/factor_analysis")
+async def get_factor_analysis(ticker: str = "ASELS"):
+    """
+    [FACTOR RISK & BETA SENSITIVITY ENGINE]
+    Hissenin BIST 100 karşısındaki Beta, Yıllıklandırılmış Alpha, Downside Beta ve Kriz Direnci skorunu döner.
+    """
+    try:
+        result = FactorRiskEngine.calculate_beta_alpha(ticker)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Faktör risk analizi hatası: {str(e)}")
+
+
+@app.get("/api/valuation/peer_heatmap")
+async def get_peer_heatmap(ticker: str = "THYAO"):
+    """
+    [PEER VALUATION & SECTOR HEATMAP ENGINE]
+    Hissenin sektör akranlarıyla F/K, PD/DD, FD/FAVÖK çarpanlarını kıyaslar,
+    Z-Skoru ve AŞIRI_ISKONTOLU / AŞIRI_PRİMLİ ısı haritası durumunu döner.
+    """
+    try:
+        result = PeerValuationEngine.calculate_sector_heatmap(ticker)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Sektörel ısı haritası hatası: {str(e)}")
+
+
+@app.get("/api/analysis/factor_attribution")
+async def get_factor_attribution(ticker: str = "ASELS"):
+    """
+    [FACTOR ATTRIBUTION ENGINE]
+    Hissenin son dönemdeki toplam getirisini Beta (Piyasa Rüzgarı),
+    Sektör Etkisi ve Şirket Özgün Başarısı (Alpha) olarak 3 parçaya ayrıştırır.
+    """
+    try:
+        result = FactorAttributionEngine.decompose_returns(ticker)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Faktör getiri ayrıştırma hatası: {str(e)}")
+
+
+@app.get("/api/analysis/feature_importance")
+async def get_feature_importance_endpoint(ticker: str = "ASELS"):
+    """
+    [FEATURE IMPORTANCE & ANOMALY ENGINE]
+    O anki piyasada hisse fiyatını en çok etkileyen faktörü (Takas/Derinlik,
+    Teknik Momentum, Temel Değerleme, Sosyal Medya/Haber) ve anomalileri döner.
+    """
+    try:
+        clean_ticker = ticker.strip().upper().replace(".IS", "")
+        result = FeatureImportanceEngine.calculate_feature_importance(clean_ticker)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Öznitelik önem analizi hatası: {str(e)}")
+
+
+class SocialAutoPostRequest(BaseModel):
+    ticker: str = Field(default="ASELS", description="BIST Hisse Kodu")
+    platform: Optional[str] = Field(default="telegram", description="Hedef platform ('telegram', 'twitter' veya 'all')")
+    force_refresh: Optional[bool] = Field(default=False, description="Taze analiz koşturulsun mu?")
+
+
+@app.post("/api/social/auto_post")
+async def execute_social_auto_post(req: SocialAutoPostRequest):
+    """
+    [SOCIAL MEDIA AUTOPILOT]
+    Sistemin son analiz sonucunu çeker, ContentGenerator ile platforma özel metin üretir
+    ve SocialPublisher ile Telegram'a (veya Twitter'a) otomatik gönderir.
+    """
+    try:
+        clean_ticker = req.ticker.strip().upper().replace(".IS", "")
+        platform = (req.platform or "telegram").strip().lower()
+
+        # 1. En son analiz sonucunu bul veya taze üret
+        decision_data = None
+        if not req.force_refresh:
+            for item in reversed(RECENT_DECISIONS):
+                if item.get("ticker") == clean_ticker:
+                    decision_data = item.get("decision")
+                    break
+
+        if decision_data is None:
+            fresh_req = AnalyzeRequest(ticker=clean_ticker)
+            fresh_decision = await execute_evaluate_v2(fresh_req)
+            decision_data = fresh_decision.model_dump() if hasattr(fresh_decision, "model_dump") else fresh_decision.dict()
+
+        # 2. ContentGenerator ile içerik üret
+        generated_post = ContentGenerator.generate_post(clean_ticker, decision_data, platform=platform)
+
+        # 3. SocialPublisher ile yayınla
+        if platform == "telegram":
+            publish_res = SocialPublisher.publish_to_telegram(generated_post)
+        elif platform in ["twitter", "x"]:
+            publish_res = SocialPublisher.publish_to_twitter(generated_post)
+        else:
+            publish_res = SocialPublisher.publish_auto(clean_ticker, decision_data, platforms=["telegram", "twitter"])
+
+        return {
+            "success": True,
+            "ticker": clean_ticker,
+            "platform": platform,
+            "generated_post": generated_post,
+            "publish_result": publish_res,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Sosyal medya otomatik paylaşım hatası: {str(e)}")
+
+
+@app.get("/api/system/telemetry")
+async def get_system_telemetry(limit: int = 30):
+    """
+    [AGENT TELEMETRY & OBSERVABILITY]
+    Ajanların çalışma sürelerini (ms), hata oranlarını ve en yavaş çalışan ajanı raporlar.
+    """
+    try:
+        health = AgentTelemetry.get_system_health(limit=limit)
+        return health
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Telemetri alma hatası: {str(e)}")
+
+
+class McpToolCallRequest(BaseModel):
+    name: str = Field(..., description="MCP Araç Adı (get_stock_price, run_debate_analysis, get_market_sentiment)")
+    arguments: Dict[str, Any] = Field(default_factory=dict, description="Araç parametreleri")
+
+
+@app.get("/api/mcp/manifest")
+@app.get("/api/mcp/tools")
+async def get_mcp_manifest():
+    """
+    [MODEL CONTEXT PROTOCOL (MCP) - MANIFEST]
+    Bistapp finansal karar destek sisteminin dışa açık MCP araç listesini ve şemasını döner.
+    """
+    return {
+        "serverInfo": {
+            "name": "Bistapp_Financial_Intelligence_MCP",
+            "version": "1.0.0"
+        },
+        "tools": BistappMcpServer.list_tools()
+    }
+
+
+@app.post("/api/mcp/call")
+async def call_mcp_tool(req: McpToolCallRequest):
+    """
+    [MODEL CONTEXT PROTOCOL (MCP) - TOOL CALL]
+    Belirtilen MCP aracını çalıştırır ve standart içerik formatında döner.
+    """
+    try:
+        return await BistappMcpServer.call_tool(req.name, req.arguments)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MCP araç çağırma hatası: {str(e)}")
+
+
+@app.post("/api/mcp/jsonrpc")
+async def handle_mcp_jsonrpc(req: Dict[str, Any]):
+    """
+    [MODEL CONTEXT PROTOCOL (MCP) - JSON-RPC 2.0 ENDPOINT]
+    Harici LLM ajanları (Claude Desktop vb.) için tam standart MCP JSON-RPC arayüzü sunar.
+    """
+    try:
+        return await BistappMcpServer.handle_jsonrpc(req)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MCP JSON-RPC hatası: {str(e)}")
+
+
+class TaskQueueAnalyzeRequest(BaseModel):
+    ticker: str = Field(default="ASELS", description="BIST Hisse Kodu")
+    market_regime: Optional[str] = Field(default="BULL", description="Piyasa rejimi")
+
+
+@app.post("/api/tasks/analyze")
+async def queue_analysis_task(req: TaskQueueAnalyzeRequest):
+    """
+    [TASK QUEUE - GÖREV KUYRUĞU]
+    Analiz talebini kuyruğa alır ve arka planda işlenmek üzere task_id döner.
+    """
+    try:
+        clean_ticker = req.ticker.strip().upper().replace(".IS", "")
+        payload = {"ticker": clean_ticker, "market_regime": req.market_regime}
+        task_id = TaskQueue.add_task("analyze", payload)
+        return {
+            "success": True,
+            "task_id": task_id,
+            "status": "BEKLIYOR",
+            "message": f"{clean_ticker} için analiz görevi kuyruğa alındı."
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Görev kuyruğa alınamadı: {str(e)}")
+
+
+@app.get("/api/tasks/status/{task_id}")
+async def get_task_status_endpoint(task_id: str):
+    """
+    [TASK QUEUE - DURUM SORGULAMA]
+    task_id üzerinden görevin durumunu (BEKLIYOR, CALISIYOR, BİTTİ, HATA) ve varsa sonucunu döner.
+    """
+    try:
+        status_info = TaskQueue.get_task_status(task_id)
+        if status_info.get("status") == "BULUNAMADI":
+            raise HTTPException(status_code=404, detail=f"'{task_id}' numaralı görev bulunamadı.")
+        return status_info
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Görev durumu sorgulanamadı: {str(e)}")
+
+
 # ============================================================================
 # AKADEMİ & GAMIFICATION (USER TIERS & QUIZZES) UÇ NOKTALARI
 # ============================================================================
@@ -1635,11 +2312,13 @@ class BacktestRunRequest(BaseModel):
     period_years: int = 1
     initial_capital: float = 100000.0
     risk_threshold: float = 2.5
+    simulate_future: bool = True
+    simulation_days: int = 30
 
 
 @app.post("/api/backtest/run")
 async def run_vectorized_backtest(req: BacktestRunRequest):
-    """Vectorized matrix math ile 1-5 yıllık strateji simülasyonunu koşturur."""
+    """Vectorized matrix math ile strateji simülasyonunu ve Monte Carlo gelecek projeksiyonunu koşturur."""
     try:
         from backtest_engine import VectorizedBacktestEngine
         result = VectorizedBacktestEngine.run_simulation(
@@ -1648,6 +2327,21 @@ async def run_vectorized_backtest(req: BacktestRunRequest):
             initial_capital=req.initial_capital,
             risk_threshold_atr=req.risk_threshold
         )
+
+        if req.simulate_future:
+            base_p = 100.0
+            prices = [base_p]
+            import random
+            for _ in range(99):
+                base_p *= (1.0 + random.gauss(0.0005, 0.02))
+                prices.append(max(0.01, base_p))
+
+            mc_projection = BacktestEngine.simulate_monte_carlo(prices, days=req.simulation_days, simulations=1000)
+            if isinstance(result, dict):
+                result["monte_carlo_projection"] = mc_projection
+            else:
+                result = {"backtest": result, "monte_carlo_projection": mc_projection}
+
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Backtest simülasyon hatası: {str(e)}")

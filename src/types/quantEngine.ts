@@ -141,5 +141,70 @@ export interface FinalDecision {
   coachSummary?: string | null;
   coach_summary?: string | null;
   metadata?: Record<string, any>;
+  positionSizing?: any;
+  position_sizing?: any;
+  portfolioGuardStatus?: any;
+  portfolio_guard_status?: any;
+  slippageImpact?: any;
+  slippage_impact?: any;
+  monteCarloProjection?: MonteCarloProjection | null;
+  monte_carlo_projection?: MonteCarloProjection | null;
+  ragContext?: string | null;
+  rag_context?: string | null;
+  executionPlan?: ExecutionPlan | null;
+  execution_plan?: ExecutionPlan | null;
+}
+
+export interface MonteCarloProjection {
+  days: number;
+  simulations: number;
+  startPrice?: number;
+  p5: number;
+  p50: number;
+  p95: number;
+  expectedVolatility?: number;
+}
+
+export interface OrderSlice {
+  slice_id: number;
+  sliceId?: number;
+  side: 'BUY' | 'SELL' | string;
+  quantity: number;
+  target_price: number;
+  targetPrice?: number;
+  order_type: string;
+  orderType?: string;
+  delay_seconds: number;
+  delaySeconds?: number;
+  estimated_slippage_bps: number;
+  estimatedSlippageBps?: number;
+  instruction: string;
+}
+
+export interface ExecutionPlan {
+  ticker: string;
+  side: 'BUY' | 'SELL' | string;
+  total_quantity: number;
+  totalQuantity?: number;
+  current_price: number;
+  currentPrice?: number;
+  total_notional_tl?: number;
+  totalNotionalTl?: number;
+  execution_strategy: 'TWAP_ICEBERG_SLICE' | 'DIRECT_EXECUTION' | string;
+  executionStrategy?: string;
+  strategy_name?: string;
+  strategyName?: string;
+  top_3_liquidity_qty?: number;
+  top3LiquidityQty?: number;
+  direct_slippage_pct?: number;
+  directSlippagePct?: number;
+  optimized_slippage_pct: number;
+  optimizedSlippagePct?: number;
+  estimated_savings_tl?: number;
+  estimatedSavingsTl?: number;
+  total_slices: number;
+  totalSlices?: number;
+  slices: OrderSlice[];
+  summary: string;
 }
 

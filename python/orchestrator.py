@@ -29,6 +29,107 @@ try:
 except ImportError:
     analyze_social_manipulation = None
 
+try:
+    from valuation_engine import ValuationEngine
+except ImportError:
+    class ValuationEngine:
+        @staticmethod
+        def calculate_dcf(*args, **kwargs):
+            return {"is_overvalued": False, "status": "DENGELI", "summary": "DCF analizi nötr."}
+        @staticmethod
+        def evaluate_relative_value(*args, **kwargs):
+            return {"weighted_discount_pct": 0.0, "status": "DENGELI", "summary": "Çarpan analizi dengeli."}
+
+try:
+    from post_mortem_engine import PostMortemEngine
+except ImportError:
+    class PostMortemEngine:
+        @staticmethod
+        def load_agent_weights():
+            return {
+                "technical": 0.22,
+                "depth": 0.18,
+                "fundamental": 0.18,
+                "sentiment": 0.10,
+                "company_direct": 0.06,
+                "trend": 0.12,
+                "skeptic": 0.07,
+                "trust": 0.07,
+            }
+
+try:
+    from analyst_consensus_engine import AnalystConsensusEngine
+except ImportError:
+    class AnalystConsensusEngine:
+        @staticmethod
+        def check_earnings_surprise(*args, **kwargs):
+            return {"signal": "BEKLENTİYE_PARALEL", "surprise_pct": 0.0, "summary": "Beklentiye paralel."}
+        @staticmethod
+        def get_simulated_earnings_surprise(*args, **kwargs):
+            return {"signal": "BEKLENTİYE_PARALEL", "surprise_pct": 0.0, "summary": "Beklentiye paralel."}
+
+try:
+    from factor_risk_engine import FactorRiskEngine
+except ImportError:
+    class FactorRiskEngine:
+        @staticmethod
+        def calculate_beta_alpha(*args, **kwargs):
+            return {"beta": 1.0, "alpha_annualized_pct": 0.0, "crisis_resilience_score": 50.0}
+
+try:
+    from macro_shock_engine import MacroShockEngine
+except ImportError:
+    class MacroShockEngine:
+        @staticmethod
+        def simulate_all_shocks(*args, **kwargs):
+            return {"is_any_high_risk": False}
+
+try:
+    from peer_valuation_engine import PeerValuationEngine
+except ImportError:
+    class PeerValuationEngine:
+        @staticmethod
+        def calculate_sector_heatmap(*args, **kwargs):
+            return {"valuation_status": "SEKTÖRLE_PARALEL", "composite_z_score": 0.0, "summary": ""}
+
+try:
+    from durable_executor import DurableExecutor
+except ImportError:
+    class DurableExecutor:
+        @staticmethod
+        def execute_with_recovery(task_id, task_func, *args, **kwargs):
+            return task_func(*args, **kwargs)
+
+try:
+    from data_quality_gate import DataQualityGate
+except ImportError:
+    class DataQualityGate:
+        @staticmethod
+        def sanitize_context(ctx): return ctx, []
+        @staticmethod
+        def validate_market_data(data): return True, ""
+        @staticmethod
+        def validate_social_data(data): return True, ""
+
+try:
+    from factor_attribution_engine import FactorAttributionEngine
+except ImportError:
+    class FactorAttributionEngine:
+        @staticmethod
+        def decompose_returns(*args, **kwargs):
+            return {"is_beta_driven": False, "market_component_pct": 5.0, "alpha_component_pct": 3.0}
+
+try:
+    from feature_importance_engine import FeatureImportanceEngine
+except ImportError:
+    class FeatureImportanceEngine:
+        @staticmethod
+        def calculate_feature_importance(*args, **kwargs):
+            return {"weights_ratio": {"depth": 0.25, "technical": 0.25, "fundamental": 0.25, "sentiment": 0.25}, "summary": ""}
+        @staticmethod
+        def modulate_agent_weights(weights, importance):
+            return weights
+
 
 
 def _score_to_signal(score: float) -> SignalType:
@@ -80,25 +181,47 @@ class MultiAgentPipeline:
         score = max(10.0, min(95.0, round(base_score, 1)))
         signal = _score_to_signal(score)
 
+        confidence = 0.85
         source_info = f" ({m.source})" if m.source != "DEFAULT" else ""
         reasoning = (
             f"Fiyat {m.price:.2f}{source_info}, Günlük Değişim: %{m.change_pct:+.2f}, "
             f"RSI: {m.rsi:.1f}, MACD: {m.macd_signal}. Trend güçlü."
         )
 
+        # 📊 FactorRiskEngine & MacroShockEngine Duyarlılık Kontrolü
+        factor_data = FactorRiskEngine.calculate_beta_alpha(ctx.ticker)
+        beta_val = float(factor_data.get("beta", 1.0))
+        macro_shock_data = MacroShockEngine.simulate_all_shocks(ctx.ticker)
+        is_macro_high_risk = macro_shock_data.get("is_any_high_risk", False)
+
+        if beta_val > 1.5 and is_macro_high_risk:
+            reasoning += f" | [UYARI]: Yüksek Beta (Beta: {beta_val:.2f}): Piyasa düşüşlerinde sert düşebilir."
+            confidence = max(0.40, round(confidence - 0.05, 2))
+
+        # 📈 FactorAttributionEngine: Getiri Kaynak Ayrıştırması (Beta vs Sektör vs Alpha)
+        attribution_data = FactorAttributionEngine.decompose_returns(ctx.ticker)
+        if attribution_data.get("is_beta_driven", False):
+            score = max(20.0, round(score - 10.0, 1))
+            signal = _score_to_signal(score)
+            reasoning += " | [FAKTÖR AYRIŞTIRMASI]: Getirinin çoğu piyasa rüzgarından, Alpha üretimi zayıf (-10 puan)."
+
         return AgentResponse(
             agent_id="technical",
             agent_name="Teknik Analiz Ajanı",
             signal=signal,
             score=score,
-            confidence=0.85,
+            confidence=confidence,
             reasoning=reasoning,
             key_metrics={
                 "price": m.price,
                 "change_pct": m.change_pct,
                 "rsi": m.rsi,
                 "volume": m.volume,
-                "source": m.source
+                "source": m.source,
+                "beta": beta_val,
+                "alpha": factor_data.get("alpha_annualized_pct", 0.0),
+                "crisis_resilience_score": factor_data.get("crisis_resilience_score", 50.0),
+                "factor_attribution": attribution_data,
             }
         )
 
@@ -106,38 +229,65 @@ class MultiAgentPipeline:
     def evaluate_depth(cls, ctx: UnifiedContext) -> AgentResponse:
         d = ctx.depth_data
         score = 60.0
+        confidence = 0.80
+        source_note = ""
+        is_suspicious = False
+
         if d:
+            is_suspicious = getattr(d, "is_suspicious", False)
+            data_src = str(getattr(d, "data_source", "SIMULATED")).upper()
+            obi_val = getattr(d, "obi", 0.0)
+
+            # OBI (Order Book Imbalance) Etkisi
+            if obi_val >= 0.20:
+                score += 10.0
+            elif obi_val <= -0.20:
+                score -= 12.0
+
             if d.wall_pressure_ratio > 1.2:
-                score += 12.0
+                score += 8.0
             elif d.wall_pressure_ratio < 0.8:
-                score -= 15.0
+                score -= 10.0
 
             if d.bofa_net_lot > 50_000:
-                score += 12.0
+                score += 10.0
             elif d.bofa_net_lot < -50_000:
-                score -= 18.0
+                score -= 15.0
 
             if d.is_wall_spoofing:
                 score -= 15.0
+
+            # Şüpheli / Simüle L2 Veri Koruması
+            if is_suspicious:
+                score = 50.0  # Şüpheli veride nötrle
+                confidence = 0.35
+                source_note = f" | ⚠️ [ŞÜPHELİ L2]: {getattr(d, 'suspicious_reason', 'L2 verisi güvenilmez, bu sinyale dayanma.')}"
+            elif data_src != "REALTIME_WS":
+                confidence = max(0.45, confidence - 0.15)
+                source_note = " | [BİLGİ]: Simüle L2 verisi (Canlı WebSocket değildir)."
 
         score = max(10.0, min(95.0, round(score, 1)))
         signal = _score_to_signal(score)
         
         bofa_text = f"{d.bofa_net_lot:+,} lot" if d else "N/A"
         wall_text = f"{d.wall_pressure_ratio:.2f}x" if d else "N/A"
-        reasoning = f"Tahta Derinliği: BofA Akışı {bofa_text}, Duvar Baskısı {wall_text}."
+        obi_text = f"{getattr(d, 'obi', 0.0):+.3f}" if d else "0.000"
+        reasoning = f"Tahta Derinliği: OBI {obi_text}, BofA Akışı {bofa_text}, Duvar Baskısı {wall_text}.{source_note}"
 
         return AgentResponse(
             agent_id="depth",
             agent_name="Takas & Derinlik Ajanı",
             signal=signal,
             score=score,
-            confidence=0.80,
+            confidence=confidence,
             reasoning=reasoning,
             key_metrics={
                 "bofa_net_lot": d.bofa_net_lot if d else 0,
                 "wall_pressure": d.wall_pressure_ratio if d else 1.0,
-                "spoofing": d.is_wall_spoofing if d else False
+                "spoofing": d.is_wall_spoofing if d else False,
+                "obi": getattr(d, "obi", 0.0) if d else 0.0,
+                "data_source": getattr(d, "data_source", "SIMULATED") if d else "NONE",
+                "is_suspicious": is_suspicious,
             }
         )
 
@@ -159,23 +309,74 @@ class MultiAgentPipeline:
             if f.beneish_m_score > -1.78:
                 score -= 20.0  # Manipülasyon şüphesi
 
+        # 📊 ValuationEngine: DCF ve Sektörel Çarpan Analizi
+        current_px = ctx.market_data.price if ctx.market_data else 100.0
+
+        dcf_result = ValuationEngine.calculate_dcf(
+            free_cash_flows=[current_px * 800, current_px * 920, current_px * 1050, current_px * 1200, current_px * 1400],
+            discount_rate=0.14,
+            terminal_growth_rate=0.04,
+            shares_outstanding=10000.0,
+            current_price=current_px
+        )
+
+        rel_result = ValuationEngine.evaluate_relative_value(
+            pe_ratio=f.pe_ratio if f else 10.0,
+            sector_pe=12.5,
+            pb_ratio=f.pb_ratio if f else 2.0,
+            sector_pb=2.8
+        )
+
+        # İskontoluysa artı puan, primliyse eksi puan
+        if rel_result.get("weighted_discount_pct", 0.0) >= 10.0:
+            score += 10.0
+        elif rel_result.get("weighted_discount_pct", 0.0) <= -15.0:
+            score -= 10.0
+
+        if dcf_result.get("is_overvalued", False):
+            score -= 15.0
+        elif dcf_result.get("status") == "ISCONTOLU":
+            score += 10.0
+
+        # 🏢 PeerValuationEngine: Sektörel Çarpan Isı Haritası
+        peer_res = PeerValuationEngine.calculate_sector_heatmap(ctx.ticker)
+        peer_status = peer_res.get("valuation_status", "SEKTÖRLE_PARALEL")
+        composite_z = peer_res.get("composite_z_score", 0.0)
+
+        peer_note = ""
+        if peer_status == "AŞIRI_ISKONTOLU":
+            score += 10.0
+            peer_note = f" Sektörel iskonto tespit edildi (Z-Skor: {composite_z:.2f}, +10 puan)."
+        elif peer_status == "AŞIRI_PRİMLİ":
+            score -= 10.0
+            peer_note = f" Sektörel prim tespit edildi (Z-Skor: {composite_z:.2f}, -10 puan)."
+
         score = max(10.0, min(95.0, round(score, 1)))
         signal = _score_to_signal(score)
 
         z_text = f"{f.altman_z_score:.2f}" if f else "N/A"
         f_text = f"{f.piotroski_f_score}" if f else "N/A"
-        reasoning = f"Mali Tablo Sağlığı: Altman Z-Skor {z_text}, Piotroski F-Skor {f_text}."
+        reasoning = (
+            f"Mali Tablo Sağlığı: Altman Z-Skor {z_text}, Piotroski F-Skor {f_text}. "
+            f"Değerleme: {rel_result['summary']} {dcf_result['summary']}{peer_note}"
+        )
 
         return AgentResponse(
             agent_id="fundamental",
             agent_name="Temel Değerleme Ajanı",
             signal=signal,
             score=score,
-            confidence=0.82,
+            confidence=0.85,
             reasoning=reasoning,
             key_metrics={
                 "altman_z": f.altman_z_score if f else 0,
-                "piotroski_f": f.piotroski_f_score if f else 0
+                "piotroski_f": f.piotroski_f_score if f else 0,
+                "dcf_fair_value": dcf_result.get("fair_value_per_share", 0.0),
+                "dcf_is_overvalued": dcf_result.get("is_overvalued", False),
+                "dcf_status": dcf_result.get("status", "DENGELI"),
+                "relative_discount_pct": rel_result.get("weighted_discount_pct", 0.0),
+                "relative_status": rel_result.get("status", "DENGELI"),
+                "peer_valuation": peer_res,
             }
         )
 
@@ -194,6 +395,19 @@ class MultiAgentPipeline:
                 score = max(15.0, round(score - 15.0, 1))
                 reasoning += " | [UYARI]: Sosyal medya manipülasyon riski tespit edildi (-15 puan)."
 
+        # 📈 Analist Konsensüsü & Sürpriz Kâr Radarı
+        surprise_res = AnalystConsensusEngine.get_simulated_earnings_surprise(ctx.ticker)
+        surprise_sig = surprise_res.get("signal", "BEKLENTİYE_PARALEL")
+        surprise_pct = surprise_res.get("surprise_pct", 0.0)
+
+        if surprise_sig == "POZİTİF_SURPRIZ":
+            score += 10.0
+            reasoning += f" | [ANALİST KONSENSÜSÜ]: Bilanço sürprizi: Kâr beklentinin %{abs(surprise_pct):.1f} üzerinde (+10 puan)."
+        elif surprise_sig == "NEGATİF_SURPRIZ":
+            score -= 10.0
+            reasoning += f" | [ANALİST KONSENSÜSÜ]: Bilanço sürprizi: Kâr beklentinin %{abs(surprise_pct):.1f} altında (-10 puan)."
+
+        score = max(10.0, min(95.0, round(score, 1)))
         signal = _score_to_signal(score)
 
         return AgentResponse(
@@ -206,6 +420,7 @@ class MultiAgentPipeline:
             key_metrics={
                 "sentiment_score": sent,
                 "manipulation_risk_score": manip_risk,
+                "earnings_surprise": surprise_res,
             },
             manipulation_risk_score=manip_risk,
         )
@@ -277,6 +492,64 @@ class MultiAgentPipeline:
         )
 
     @classmethod
+    def evaluate_skeptic(cls, ctx: UnifiedContext) -> AgentResponse:
+        """
+        Skeptik Ajan: Eğer teknik ajan skoru çok yüksekse (>80) ama takas/hacim zayıfsa
+        veya RSI aşırı alımdaysa aşırı iyimserlik uyarısı yapar.
+        """
+        m = ctx.market_data
+        d = ctx.depth_data
+        score = 50.0
+        reasoning = "Piyasa koşulları normal, aşırı iyimserlik tespit edilmedi."
+        over_optimism = False
+
+        if m.rsi > 75.0 or (d and d.wall_pressure_ratio < 0.8):
+            over_optimism = True
+            score = 35.0
+            reasoning = f"⚠️ SKEPTİK UYARI: RSI aşırı alımda ({m.rsi:.1f}) veya tahta baskısı zayıf ({d.wall_pressure_ratio if d else 1.0}x). Aşırı iyimserlik riski."
+        else:
+            score = 60.0
+
+        signal = _score_to_signal(score)
+        return AgentResponse(
+            agent_id="skeptic",
+            agent_name="Skeptik Analiz Ajanı",
+            signal=signal,
+            score=score,
+            confidence=0.80,
+            reasoning=reasoning,
+            key_metrics={"over_optimism": over_optimism, "rsi": m.rsi}
+        )
+
+    @classmethod
+    def evaluate_trust(cls, ctx: UnifiedContext) -> AgentResponse:
+        """
+        Güven (Trust) Ajanı: Temel göstergeler güçlüyse (Piotroski > 7, Altman Z > 3)
+        ve KAP haberleri bunu destekliyorsa sağlam temel desteği sunar.
+        """
+        f = ctx.fundamental_data
+        n = ctx.news_data
+        score = 60.0
+        reasoning = "Temel veriler ve haber akışı kararlı."
+        solid_fundamentals = False
+
+        if f and f.altman_z_score > 3.0 and f.piotroski_f_score >= 7:
+            solid_fundamentals = True
+            score = 82.0
+            reasoning = f"🛡️ GÜVEN KALKANI: Altman Z-Skor ({f.altman_z_score:.2f}) ve Piotroski F-Skor ({f.piotroski_f_score}) güçlü bilanço teyidi veriyor."
+
+        signal = _score_to_signal(score)
+        return AgentResponse(
+            agent_id="trust",
+            agent_name="Güven (Trust) Ajanı",
+            signal=signal,
+            score=score,
+            confidence=0.85,
+            reasoning=reasoning,
+            key_metrics={"solid_fundamentals": solid_fundamentals, "altman_z": f.altman_z_score if f else 0}
+        )
+
+    @classmethod
     async def run(cls, ctx: UnifiedContext) -> FinalDecision:
         # 0. Sosyal manipülasyon verisi yoksa güvenli (fail-safe) olarak doldur
         if ctx.social_data is None and analyze_social_manipulation is not None:
@@ -293,29 +566,54 @@ class MultiAgentPipeline:
                     toon="",
                 )
 
-        # 1. Tüm 6 ajandan ham oyları topla
+        # 0.5 Veri Kalitesi Kapısı (DataQualityGate) denetimi ve stabilizasyonu
+        ctx, quality_warnings = DataQualityGate.sanitize_context(ctx)
+
+        # 1. Tüm 8 ajandan ham oyları topla (DurableExecutor ile dayanıklı kurtarma)
         raw_votes: Dict[str, AgentResponse] = {
-            "technical": cls.evaluate_technical(ctx),
-            "depth": cls.evaluate_depth(ctx),
-            "fundamental": cls.evaluate_fundamental(ctx),
-            "sentiment": cls.evaluate_sentiment(ctx),
-            "company_direct": cls.evaluate_company_direct(ctx),
-            "trend": cls.evaluate_trend(ctx),
+            "technical": DurableExecutor.execute_with_recovery(f"{ctx.ticker}_technical", cls.evaluate_technical, ctx),
+            "depth": DurableExecutor.execute_with_recovery(f"{ctx.ticker}_depth", cls.evaluate_depth, ctx),
+            "fundamental": DurableExecutor.execute_with_recovery(f"{ctx.ticker}_fundamental", cls.evaluate_fundamental, ctx),
+            "sentiment": DurableExecutor.execute_with_recovery(f"{ctx.ticker}_sentiment", cls.evaluate_sentiment, ctx),
+            "company_direct": DurableExecutor.execute_with_recovery(f"{ctx.ticker}_company_direct", cls.evaluate_company_direct, ctx),
+            "trend": DurableExecutor.execute_with_recovery(f"{ctx.ticker}_trend", cls.evaluate_trend, ctx),
+            "skeptic": DurableExecutor.execute_with_recovery(f"{ctx.ticker}_skeptic", cls.evaluate_skeptic, ctx),
+            "trust": DurableExecutor.execute_with_recovery(f"{ctx.ticker}_trust", cls.evaluate_trust, ctx),
         }
 
         # 2. Münazara protokolünü çalıştır (DebateEngine)
         debate_result = DebateEngine.conduct_one_round_debate(raw_votes, ctx)
 
-        # 3. Nihai ağırlıklı bileşik skoru hesapla
+        # 3. Nihai ağırlıklı bileşik skoru hesapla (agent_weights.json veya varsayılanlar)
         votes = debate_result.revised_agent_responses
-        weights = {
-            "technical": 0.25,
-            "depth": 0.20,
-            "fundamental": 0.20,
-            "sentiment": 0.12,
-            "company_direct": 0.08,
-            "trend": 0.15,
-        }
+        base_weights = PostMortemEngine.load_agent_weights()
+
+        # 🎯 FeatureImportanceEngine: Anlık Piyasa Faktör Önemi ve Ağırlık Modülasyonu
+        feat_importance = FeatureImportanceEngine.calculate_feature_importance(
+            ticker=ctx.ticker,
+            market_data=ctx.market_data,
+            depth_data=ctx.depth_data,
+            fundamental_data=ctx.fundamental_data,
+            news_data=ctx.news_data,
+            social_data=ctx.social_data,
+        )
+        weights = FeatureImportanceEngine.modulate_agent_weights(base_weights, feat_importance)
+
+        # 🛡️ L2 Veri Kalitesi & Kaynak Koruma Kalkanı:
+        # Eğer L2 verisi 'Şüpheli' veya 'Simüle' ise, Takas/Derinlik Ajanının oy ağırlığını otomatik olarak düşür
+        if ctx.depth_data:
+            is_suspicious = getattr(ctx.depth_data, "is_suspicious", False)
+            data_src = str(getattr(ctx.depth_data, "data_source", "SIMULATED")).upper()
+            if is_suspicious:
+                # Şüpheli veride ağırlığı yarıya düşür (örn: %20 -> %10)
+                weights["depth"] = max(0.04, weights.get("depth", 0.18) * 0.50)
+            elif data_src != "REALTIME_WS":
+                # Simüle veride ağırlığı %30 azalt
+                weights["depth"] = max(0.06, weights.get("depth", 0.18) * 0.70)
+
+            # Ağırlıkları normalize et (toplam = 1.0)
+            total_w = sum(weights.values())
+            weights = {k: round(v / total_w, 4) for k, v in weights.items()}
 
         composite_score = sum(votes[k].score * weights.get(k, 0.10) for k in votes if k in weights)
         composite_score = round(composite_score, 1)
@@ -383,6 +681,7 @@ class MultiAgentPipeline:
                 "challenges_count": len(debate_result.challenges),
                 "manipulation_risk_score": manip_risk_val,
                 "social_data": ctx.social_data.model_dump() if (ctx.social_data and hasattr(ctx.social_data, "model_dump")) else (ctx.social_data.dict() if ctx.social_data else None),
+                "feature_importance": feat_importance,
             }
         )
 

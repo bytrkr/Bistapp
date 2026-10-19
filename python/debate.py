@@ -28,6 +28,49 @@ except ImportError:
         DebateRoundResult,
     )
 
+try:
+    from liquidity_engine import LiquidityEngine
+except ImportError:
+    class LiquidityEngine:
+        @staticmethod
+        def analyze_order_book_impact(*args, **kwargs):
+            return {"is_thin_book": False, "estimated_slippage_pct": 0.5}
+
+try:
+    from social_illusion_engine import SocialIllusionEngine
+except ImportError:
+    class SocialIllusionEngine:
+        @staticmethod
+        def detect_botnet(mentions=None):
+            return {"botnet_risk_score": 0.0, "is_botnet_detected": False}
+
+try:
+    from valuation_engine import ValuationEngine
+except ImportError:
+    class ValuationEngine:
+        @staticmethod
+        def calculate_dcf(*args, **kwargs):
+            return {"is_overvalued": False, "status": "DENGELI"}
+
+try:
+    from macro_shock_engine import MacroShockEngine
+except ImportError:
+    class MacroShockEngine:
+        @staticmethod
+        def simulate_shock(*args, **kwargs):
+            return {"macro_vulnerability_score": 40.0, "is_high_risk": False}
+        @staticmethod
+        def simulate_all_shocks(*args, **kwargs):
+            return {"max_vulnerability_score": 40.0, "is_any_high_risk": False}
+
+try:
+    from var_engine import VaREngine
+except ImportError:
+    class VaREngine:
+        @staticmethod
+        def calculate_marginal_var(*args, **kwargs):
+            return {"is_excessive_risk": False, "var_increase_pct": 5.0}
+
 
 class DebateEngine:
     """
@@ -91,8 +134,9 @@ class DebateEngine:
             # Durum 1A: Teknik Alışta, Takas ve BofA Sert Satışta
             bofa = ctx.depth_data.bofa_net_lot if ctx.depth_data else 0
             wall = ctx.depth_data.wall_pressure_ratio if ctx.depth_data else 1.0
+            is_depth_suspicious = getattr(ctx.depth_data, "is_suspicious", False) if ctx.depth_data else False
             
-            if (is_bull_trap or score_diff >= cls.CONFLICT_THRESHOLD) and tech.score > depth.score and bofa < -50_000:
+            if not is_depth_suspicious and (is_bull_trap or score_diff >= cls.CONFLICT_THRESHOLD) and tech.score > depth.score and bofa < -50_000:
                 penalty = 20.0 if bofa < -150_000 else 15.0
                 if wall < 0.70:
                     penalty += 5.0
@@ -359,6 +403,280 @@ class DebateEngine:
                 target_name=tech.agent_name,
                 conflict_type="SOSYAL_MANIPULASYON_SHIELD",
                 dispute_metric=f"Manipülasyon Riski: {ctx.social_data.manipulation_risk_score:.0f}/100 | Mention: {ctx.social_data.mention_count}",
+                argument=arg,
+                penalty_applied=penalty,
+                target_score_before=before_score,
+                target_score_after=tech.score,
+            )
+            challenges.append(challenge)
+            conflict_summaries.append(arg)
+
+        # ----------------------------------------------------------------------
+        # MÜNAZARA 8: SKEPTİK FİLTRE (Aşırı İyimserlik Cezası)
+        # ----------------------------------------------------------------------
+        skeptic = revised_votes.get("skeptic")
+        if (
+            skeptic
+            and tech
+            and tech.score > 80.0
+            and skeptic.key_metrics.get("over_optimism", False)
+            and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]
+        ):
+            penalty = 15.0
+            before_score = tech.score
+            after_score = max(20.0, round(before_score - penalty, 1))
+            new_signal = cls.recompute_signal(after_score)
+            arg = "⚔️ İTİRAZ [Skeptik -> Teknik]: Piyasa aşırı iyimser ve RSI/Tahta uyumsuzluğu var (Skeptik Filtre)."
+
+            tech.score = after_score
+            tech.signal = new_signal
+            tech.confidence = max(0.50, round(tech.confidence - 0.15, 2))
+            tech.reasoning = f"{tech.reasoning} | [MÜNAZARA REVİZYONU]: {arg} (-{penalty:.0f} puan)."
+
+            challenge = DebateChallenge(
+                challenger_agent_id=skeptic.agent_id,
+                challenger_name=skeptic.agent_name,
+                target_agent_id=tech.agent_id,
+                target_name=tech.agent_name,
+                conflict_type="SKEPTIC_FILTER",
+                dispute_metric=f"RSI: {ctx.market_data.rsi:.1f} | Over Optimism: True",
+                argument=arg,
+                penalty_applied=penalty,
+                target_score_before=before_score,
+                target_score_after=tech.score,
+            )
+            challenges.append(challenge)
+            conflict_summaries.append(arg)
+
+        # ----------------------------------------------------------------------
+        # MÜNAZARA 9: GÜVEN KALKANI (Sağlam Temel Desteği)
+        # ----------------------------------------------------------------------
+        trust = revised_votes.get("trust")
+        if (
+            trust
+            and fund
+            and fund.signal in [SignalType.SAT, SignalType.GUCLU_SAT]
+            and trust.key_metrics.get("solid_fundamentals", False)
+        ):
+            bonus = 10.0
+            before_score = fund.score
+            after_score = min(90.0, round(before_score + bonus, 1))
+            new_signal = cls.recompute_signal(after_score)
+            arg = "⚔️ DESTEK [Güven Kalkanı -> Temel]: Bilanço ve Altman Z / Piotroski skorları çok güçlü; geçici satış baskısına karşı Güven Kalkanı devreye girdi."
+
+            fund.score = after_score
+            fund.signal = new_signal
+            fund.reasoning = f"{fund.reasoning} | [MÜNAZARA REVİZYONU]: {arg} (+{bonus:.0f} puan)."
+
+            challenge = DebateChallenge(
+                challenger_agent_id=trust.agent_id,
+                challenger_name=trust.agent_name,
+                target_agent_id=fund.agent_id,
+                target_name=fund.agent_name,
+                conflict_type="TRUST_SHIELD",
+                dispute_metric="Solid Fundamentals: True | Altman Z > 3",
+                argument=arg,
+                penalty_applied=-bonus,
+                target_score_before=before_score,
+                target_score_after=fund.score,
+            )
+            challenges.append(challenge)
+            conflict_summaries.append(arg)
+
+        # ----------------------------------------------------------------------
+        # MÜNAZARA 10: LİKİDİTE KALKANI (Sığ Tahta / Yüksek Kayma Cezası)
+        # ----------------------------------------------------------------------
+        try:
+            liq_analysis = LiquidityEngine.analyze_order_book_impact(
+                bids=ctx.depth_data.bids if ctx.depth_data and ctx.depth_data.bids else [],
+                asks=ctx.depth_data.asks if ctx.depth_data and ctx.depth_data.asks else [],
+                order_size_tl=150_000.0,
+                current_price=ctx.market_data.price,
+                side="BUY"
+            )
+            if liq_analysis.get("is_thin_book", False) and tech and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]:
+                penalty = 10.0
+                before_score = tech.score
+                after_score = max(20.0, round(before_score - penalty, 1))
+                new_signal = cls.recompute_signal(after_score)
+                slip_pct = liq_analysis.get("estimated_slippage_pct", 1.5)
+                arg = f"⚔️ İTİRAZ [Likidite Kalkanı -> Teknik]: Sığ tahta ve yüksek kayma riski tespit edildi (%{slip_pct:.2f}). Alım sinyali cezalandırıldı."
+
+                tech.score = after_score
+                tech.signal = new_signal
+                tech.confidence = max(0.50, round(tech.confidence - 0.10, 2))
+                tech.reasoning = f"{tech.reasoning} | [MÜNAZARA REVİZYONU]: {arg} (-{penalty:.0f} puan)."
+
+                challenge = DebateChallenge(
+                    challenger_agent_id="liquidity_engine",
+                    challenger_name="Likidite Şok Motoru",
+                    target_agent_id=tech.agent_id,
+                    target_name=tech.agent_name,
+                    conflict_type="LIQUIDITY_SHIELD",
+                    dispute_metric=f"Slippage: %{slip_pct:.2f} | Thin Book: True",
+                    argument=arg,
+                    penalty_applied=penalty,
+                    target_score_before=before_score,
+                    target_score_after=tech.score,
+                )
+                challenges.append(challenge)
+                conflict_summaries.append(arg)
+        except Exception as e:
+            print(f"[DEBATE] LiquidityEngine hata: {e}")
+
+        # ----------------------------------------------------------------------
+        # MÜNAZARA 11: BOTNET İLLÜZYON KALKANI (Yapay Sosyal Şişirme Cezası)
+        # ----------------------------------------------------------------------
+        botnet_score = 0.0
+        if ctx.social_data and getattr(ctx.social_data, "manipulation_risk_score", 0.0) > 70.0:
+            botnet_score = ctx.social_data.manipulation_risk_score
+
+        if hasattr(ctx, "social_mentions") and getattr(ctx, "social_mentions"):
+            botnet_res = SocialIllusionEngine.detect_botnet(ctx.social_mentions)
+            botnet_score = max(botnet_score, float(botnet_res.get("botnet_risk_score", 0.0)))
+
+        if botnet_score > 70.0 and tech and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]:
+            penalty = 25.0
+            before_score = tech.score
+            after_score = max(15.0, round(before_score - penalty, 1))
+            new_signal = cls.recompute_signal(after_score)
+            arg = f"⚔️ İTİRAZ [Botnet İllüzyon Kalkanı -> Teknik]: Sosyal medyada organize botnet ve yapay pompalama tespit edildi (Botnet/Manipülasyon Skoru: {botnet_score:.0f}/100). Teknik alım sinyali cezalandırıldı."
+
+            tech.score = after_score
+            tech.signal = new_signal
+            tech.confidence = max(0.40, round(tech.confidence - 0.20, 2))
+            tech.reasoning = f"{tech.reasoning} | [MÜNAZARA REVİZYONU]: {arg} (-{penalty:.0f} puan)."
+
+            challenge = DebateChallenge(
+                challenger_agent_id="social_illusion_engine",
+                challenger_name="Botnet İllüzyon Kalkanı",
+                target_agent_id=tech.agent_id,
+                target_name=tech.agent_name,
+                conflict_type="BOTNET_ILLUSION_SHIELD",
+                dispute_metric=f"Botnet/Manipülasyon Riski: {botnet_score:.0f}/100",
+                argument=arg,
+                penalty_applied=penalty,
+                target_score_before=before_score,
+                target_score_after=tech.score,
+            )
+            challenges.append(challenge)
+            conflict_summaries.append(arg)
+
+        # ----------------------------------------------------------------------
+        # MÜNAZARA 12: AŞIRI DEĞERLEME KALKANI (DCF Aşırı Primli Cezası)
+        # ----------------------------------------------------------------------
+        dcf_is_overvalued = False
+        if fund and (fund.key_metrics.get("dcf_is_overvalued") or fund.key_metrics.get("dcf_status") == "ASIRI_PRIMLI"):
+            dcf_is_overvalued = True
+        elif ctx.dcf_valuation_data and ctx.market_data and ctx.market_data.price > (ctx.dcf_valuation_data.fair_value * 1.25):
+            dcf_is_overvalued = True
+
+        if dcf_is_overvalued and fund and fund.signal in [SignalType.AL, SignalType.GUCLU_AL]:
+            penalty = 15.0
+            before_score = fund.score
+            after_score = max(20.0, round(before_score - penalty, 1))
+            new_signal = cls.recompute_signal(after_score)
+            arg = "⚔️ İTİRAZ [Aşırı Değerleme Kalkanı -> Temel]: DCF nakit akışlarına göre hisse adil değerinin üzerinde (Aşırı Primli). Alım sinyali cezalandırıldı."
+
+            fund.score = after_score
+            fund.signal = new_signal
+            fund.confidence = max(0.40, round(fund.confidence - 0.15, 2))
+            fund.reasoning = f"{fund.reasoning} | [MÜNAZARA REVİZYONU]: {arg} (-{penalty:.0f} puan)."
+
+            challenge = DebateChallenge(
+                challenger_agent_id="valuation_engine",
+                challenger_name="DCF Değerleme Motoru",
+                target_agent_id=fund.agent_id,
+                target_name=fund.agent_name,
+                conflict_type="OVERVALUATION_SHIELD",
+                dispute_metric="DCF Status: ASIRI_PRIMLI | Intrinsic Premium > 25%",
+                argument=arg,
+                penalty_applied=penalty,
+                target_score_before=before_score,
+                target_score_after=fund.score,
+            )
+            challenges.append(challenge)
+            conflict_summaries.append(arg)
+
+        # ----------------------------------------------------------------------
+        # MÜNAZARA 13: MAKRO ŞOK KALKANI (Yüksek Makro Kırılganlık Cezası)
+        # ----------------------------------------------------------------------
+        try:
+            macro_res = MacroShockEngine.simulate_all_shocks(ctx.ticker)
+            macro_vuln = float(macro_res.get("max_vulnerability_score", 0.0))
+            is_macro_high_risk = macro_vuln >= 70.0
+        except Exception:
+            macro_vuln = 0.0
+            is_macro_high_risk = False
+
+        if is_macro_high_risk and tech and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]:
+            penalty = 15.0
+            before_score = tech.score
+            after_score = max(20.0, round(before_score - penalty, 1))
+            new_signal = cls.recompute_signal(after_score)
+            arg = f"⚔️ İTİRAZ [Makro Şok Kalkanı -> Teknik]: Hisse makro stres senaryolarına karşı yüksek kırılganlık taşıyor (Kırılganlık Skoru: {macro_vuln:.0f}/100). Makro riskler teknik analizi geçersiz kıldığı için alım sinyali cezalandırıldı."
+
+            tech.score = after_score
+            tech.signal = new_signal
+            tech.confidence = max(0.45, round(tech.confidence - 0.15, 2))
+            tech.reasoning = f"{tech.reasoning} | [MÜNAZARA REVİZYONU]: {arg} (-{penalty:.0f} puan)."
+
+            challenge = DebateChallenge(
+                challenger_agent_id="macro_shock_engine",
+                challenger_name="Makro Şok & Black Swan Motoru",
+                target_agent_id=tech.agent_id,
+                target_name=tech.agent_name,
+                conflict_type="MACRO_SHOCK_SHIELD",
+                dispute_metric=f"Macro Vulnerability: {macro_vuln:.0f}/100 | Black Swan Risk: True",
+                argument=arg,
+                penalty_applied=penalty,
+                target_score_before=before_score,
+                target_score_after=tech.score,
+            )
+            challenges.append(challenge)
+            conflict_summaries.append(arg)
+
+        # ----------------------------------------------------------------------
+        # MÜNAZARA 14: PORTFÖY MARJİNAL VaR KALKANI
+        # Yeni alım portföy riske maruz değerini (VaR) orantısız artırıyorsa Teknik Ajan AL sinyaline -10 ceza
+        # ----------------------------------------------------------------------
+        try:
+            sample_portfolio = [
+                {"ticker": "THYAO", "value_tl": 300000.0},
+                {"ticker": "ASELS", "value_tl": 250000.0},
+                {"ticker": "KCHOL", "value_tl": 200000.0},
+            ]
+            new_asset = {"ticker": ctx.ticker, "value_tl": 150000.0}
+            marginal_res = VaREngine.calculate_marginal_var(new_asset, sample_portfolio)
+            is_var_excessive = marginal_res.get("is_excessive_risk", False)
+            var_inc_pct = marginal_res.get("var_increase_pct", 0.0)
+        except Exception:
+            is_var_excessive = False
+            var_inc_pct = 0.0
+
+        if is_var_excessive and tech and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]:
+            penalty = 10.0
+            before_score = tech.score
+            after_score = max(20.0, round(before_score - penalty, 1))
+            new_signal = cls.recompute_signal(after_score)
+            arg = (
+                f"⚔️ İTİRAZ [Portföy VaR Kalkanı -> Teknik]: Yeni alım portföyün Riske Maruz Değerini (VaR) "
+                f"%{var_inc_pct:+.1f} oranında artırarak risk bütçesini zorlamaktadır. "
+                f"Portföy dengesini korumak için teknik alım sinyali cezalandırıldı (-{penalty:.0f} puan)."
+            )
+
+            tech.score = after_score
+            tech.signal = new_signal
+            tech.confidence = max(0.45, round(tech.confidence - 0.10, 2))
+            tech.reasoning = f"{tech.reasoning} | [MÜNAZARA REVİZYONU]: {arg}"
+
+            challenge = DebateChallenge(
+                challenger_agent_id="var_engine",
+                challenger_name="Portföy VaR & Risk Motoru",
+                target_agent_id=tech.agent_id,
+                target_name=tech.agent_name,
+                conflict_type="PORTFOLIO_VAR_SHIELD",
+                dispute_metric=f"Marginal VaR Increase: %{var_inc_pct:+.1f} | Excessive Risk: True",
                 argument=arg,
                 penalty_applied=penalty,
                 target_score_before=before_score,

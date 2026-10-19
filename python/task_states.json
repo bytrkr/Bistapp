@@ -1,0 +1,24 @@
+{
+  "test_task_1": {
+    "status": "bitti",
+    "agent_id": "1",
+    "started_at": 1792431442.5552688,
+    "retries_attempted": 0,
+    "updated_at": 1792431442.555588,
+    "completed_at": 1792431442.5554607,
+    "duration_ms": 0.19,
+    "successful_attempt": 1
+  },
+  "failing_task_agent": {
+    "status": "başarısız",
+    "agent_id": "agent",
+    "started_at": 1792431442.5573032,
+    "retries_attempted": 3,
+    "updated_at": 1792431442.710109,
+    "last_error": "Simule edilmis gecici hata",
+    "failed_at": 1792431442.7100124,
+    "duration_ms": 152.64,
+    "final_error": "Simule edilmis gecici hata",
+    "traceback": "NoneType: None\n"
+  }
+}

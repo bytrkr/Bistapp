@@ -128,6 +128,8 @@ export const TacticalCard: React.FC<TacticalCardProps> = ({
 
   const akdView = useMemo(() => manipulationEngine.formatAkdViewModel(akdData), [akdData]);
   const taxView = useMemo(() => manipulationEngine.formatTaxViewModel(taxData), [taxData]);
+  const riskView = useMemo(() => manipulationEngine.formatRiskViewModel(uploadedDecision), [uploadedDecision]);
+  const ragContextText = useMemo(() => uploadedDecision?.ragContext || uploadedDecision?.rag_context || uploadedDecision?.metadata?.rag_context || null, [uploadedDecision]);
 
   // Sembol değiştiğinde Python backend'den AKD ve Vergi/Reel Getiri verilerini yükle
   useEffect(() => {
@@ -824,6 +826,58 @@ export const TacticalCard: React.FC<TacticalCardProps> = ({
                 <p className="text-[11px] text-slate-400 italic pt-0.5">{taxView.summary}</p>
               </div>
             </div>
+
+            {/* Risk & Pozisyon Yönetimi Paneli */}
+            <div className="bg-slate-950 border border-slate-800 rounded-xl p-3.5 space-y-2 md:col-span-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-purple-300 flex items-center gap-1.5">
+                  <Shield className="w-4 h-4 text-purple-400" />
+                  <span>⚖️ Risk &amp; Pozisyon Yönetimi (Kelly, PortfolioGuard &amp; Slippage)</span>
+                </span>
+                <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
+                  riskView.guardApproved
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    : 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+                }`}>
+                  {riskView.guardApproved ? '✅ Korelasyon Onaylı' : '❌ Korelasyon Red'}
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono text-slate-300">
+                <div className="bg-slate-900/90 border border-slate-800 rounded-lg p-2.5">
+                  <div className="text-[10px] text-slate-400">Önerilen Pozisyon (TL)</div>
+                  <div className="text-base font-bold text-white mt-0.5">{cur}{riskView.recommendedAllocationUsd.toLocaleString('tr-TR')} ({riskView.recommendedLots} lot)</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Kelly Çarpanı: %{(riskView.kellyFraction * 100).toFixed(1)}</div>
+                </div>
+                <div className="bg-slate-900/90 border border-slate-800 rounded-lg p-2.5">
+                  <div className="text-[10px] text-slate-400">PortfolioGuard (Korelasyon)</div>
+                  <div className={`text-xs font-bold mt-1 ${riskView.guardApproved ? 'text-emerald-400' : 'text-rose-400'}`}>Max Corr: {riskView.guardCorrelation}</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5 truncate">{riskView.guardReason}</div>
+                </div>
+                <div className="bg-slate-900/90 border border-slate-800 rounded-lg p-2.5">
+                  <div className="text-[10px] text-slate-400">Slippage &amp; Komisyon</div>
+                  <div className="text-xs font-bold text-amber-300 mt-1">Kesinti: {cur}{riskView.feeAmount.toLocaleString('tr-TR', { minimumFractionDigits: 2 })}</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Kayma: {riskView.slippageBps} bps</div>
+                </div>
+              </div>
+            </div>
+
+            {/* 📚 Geçmiş Bağlam (RAG) Paneli */}
+            {ragContextText && (
+              <div className="bg-slate-950 border border-emerald-500/30 rounded-xl p-3.5 space-y-2 md:col-span-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-emerald-300 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-emerald-400" />
+                    <span>📚 Geçmiş Bağlam (RAG &amp; KAP Hafızası)</span>
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono font-bold">
+                    RAG Eşleşti
+                  </span>
+                </div>
+                <div className="bg-slate-900/90 border border-slate-800 rounded-lg p-3 text-xs font-mono text-slate-200 whitespace-pre-wrap max-h-40 overflow-y-auto">
+                  {ragContextText}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

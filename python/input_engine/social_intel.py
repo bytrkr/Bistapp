@@ -36,6 +36,17 @@ except (ImportError, ValueError):
                 self.summary = summary
                 self.toon = toon
 
+try:
+    from social_illusion_engine import SocialIllusionEngine
+except ImportError:
+    try:
+        from ..social_illusion_engine import SocialIllusionEngine
+    except ImportError:
+        class SocialIllusionEngine:
+            @staticmethod
+            def detect_botnet(mentions=None):
+                return {"botnet_risk_score": 0.0, "is_botnet_detected": False}
+
 JIRO_URL = os.getenv("JIRO_URL", "http://jiro:8000")
 
 
@@ -62,6 +73,7 @@ def fetch_social_sentiment(ticker: str) -> Dict[str, Any]:
                     "score": float(data.get("score", 0.0)),
                     "mention_count": int(data.get("mention_count", 0)),
                     "summary": data.get("summary", f"{clean_ticker} için sosyal akış verisi nötr."),
+                    "mentions": data.get("mentions", []),
                     "is_live": True,
                 }
     except Exception as e:
@@ -73,6 +85,7 @@ def fetch_social_sentiment(ticker: str) -> Dict[str, Any]:
         "score": 0.0,
         "mention_count": 0,
         "summary": "Veri yok",
+        "mentions": [],
         "is_live": False,
     }
 
@@ -141,11 +154,21 @@ async def analyze_social_manipulation(ticker: str) -> SocialData:
                 f"{clean_ticker} sosyal medya akışı olağan sınırlar içinde ({mention_count} mention, duygu {sentiment_score:+.2f}).",
             )
 
+        # 🤖 SocialIllusionEngine: Botnet ve Astroturfing Tespiti
+        mentions_list = raw.get("mentions", [])
+        botnet_res = SocialIllusionEngine.detect_botnet(mentions_list)
+        botnet_risk_score = float(botnet_res.get("botnet_risk_score", 0.0))
+
+        # Dönen skoru manipulation_risk_score ile harmanla (en yükseğini al)
+        final_manipulation_risk = max(risk_score, botnet_risk_score)
+        if botnet_risk_score >= 70.0:
+            summary += f" [Botnet İllüzyonu]: Organize botnet/yapay etkileşim tespit edildi (Botnet Skoru: {botnet_risk_score:.0f}/100)."
+
         social_obj = SocialData(
             ticker=clean_ticker,
             mention_count=mention_count,
             sentiment_score=sentiment_score,
-            manipulation_risk_score=risk_score,
+            manipulation_risk_score=final_manipulation_risk,
             summary=summary,
             toon="",
         )

@@ -14,6 +14,10 @@ export interface NormalizedKapDisclosure {
   summary?: string;
   companyName?: string;
   source?: string;
+  isLive?: boolean;
+  isSimulated?: boolean;
+  dataSource?: string;
+  simulationWarning?: string;
 }
 
 interface CacheStore {
@@ -135,6 +139,10 @@ async function fetchLiveRssItems(query: string, defaultTicker: string = 'BIST'):
       url: url || `https://www.kap.org.tr/tr/sirket-bilgileri/ozet/${ticker}`,
       summary: `${source} üzerinden anlık çekilen piyasa ve KAP haberi: ${title}`,
       source,
+      isLive: true,
+      isSimulated: false,
+      dataSource: 'REALTIME_KAP_RSS',
+      simulationWarning: '',
     });
   }
 
@@ -173,6 +181,10 @@ function normalizeRawKapItem(item: any): NormalizedKapDisclosure | null {
     summary: item.summary || item.text || title,
     companyName,
     source: 'KAP Resmi Bildirim',
+    isLive: true,
+    isSimulated: false,
+    dataSource: 'REALTIME_KAP_API',
+    simulationWarning: '',
   };
 }
 

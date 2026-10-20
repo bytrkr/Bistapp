@@ -39,6 +39,8 @@ export const KapRadar: React.FC<KapRadarProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [lastRefreshedAt, setLastRefreshedAt] = useState<Date>(new Date());
+  const [isLiveStream, setIsLiveStream] = useState<boolean>(true);
+  const [simulationWarning, setSimulationWarning] = useState<string>('');
 
   // Eğer dışarıdan gelen selectedTicker değişirse ve geçerliyse onu yansıt
   useEffect(() => {
@@ -60,10 +62,15 @@ export const KapRadar: React.FC<KapRadarProps> = ({
         const json = await res.json();
         const items = Array.isArray(json.data) ? json.data : Array.isArray(json.items) ? json.items : [];
         setDisclosures(items);
+        const live = Boolean(json.is_live ?? (items.length > 0 && items.some((it: any) => it.isLive !== false)));
+        setIsLiveStream(live);
+        setSimulationWarning(json.simulation_warning || (!live ? '⚠️ Simüle Veri: Canlı KAP veri akışına ulaşılamadı.' : ''));
         setLastRefreshedAt(new Date());
       }
     } catch (err) {
       console.warn('[KapRadar] Haber akışı alınamadı:', err);
+      setIsLiveStream(false);
+      setSimulationWarning('⚠️ Simüle Veri: Canlı akış bağlantı hatası.');
     } finally {
       setIsLoading(false);
     }
@@ -103,10 +110,17 @@ export const KapRadar: React.FC<KapRadarProps> = ({
           <div>
             <h2 className="text-base font-bold font-mono text-white flex items-center gap-2">
               KAP Canlı Bildirim Radarı
-              <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                CANLI (kap.org.tr)
-              </span>
+              {isLiveStream ? (
+                <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold flex items-center gap-1 font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  CANLI (kap.org.tr)
+                </span>
+              ) : (
+                <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 font-semibold flex items-center gap-1 font-mono">
+                  <AlertCircle className="w-3 h-3 text-amber-400" />
+                  ⚠️ Simüle Veri
+                </span>
+              )}
             </h2>
             <p className="text-xs text-slate-400 mt-0.5">
               Kamuyu Aydınlatma Platformu anlık özel durum açıklamaları, finansal raporlar ve sözleşmeler.
@@ -127,6 +141,14 @@ export const KapRadar: React.FC<KapRadarProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Simüle Veri Uyarısı */}
+      {!isLiveStream && simulationWarning && (
+        <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs font-mono text-amber-300 flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-amber-400 flex-shrink-0" />
+          <span>{simulationWarning} Uzman ajanlar bu verilere tek başına güvenmez.</span>
+        </div>
+      )}
 
       {/* Filter Chips & Search Bar */}
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">

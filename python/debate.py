@@ -379,9 +379,24 @@ class DebateEngine:
         # ----------------------------------------------------------------------
         # MÜNAZARA 7: SOSYAL_MANIPULASYON_SHIELD
         # ----------------------------------------------------------------------
-        if (
+        is_social_simulated = (
+            ctx.social_data is not None
+            and (
+                getattr(ctx.social_data, "is_simulated", False)
+                or not getattr(ctx.social_data, "is_live", True)
+                or not getattr(ctx.social_data, "is_reliable", True)
+                or getattr(ctx.social_data, "data_source", "").upper() == "SIMULATED"
+            )
+        )
+
+        if is_social_simulated and ctx.social_data is not None and ctx.social_data.manipulation_risk_score > 70.0:
+            conflict_summaries.append(
+                "🛡️ [SİMÜLE VERİ KALKANI]: Sosyal medya verisi canlı değil (simüle) — teknik ajana manipülasyon cezası uygulanmadı (Ajanlar simüle veriye güvenmiyor)."
+            )
+        elif (
             tech
             and ctx.social_data is not None
+            and not is_social_simulated
             and ctx.social_data.manipulation_risk_score > 70.0
             and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]
         ):
@@ -535,7 +550,11 @@ class DebateEngine:
             botnet_res = SocialIllusionEngine.detect_botnet(ctx.social_mentions)
             botnet_score = max(botnet_score, float(botnet_res.get("botnet_risk_score", 0.0)))
 
-        if botnet_score > 70.0 and tech and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]:
+        if is_social_simulated and botnet_score > 70.0:
+            conflict_summaries.append(
+                "🛡️ [SİMÜLE VERİ KALKANI]: Botnet verisi canlı değil (simüle) — teknik ajana ceza uygulanmadı."
+            )
+        elif botnet_score > 70.0 and tech and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]:
             penalty = 25.0
             before_score = tech.score
             after_score = max(15.0, round(before_score - penalty, 1))

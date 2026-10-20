@@ -1,6 +1,7 @@
 // server/services/juryDebateEngine.ts
 import { tcmbService } from './tcmbService.js';
 import { finnhubService } from './finnhubService.js';
+import { botCache } from '../bots/types.js';
 
 export async function runJuryDebate(ticker: string, marketPayload?: any) {
   const cleanTicker = (ticker || 'ASELS').toUpperCase();
@@ -13,15 +14,32 @@ export async function runJuryDebate(ticker: string, marketPayload?: any) {
   // Finnhub Sentiment Verisi (NASDAQ hisseleri için veya global algı)
   const finnhubSym = isNasdaq ? cleanTicker : 'NVDA';
   const finnhubData = await finnhubService.getSentiment(finnhubSym);
+  const localSentiment = botCache.getSentiment(cleanTicker);
 
-  // Jüri 4 (KAP & Haber Duygu) Veto Kontrolü
-  const isJury4Veto = finnhubData.isVetoed; // sentiment < 0.35
-  const jury4Vote = isJury4Veto ? 'VETO / SAT' : finnhubData.sentimentScore >= 0.7 ? 'GÜÇLÜ AL' : finnhubData.sentimentScore >= 0.5 ? 'AL' : 'TUT';
-  const jury4Comment = isJury4Veto
-    ? `🚨 NEGATİF DUYGU VETOSU: Finnhub duygu skoru kritik eşiğin altına indi (${finnhubData.sentimentScore} < 0.35). Haber akışı piyasa algısında sert baskı yaratıyor.`
-    : isNasdaq
-    ? `Finnhub Sentiment skoru ${finnhubData.sentimentScore.toFixed(2)} ile ${finnhubData.bullishPercent}% bullish. Insider tarafında ${finnhubData.insiderAction} akışı mevcut.`
-    : `KAP ve finansal haber duygu skoru +0.82 ile güçlü pozitif. Yeni iş ve sipariş bildirimleri ciroyu destekliyor.`;
+  // Jüri 4 (KAP & Haber Duygu) Veto Kontrolü - Simüle Veri Kalkanı
+  const isFinnhubSimulated = !finnhubData.isLiveApi;
+  const isLocalSocialSimulated = !localSentiment || localSentiment.isSimulated || !localSentiment.isLive;
+
+  // Canlı veri değilse gerçek sermaye vetosu uygulanmaz (Simüle Veri Koruması)
+  const isJury4Veto = isNasdaq ? (finnhubData.isVetoed && !isFinnhubSimulated) : false;
+  const jury4Vote = isJury4Veto
+    ? 'VETO / SAT'
+    : finnhubData.sentimentScore >= 0.7
+    ? 'GÜÇLÜ AL'
+    : finnhubData.sentimentScore >= 0.5
+    ? 'AL'
+    : 'TUT';
+
+  let jury4Comment = '';
+  if (isJury4Veto) {
+    jury4Comment = `🚨 NEGATİF DUYGU VETOSU: Finnhub canlı duygu skoru kritik eşiğin altına indi (${finnhubData.sentimentScore} < 0.35). Haber akışı piyasa algısında sert baskı yaratıyor.`;
+  } else if (isNasdaq) {
+    const simTag = isFinnhubSimulated ? ' (⚠️ Simüle Veri)' : '';
+    jury4Comment = `Finnhub Sentiment skoru ${finnhubData.sentimentScore.toFixed(2)} ile %${finnhubData.bullishPercent} bullish.${simTag} Insider tarafında ${finnhubData.insiderAction} akışı mevcut.`;
+  } else {
+    const socialSimTag = isLocalSocialSimulated ? ' (⚠️ Simüle Veri: JIRO/X canlı bağlantısı aktif değil)' : ' (🟢 Canlı Sosyal Akış)';
+    jury4Comment = `KAP ve finansal haber duygu skoru +0.82 ile pozitif.${socialSimTag} Şirket faaliyetleri ve sipariş bildirimleri ciroyu destekliyor.`;
+  }
 
   // Jüri 2 (Tahta Derinlik & Takas) TCMB EVDS Puanlaması
   const jury2Vote = jury2Adjust.signal;

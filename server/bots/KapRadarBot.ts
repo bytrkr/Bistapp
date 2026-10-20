@@ -12,6 +12,8 @@ export class KapRadarBot {
   private lastRunTime: number | null = null;
   private lastError: string | null = null;
   private totalDisclosures = 0;
+  private isLiveFeed = false;
+  private simulationWarning = '⚠️ Simüle Veri: Canlı KAP veri akışı henüz başlatılmadı.';
 
   public start(): void {
     if (this.isRunning) return;
@@ -51,10 +53,17 @@ export class KapRadarBot {
         this.totalDisclosures = items.length;
         this.consecutiveErrors = 0;
         this.lastError = null;
+        this.isLiveFeed = items.some((it: any) => it.isLive !== false);
+        this.simulationWarning = this.isLiveFeed ? '' : '⚠️ Simüle Veri: Canlı KAP akışına ulaşılamadı.';
+      } else {
+        this.isLiveFeed = false;
+        this.simulationWarning = '⚠️ Simüle Veri: Canlı KAP bildirim akışına ulaşılamadı (Boş Yanıt).';
       }
     } catch (err: any) {
       this.errorCount++;
       this.consecutiveErrors++;
+      this.isLiveFeed = false;
+      this.simulationWarning = `⚠️ Simüle Veri: KAP veri akışı hatası (${err?.message || String(err)})`;
       this.lastError = err?.message || String(err);
       console.warn(`⚠️ [${this.name}] KAP veri akışı hatası (Deneme #${this.consecutiveErrors}):`, this.lastError);
     }
@@ -69,6 +78,10 @@ export class KapRadarBot {
       errorCount: this.errorCount,
       lastError: this.lastError,
       itemsCollected: this.totalDisclosures,
+      isLive: this.isLiveFeed,
+      isSimulated: !this.isLiveFeed,
+      dataSource: this.isLiveFeed ? 'REALTIME_KAP_RSS' : 'SIMULATED',
+      simulationWarning: this.simulationWarning,
     };
   }
 }

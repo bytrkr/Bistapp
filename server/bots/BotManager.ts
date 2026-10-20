@@ -66,6 +66,9 @@ export class BotManager {
    */
   public getHealth(): {
     systemStatus: 'HEALTHY' | 'DEGRADED';
+    simulationStatus: 'SIMULATED_BOTS_DETECTED' | 'ALL_LIVE';
+    simulatedBotsCount: number;
+    simulationWarnings: string[];
     cacheStats: ReturnType<typeof botCache.getStats>;
     bots: BotHealthStatus[];
   } {
@@ -78,9 +81,13 @@ export class BotManager {
     ];
 
     const hasError = bots.some((b) => b.status === 'ERROR');
+    const simulatedBots = bots.filter((b) => b.isSimulated);
 
     return {
       systemStatus: hasError ? 'DEGRADED' : 'HEALTHY',
+      simulationStatus: simulatedBots.length > 0 ? 'SIMULATED_BOTS_DETECTED' : 'ALL_LIVE',
+      simulatedBotsCount: simulatedBots.length,
+      simulationWarnings: simulatedBots.map((b) => `${b.name}: ${b.simulationWarning || 'Simüle Veri'}`),
       cacheStats: botCache.getStats(),
       bots,
     };

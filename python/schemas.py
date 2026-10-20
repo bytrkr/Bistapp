@@ -99,6 +99,10 @@ class NewsData(BaseModel):
     ticker: str
     sentiment_score: float = 0.20
     headlines: List[str] = Field(default_factory=list)
+    data_source: str = "LIVE_RSS_KAP"
+    is_live: bool = True
+    is_simulated: bool = False
+    simulation_warning: str = ""
 
 
 class TrendData(BaseModel):
@@ -133,6 +137,11 @@ class SocialData(BaseModel):
     manipulation_risk_score: float = Field(default=0.0, ge=0.0, le=100.0)
     summary: str = "Veri yok"
     toon: str = ""
+    data_source: str = "SIMULATED"
+    is_live: bool = False
+    is_simulated: bool = True
+    is_reliable: bool = False
+    simulation_warning: str = ""
 
 
 class UnifiedContext(BaseModel):

@@ -2124,6 +2124,26 @@ async def get_system_telemetry(limit: int = 30):
         raise HTTPException(status_code=500, detail=f"Telemetri alma hatası: {str(e)}")
 
 
+@app.get("/api/system/social-intel-status")
+async def get_social_intel_status():
+    """
+    [SOSYAL İSTİHBARAT & JIRO CANLILIK DENETİMİ]
+    JIRO mikroservisinin ve sosyal medya veri akışının canlı mı yoksa simüle mi olduğunu doğrular.
+    """
+    try:
+        from social_intel import verify_social_live_connection
+        return verify_social_live_connection()
+    except Exception as e:
+        return {
+            "is_live": False,
+            "is_simulated": True,
+            "service": "JIRO",
+            "status": "ERROR",
+            "warning": "⚠️ Simüle Veri: Sosyal istihbarat modülü hatası.",
+            "details": str(e),
+        }
+
+
 class McpToolCallRequest(BaseModel):
     name: str = Field(..., description="MCP Araç Adı (get_stock_price, run_debate_analysis, get_market_sentiment)")
     arguments: Dict[str, Any] = Field(default_factory=dict, description="Araç parametreleri")

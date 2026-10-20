@@ -66,6 +66,11 @@ export interface SocialSentimentData {
   parsedAkdData?: ParsedAkdData;
   timestamp: number;
   summary: string;
+  isLive?: boolean;
+  isSimulated?: boolean;
+  dataSource?: string;
+  simulationWarning?: string;
+  isReliable?: boolean;
 }
 
 export interface BotHealthStatus {
@@ -76,6 +81,10 @@ export interface BotHealthStatus {
   errorCount: number;
   lastError: string | null;
   itemsCollected: number;
+  isLive?: boolean;
+  isSimulated?: boolean;
+  dataSource?: string;
+  simulationWarning?: string;
 }
 
 class BotEventBus extends EventEmitter {}

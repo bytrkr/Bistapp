@@ -106,10 +106,19 @@ class FeatureImportanceEngine:
 
         # 4. Sosyal Medya & Haber Duygusu Analizi
         if social_data is not None:
+            is_sim = bool(
+                getattr(social_data, "is_simulated", False)
+                or not getattr(social_data, "is_live", True)
+                or not getattr(social_data, "is_reliable", True)
+                or str(getattr(social_data, "data_source", "")).upper() == "SIMULATED"
+            )
             manip_risk = float(getattr(social_data, "manipulation_risk_score", 0.0))
             mentions = int(getattr(social_data, "mention_count", 0))
 
-            if manip_risk >= 60.0:
+            if is_sim:
+                anomalies.append("ℹ️ [SİMÜLE VERİ]: Sosyal medya istihbaratı canlı değil (simüle mod).")
+                raw_scores["sentiment"] += 3.0
+            elif manip_risk >= 60.0:
                 raw_scores["sentiment"] += 20.0
                 anomalies.append(f"Sosyal medyada organize botnet aktivitesi tespit edildi (%{manip_risk:.0f}).")
             elif mentions > 800:

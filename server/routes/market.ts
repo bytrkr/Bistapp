@@ -114,9 +114,14 @@ router.get('/signals/:ticker', (req: Request, res: Response) => {
  */
 router.get('/sentiment', (_req: Request, res: Response) => {
   const sentiments = botCache.getAllSentiments();
+  const allSimulated = sentiments.length === 0 || sentiments.every((s) => s.isSimulated !== false);
   return res.json({
     success: true,
     count: sentiments.length,
+    is_live: !allSimulated,
+    is_simulated: allSimulated,
+    data_source: allSimulated ? 'SIMULATED' : 'REALTIME_TWITTER',
+    simulation_warning: allSimulated ? '⚠️ Simüle Veri: Canlı sosyal medya veri sağlayıcısına (JIRO/X) ulaşılamıyor.' : '',
     data: sentiments,
   });
 });
@@ -133,6 +138,10 @@ router.get('/sentiment/:ticker', (req: Request, res: Response) => {
     return res.json({
       success: true,
       data: sentiment,
+      is_live: sentiment.isLive ?? false,
+      is_simulated: sentiment.isSimulated ?? true,
+      data_source: sentiment.dataSource ?? 'SIMULATED',
+      simulation_warning: sentiment.simulationWarning ?? '⚠️ Simüle Veri: Canlı X/Twitter veya JIRO bağlantısı bulunamadı.',
     });
   }
 

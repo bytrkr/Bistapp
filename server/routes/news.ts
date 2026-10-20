@@ -23,11 +23,16 @@ router.get('/', async (req: Request, res: Response) => {
     }
 
     const items = disclosures.slice(0, limit);
+    const isLive = items.length > 0 && items.some((it: any) => it.isLive !== false);
 
     return res.json({
       status: 'SUCCESS',
       count: items.length,
       ticker: ticker || 'ALL',
+      is_live: isLive,
+      is_simulated: !isLive,
+      data_source: isLive ? 'REALTIME_KAP_RSS' : 'SIMULATED',
+      simulation_warning: isLive ? '' : '⚠️ Simüle Veri: Canlı KAP bildirim akışına ulaşılamadı.',
       data: items,
       items, // Geriye dönük uyumluluk için items dizisi
     });
@@ -35,6 +40,9 @@ router.get('/', async (req: Request, res: Response) => {
     console.error('[News API Error]:', error);
     return res.status(500).json({
       status: 'ERROR',
+      is_live: false,
+      is_simulated: true,
+      simulation_warning: '⚠️ Simüle Veri: Haberler getirilirken sunucu hatası oluştu.',
       error: error?.message || 'Haberler getirilirken sunucu hatası oluştu.',
       data: [],
     });
@@ -57,11 +65,16 @@ router.get('/:ticker', async (req: Request, res: Response) => {
     }
 
     const disclosures = await KapService.getDisclosuresByTicker(ticker);
+    const isLive = disclosures.length > 0 && disclosures.some((it: any) => it.isLive !== false);
 
     return res.json({
       status: 'SUCCESS',
       count: disclosures.length,
       ticker: ticker.toUpperCase(),
+      is_live: isLive,
+      is_simulated: !isLive,
+      data_source: isLive ? 'REALTIME_KAP_RSS' : 'SIMULATED',
+      simulation_warning: isLive ? '' : '⚠️ Simüle Veri: Canlı KAP bildirim akışına ulaşılamadı.',
       data: disclosures,
       items: disclosures,
     });

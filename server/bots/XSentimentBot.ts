@@ -118,6 +118,11 @@ export class XSentimentBot {
     // AKD OCR Takas Özeti ekle
     const parsedAkdData = generateFallbackAkdData(ticker);
 
+    // Canlı X/Twitter veya JIRO bağlantısı denetimi
+    const hasLiveTwitter = Boolean(process.env.TWITTER_BEARER_TOKEN || process.env.X_API_KEY);
+    const isLive = false; // Harici canlı API anahtarı olmadıkça algoritmik simülasyondur
+    const simulationWarning = '⚠️ Simüle Veri: Canlı X/Twitter veya JIRO bağlantısı aktif değil. Sosyal duyarlılık simüle veridir; işlem kararlarında tek başına güvenilmemelidir.';
+
     const summary = sentimentLabel === 'BOĞA'
       ? `${ticker} paylaşımlarında %${Math.round(bullRatio * 100)} pozitif eğilim hakim; BofA alımları ve direnç kırılımı konuşuluyor.`
       : sentimentLabel === 'AYI'
@@ -136,10 +141,16 @@ export class XSentimentBot {
       parsedAkdData,
       timestamp: Date.now(),
       summary,
+      isLive,
+      isSimulated: !isLive,
+      dataSource: isLive ? 'REALTIME_TWITTER' : 'SIMULATED',
+      simulationWarning: isLive ? '' : simulationWarning,
+      isReliable: isLive,
     };
   }
 
   public getHealth(): BotHealthStatus {
+    const isLive = Boolean(process.env.TWITTER_BEARER_TOKEN || process.env.X_API_KEY);
     return {
       name: this.name,
       status: this.isRunning ? (this.consecutiveErrors > 3 ? 'ERROR' : 'RUNNING') : 'STOPPED',
@@ -148,6 +159,10 @@ export class XSentimentBot {
       errorCount: this.errorCount,
       lastError: this.lastError,
       itemsCollected: TRACKED_TICKERS.length,
+      isLive,
+      isSimulated: !isLive,
+      dataSource: isLive ? 'REALTIME_TWITTER' : 'SIMULATED',
+      simulationWarning: isLive ? '' : '⚠️ Simüle Veri: Canlı X/Twitter veya JIRO akışı aktif değil (Algoritmik Simülasyon).',
     };
   }
 }

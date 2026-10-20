@@ -11,8 +11,10 @@ import os
 import time
 import asyncio
 from pathlib import Path
-from typing import Dict, Any, Optional, List
-import requests
+try:
+    import requests
+except ImportError:
+    requests = None
 
 from schemas import (
     UnifiedContext,
@@ -389,11 +391,26 @@ class MultiAgentPipeline:
         reasoning = f"Haber akışı ve KAP duygu skoru {sent:+.2f}."
 
         manip_risk = 0.0
+        is_social_simulated = False
+        simulation_warning = ""
         if ctx.social_data is not None:
+            is_social_simulated = bool(
+                getattr(ctx.social_data, "is_simulated", False)
+                or not getattr(ctx.social_data, "is_live", True)
+                or not getattr(ctx.social_data, "is_reliable", True)
+                or getattr(ctx.social_data, "data_source", "").upper() == "SIMULATED"
+            )
             manip_risk = float(ctx.social_data.manipulation_risk_score)
+            simulation_warning = getattr(ctx.social_data, "simulation_warning", "")
+
             if manip_risk > 70.0:
-                score = max(15.0, round(score - 15.0, 1))
-                reasoning += " | [UYARI]: Sosyal medya manipülasyon riski tespit edildi (-15 puan)."
+                if is_social_simulated:
+                    reasoning += " | ⚠️ [SİMÜLE VERİ]: Sosyal medya verisi simüle olduğu için manipülasyon cezası uygulanmadı (Ajan simüle veriye güvenmiyor)."
+                else:
+                    score = max(15.0, round(score - 15.0, 1))
+                    reasoning += " | [UYARI]: Sosyal medya manipülasyon riski tespit edildi (-15 puan)."
+            elif is_social_simulated:
+                reasoning += " | ℹ️ [SİMÜLE VERİ]: Sosyal veri akışı canlı değil (simüle mod)."
 
         # 📈 Analist Konsensüsü & Sürpriz Kâr Radarı
         surprise_res = AnalystConsensusEngine.get_simulated_earnings_surprise(ctx.ticker)
@@ -409,18 +426,21 @@ class MultiAgentPipeline:
 
         score = max(10.0, min(95.0, round(score, 1)))
         signal = _score_to_signal(score)
+        agent_conf = 0.50 if is_social_simulated else 0.75
 
         return AgentResponse(
             agent_id="sentiment",
             agent_name="KAP Duygu Ajanı",
             signal=signal,
             score=score,
-            confidence=0.75,
+            confidence=agent_conf,
             reasoning=reasoning,
             key_metrics={
                 "sentiment_score": sent,
                 "manipulation_risk_score": manip_risk,
                 "earnings_surprise": surprise_res,
+                "is_simulated": is_social_simulated,
+                "simulation_warning": simulation_warning or ("⚠️ Simüle Veri: Canlı JIRO akışı yok" if is_social_simulated else ""),
             },
             manipulation_risk_score=manip_risk,
         )
@@ -562,8 +582,13 @@ class MultiAgentPipeline:
                     mention_count=0,
                     sentiment_score=0.0,
                     manipulation_risk_score=0.0,
-                    summary="Veri yok",
+                    summary=f"{ctx.ticker} için sosyal veri bağlantısı kurulamadı (⚠️ Simüle Mod).",
                     toon="",
+                    data_source="SIMULATED",
+                    is_live=False,
+                    is_simulated=True,
+                    is_reliable=False,
+                    simulation_warning="⚠️ Simüle Veri: JIRO mikroservisi çevrimdışı, gerçek sosyal medya akışına ulaşılamıyor.",
                 )
 
         # 0.5 Veri Kalitesi Kapısı (DataQualityGate) denetimi ve stabilizasyonu
@@ -797,10 +822,11 @@ async def generate_coach_summary(decision_data: dict) -> str:
                     "max_tokens": 400,
                     "temperature": 0.3
                 }
-                resp = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload, timeout=12)
-                if resp.status_code == 200:
-                    d = resp.json()
-                    return d["choices"][0]["message"]["content"].strip()
+                if requests is not None:
+                    resp = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload, timeout=12)
+                    if resp.status_code == 200:
+                        d = resp.json()
+                        return d["choices"][0]["message"]["content"].strip()
                 return ""
 
             llm_text = await asyncio.to_thread(_call_openrouter)

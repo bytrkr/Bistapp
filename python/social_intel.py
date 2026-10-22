@@ -18,6 +18,10 @@ from input_engine.social_intel import (
     fetch_social_sentiment,
     analyze_social_manipulation,
     build_social_manipulation_toon,
+    Anonymizer,
+    WatermarkTracker,
+    EmbeddingEngine,
+    MiroFishBridge,
 )
 
 __all__ = [
@@ -27,4 +31,8 @@ __all__ = [
     "fetch_social_sentiment",
     "analyze_social_manipulation",
     "build_social_manipulation_toon",
+    "Anonymizer",
+    "WatermarkTracker",
+    "EmbeddingEngine",
+    "MiroFishBridge",
 ]

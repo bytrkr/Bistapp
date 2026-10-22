@@ -71,6 +71,14 @@ except ImportError:
         def calculate_marginal_var(*args, **kwargs):
             return {"is_excessive_risk": False, "var_increase_pct": 5.0}
 
+try:
+    from watermark_tracker import WatermarkTracker
+except ImportError:
+    class WatermarkTracker:
+        @classmethod
+        def track_propagation(cls, *args, **kwargs):
+            return {"is_high_manipulation": False, "manipulation_history_score": 0.0}
+
 
 class DebateEngine:
     """
@@ -696,6 +704,53 @@ class DebateEngine:
                 target_name=tech.agent_name,
                 conflict_type="PORTFOLIO_VAR_SHIELD",
                 dispute_metric=f"Marginal VaR Increase: %{var_inc_pct:+.1f} | Excessive Risk: True",
+                argument=arg,
+                penalty_applied=penalty,
+                target_score_before=before_score,
+                target_score_after=tech.score,
+            )
+            challenges.append(challenge)
+            conflict_summaries.append(arg)
+
+        # ----------------------------------------------------------------------
+        # MÜNAZARA 15: WATERMARKER KALKANI (Organize Cümle Yayılımı / Pompalama Cezası)
+        # Eğer WatermarkTracker "Yüksek Manipülasyon" tespit ederse, Teknik Ajanın AL sinyaline -30 ceza uygula
+        # ----------------------------------------------------------------------
+        is_watermarker_excessive = False
+        watermarker_history_score = 0.0
+        active_watermarker_id = None
+        try:
+            if ctx.social_data is not None:
+                watermarker_history_score = float(getattr(ctx.social_data, "manipulation_history_score", 0.0))
+                is_watermarker_excessive = bool(getattr(ctx.social_data, "is_watermarker_high_risk", False) or watermarker_history_score > 80.0)
+                active_watermarker_id = getattr(ctx.social_data, "watermarker_id", None)
+        except Exception:
+            is_watermarker_excessive = False
+
+        if is_watermarker_excessive and tech and tech.signal in [SignalType.AL, SignalType.GUCLU_AL]:
+            penalty = 30.0
+            before_score = tech.score
+            after_score = max(15.0, round(before_score - penalty, 1))
+            new_signal = cls.recompute_signal(after_score)
+            arg = (
+                f"⚔️ İTİRAZ [Watermarker Kalkanı -> Teknik]: Sosyal medyada ID '{active_watermarker_id or 'Bilinmeyen'}' "
+                f"tarafından başlatılan organize cümle yayılımı tespit edildi "
+                f"(Manipülasyon Geçmiş Skoru: {watermarker_history_score:.0f}/100 > 80). "
+                f"Pompalama riskine karşı teknik alım sinyali cezalandırıldı (-{penalty:.0f} puan)."
+            )
+
+            tech.score = after_score
+            tech.signal = new_signal
+            tech.confidence = max(0.40, round(tech.confidence - 0.25, 2))
+            tech.reasoning = f"{tech.reasoning} | [MÜNAZARA REVİZYONU]: {arg}"
+
+            challenge = DebateChallenge(
+                challenger_agent_id="watermark_tracker",
+                challenger_name="Watermarker & Manipülatör Takipçisi",
+                target_agent_id=tech.agent_id,
+                target_name=tech.agent_name,
+                conflict_type="WATERMARKER_PROPAGATION_SHIELD",
+                dispute_metric=f"Watermarker ID: {active_watermarker_id} | History Score: {watermarker_history_score:.0f}/100 | High Risk: True",
                 argument=arg,
                 penalty_applied=penalty,
                 target_score_before=before_score,

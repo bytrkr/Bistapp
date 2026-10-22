@@ -74,6 +74,62 @@ except ImportError:
             def detect_botnet(mentions=None):
                 return {"botnet_risk_score": 0.0, "is_botnet_detected": False}
 
+try:
+    from anonymizer import Anonymizer
+except ImportError:
+    try:
+        from ..anonymizer import Anonymizer
+    except ImportError:
+        class Anonymizer:
+            @classmethod
+            def hash_user_id(cls, username):
+                import hashlib
+                return f"usr_{hashlib.sha256(str(username or 'anon').encode()).hexdigest()[:8]}"
+            @classmethod
+            def mask_text(cls, text): return text or ""
+            @classmethod
+            def anonymize_mentions(cls, mentions): return mentions or []
+
+try:
+    from watermark_tracker import WatermarkTracker
+except ImportError:
+    try:
+        from ..watermark_tracker import WatermarkTracker
+    except ImportError:
+        class WatermarkTracker:
+            @classmethod
+            def track_propagation(cls, *args, **kwargs):
+                return {
+                    "clusters": [],
+                    "watermarker_id": None,
+                    "manipulation_history_score": 0.0,
+                    "is_high_manipulation": False,
+                    "warning": "",
+                    "total_propagations": 0,
+                    "summary": ""
+                }
+
+try:
+    from embedding_engine import EmbeddingEngine
+except ImportError:
+    try:
+        from ..embedding_engine import EmbeddingEngine
+    except ImportError:
+        class EmbeddingEngine:
+            @classmethod
+            def cluster_mentions(cls, *args, **kwargs): return []
+
+try:
+    from mirofish_bridge import MiroFishBridge
+except ImportError:
+    try:
+        from ..mirofish_bridge import MiroFishBridge
+    except ImportError:
+        class MiroFishBridge:
+            @classmethod
+            def simulate_market_psychology(cls, *args, **kwargs):
+                return {"simulated_investors_count": 1000, "selling_pressure_probability": 50.0, "summary": ""}
+
 JIRO_URL = os.getenv("JIRO_URL", "http://jiro:8000")
 
 
@@ -236,11 +292,12 @@ def build_social_manipulation_toon(data: SocialData) -> str:
         else "LOW"
     )
     sim_flag = "TRUE" if data.is_simulated else "FALSE"
+    wm_str = f";watermarker:{data.watermarker_id};w_score:{data.manipulation_history_score:.0f}" if getattr(data, "watermarker_id", None) else ""
     return (
         f"#TOON/v3.5 schema=BISTAPP_SOCIAL_MANIPULATION\n"
         f"@social{{sym:{data.ticker};mentions:{data.mention_count};sentiment:{data.sentiment_score:+.2f};"
         f"risk_score:{data.manipulation_risk_score:.0f}/100;level:{risk_level};"
-        f"source:{data.data_source};is_simulated:{sim_flag}}}\n"
+        f"source:{data.data_source};is_simulated:{sim_flag}{wm_str}}}\n"
         f"@summary{{{data.summary}}}"
     )
 
@@ -249,14 +306,35 @@ async def analyze_social_manipulation(ticker: str) -> SocialData:
     """
     JIRO'dan gelen mention ve sentiment verilerini kullanarak sosyal manipülasyon
     risk skorunu asenkron olarak hesaplar.
-    Eğer JIRO çevrimdışıysa (is_live=False), veri 'SIMULATED' olarak etiketlenir,
-    ajanların yanıltılmaması için manipülasyon cezaları kilitlenir.
+    
+    GİZLİLİK VE İSTİHBARAT ZİNCİRİ:
+    1. Anonymizer: Kullanıcı kimliklerini SHA-256 hash'ler, PII verilerini maskeler.
+    2. WatermarkTracker: n-gram cümle kalıbı yayan ilk kaynağı (watermarker_id) bulur.
+    3. EmbeddingEngine: Yorumları semantik vektör uzayında kümelere ayırır.
+    4. MiroFishBridge: 1000 sanal yatırımcıyla yarınki satış/alış baskısını simüle eder.
     """
     clean_ticker = (ticker or "BIST").strip().upper().replace(".IS", "")
 
     try:
         raw = await asyncio.to_thread(fetch_social_sentiment, clean_ticker)
-        
+        raw_mentions = raw.get("mentions", []) if raw else []
+
+        # 🔒 1. Anonimleştirici ve Maskeleyici (Anonymizer)
+        # KURAL: JIRO'dan gelen hiçbir veri bu modülden geçmeden veritabanına ve sisteme yazılmaz
+        anonymized_mentions = Anonymizer.anonymize_mentions(raw_mentions)
+
+        # 🎯 2. Watermarker ve Manipülatör Takipçisi (WatermarkTracker)
+        watermark_res = WatermarkTracker.track_propagation(anonymized_mentions, ticker=clean_ticker)
+        watermarker_id = watermark_res.get("watermarker_id")
+        manipulation_history_score = float(watermark_res.get("manipulation_history_score", 0.0))
+        is_watermarker_high_risk = bool(watermark_res.get("is_high_manipulation", False))
+
+        # 🧠 3. Vektör Uzayı ve Kümeleme Motoru (EmbeddingEngine)
+        clusters = EmbeddingEngine.cluster_mentions(anonymized_mentions)
+
+        # 🐟 4. MiroFish Simülasyon Köprüsü (MiroFishBridge)
+        psychology_res = MiroFishBridge.simulate_market_psychology(clusters)
+
         # ⚠️ CANLI VERİ KONTROLÜ: Eğer JIRO ulaşılamazsa veya simüle veri üretiyorsa
         if not raw or not raw.get("is_live", False):
             fail_safe = SocialData(
@@ -271,6 +349,10 @@ async def analyze_social_manipulation(ticker: str) -> SocialData:
                 is_simulated=True,
                 is_reliable=False,
                 simulation_warning="⚠️ Simüle Veri: JIRO mikroservisi çevrimdışı, gerçek sosyal medya akışına ulaşılamıyor.",
+                watermarker_id=watermarker_id,
+                manipulation_history_score=manipulation_history_score,
+                is_watermarker_high_risk=is_watermarker_high_risk,
+                clusters=clusters,
             )
             fail_safe.toon = build_social_manipulation_toon(fail_safe)
             return fail_safe
@@ -298,14 +380,26 @@ async def analyze_social_manipulation(ticker: str) -> SocialData:
             )
 
         # 🤖 SocialIllusionEngine: Botnet ve Astroturfing Tespiti
-        mentions_list = raw.get("mentions", [])
-        botnet_res = SocialIllusionEngine.detect_botnet(mentions_list)
+        botnet_res = SocialIllusionEngine.detect_botnet(anonymized_mentions)
         botnet_risk_score = float(botnet_res.get("botnet_risk_score", 0.0))
 
-        # Dönen skoru manipulation_risk_score ile harmanla
+        # Dönen skoru manipulation_risk_score ve watermarker_score ile harmanla
         final_manipulation_risk = max(risk_score, botnet_risk_score)
+
         if botnet_risk_score >= 70.0:
             summary += f" [Botnet İllüzyonu]: Organize botnet/yapay etkileşim tespit edildi (Botnet Skoru: {botnet_risk_score:.0f}/100)."
+
+        # 🚨 Watermarker Yüksek Manipülasyon Kontrolü
+        if is_watermarker_high_risk or manipulation_history_score > 80.0:
+            final_manipulation_risk = max(final_manipulation_risk, 90.0)
+            summary += (
+                f" [Watermarker Alarmı]: Yüksek manipülasyon kaynağı '{watermarker_id}' organize "
+                f"cümle yayılımı başlattı (Geçmiş Skor: {manipulation_history_score:.0f}/100)."
+            )
+
+        # 🐟 MiroFish Simülasyon Özeti Ekle
+        if psychology_res.get("summary"):
+            summary += f" [MiroFish]: {psychology_res['summary']}"
 
         social_obj = SocialData(
             ticker=clean_ticker,
@@ -319,6 +413,10 @@ async def analyze_social_manipulation(ticker: str) -> SocialData:
             is_simulated=False,
             is_reliable=True,
             simulation_warning="",
+            watermarker_id=watermarker_id,
+            manipulation_history_score=manipulation_history_score,
+            is_watermarker_high_risk=is_watermarker_high_risk,
+            clusters=clusters,
         )
         social_obj.toon = build_social_manipulation_toon(social_obj)
         return social_obj

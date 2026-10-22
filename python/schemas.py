@@ -142,6 +142,10 @@ class SocialData(BaseModel):
     is_simulated: bool = True
     is_reliable: bool = False
     simulation_warning: str = ""
+    watermarker_id: Optional[str] = None
+    manipulation_history_score: float = 0.0
+    is_watermarker_high_risk: bool = False
+    clusters: List[Dict[str, Any]] = Field(default_factory=list)
 
 
 class UnifiedContext(BaseModel):

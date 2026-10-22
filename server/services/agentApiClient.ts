@@ -40,8 +40,8 @@ async function ensureKernelRunning(): Promise<boolean> {
   if (isKernelSpawning) return false;
   isKernelSpawning = true;
   try {
-    const proc = spawn('python3', ['-m', 'uvicorn', 'python.server:app', '--host', '127.0.0.1', '--port', '8001'], {
-      cwd: process.cwd(),
+    const proc = spawn('python3', ['-m', 'uvicorn', 'server:app', '--host', '127.0.0.1', '--port', '8001'], {
+      cwd: (await import('path')).join(process.cwd(), 'python'),
       stdio: 'ignore',
       detached: true,
     });

@@ -21,12 +21,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY python/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy Python codebase
-COPY python/ ./python/
+# Copy Python codebase into /app/python and set working directory to /app/python
+COPY python/ ./
+WORKDIR /app/python
+ENV PYTHONPATH=/app/python
 
 EXPOSE 8001
 
 HEALTHCHECK --interval=10s --timeout=5s --retries=3 \
   CMD curl -f http://localhost:8001/health || curl -f http://localhost:8001/api/health || exit 1
 
-CMD ["uvicorn", "python.server:app", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8001"]

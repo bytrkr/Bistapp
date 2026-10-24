@@ -22,9 +22,9 @@ COPY python/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy Python codebase into /app/python and set working directory to /app/python
-COPY python/ ./
+COPY python/ ./python/
 WORKDIR /app/python
-ENV PYTHONPATH=/app/python
+ENV PYTHONPATH=/app:/app/python
 
 EXPOSE 8001
 

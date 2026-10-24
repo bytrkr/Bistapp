@@ -10,6 +10,7 @@ from __future__ import annotations
 import os
 import time
 import asyncio
+from datetime import datetime, timezone
 from pathlib import Path
 try:
     import requests
@@ -131,6 +132,20 @@ except ImportError:
         @staticmethod
         def modulate_agent_weights(weights, importance):
             return weights
+
+try:
+    from kernel.generator import CanvasBuilder, transmit_to_publisher
+except ImportError:
+    try:
+        from python.kernel.generator import CanvasBuilder, transmit_to_publisher
+    except ImportError:
+        class CanvasBuilder:
+            @staticmethod
+            def build_svg_card(payload): return "<svg></svg>"
+            @staticmethod
+            def save_svg_card(svg, ticker): return ""
+        def transmit_to_publisher(payload, gateway_url=None):
+            return {"success": False, "status": "NOT_AVAILABLE"}
 
 
 
@@ -684,7 +699,34 @@ class MultiAgentPipeline:
         }
         coach_summary = await generate_coach_summary(decision_payload)
 
-        return FinalDecision(
+        # 🎨 Dinamik Seviye ve Kalkan Hazırlığı
+        current_p = float(ctx.market_data.price) if (ctx.market_data and ctx.market_data.price) else 100.0
+        verdict_str = final_verdict.value if hasattr(final_verdict, "value") else str(final_verdict)
+
+        if "AL" in verdict_str:
+            e_zone = f"{current_p * 0.99:.2f} - {current_p * 1.01:.2f} ₺"
+            t_price = f"{current_p * 1.15:.2f} ₺"
+            s_loss = f"{current_p * 0.95:.2f} ₺"
+        elif "SAT" in verdict_str:
+            e_zone = f"{current_p * 1.00:.2f} ₺ (Satış)"
+            t_price = f"{current_p * 0.88:.2f} ₺"
+            s_loss = f"{current_p * 1.04:.2f} ₺"
+        else:
+            e_zone = f"{current_p:.2f} ₺ (İzleme)"
+            t_price = f"{current_p * 1.08:.2f} ₺"
+            s_loss = f"{current_p * 0.96:.2f} ₺"
+
+        active_shields = []
+        if hasattr(debate_result, "challenges") and debate_result.challenges:
+            for ch in debate_result.challenges:
+                s_name = getattr(ch, "shield_name", None) or getattr(ch, "target_agent", "Münazara Kalkanı")
+                if s_name and str(s_name) not in active_shields:
+                    active_shields.append(str(s_name))
+        if not active_shields:
+            active_shields = ["Likidite Kalkanı", "FOMO Kalkanı"]
+
+        # 1. FinalDecision Nesnesini Oluştur
+        final_decision = FinalDecision(
             ticker=ctx.ticker,
             timestamp=time.time(),
             verdict=final_verdict,
@@ -707,8 +749,49 @@ class MultiAgentPipeline:
                 "manipulation_risk_score": manip_risk_val,
                 "social_data": ctx.social_data.model_dump() if (ctx.social_data and hasattr(ctx.social_data, "model_dump")) else (ctx.social_data.dict() if ctx.social_data else None),
                 "feature_importance": feat_importance,
+                "entry_zone": e_zone,
+                "target_price": t_price,
+                "stop_loss": s_loss,
+                "active_shields": active_shields
             }
         )
+
+        # 2. Veri Sözleşmesine (Data Contract) Dönüştür ve Doğrula
+        try:
+            contract_payload_obj = final_decision.to_contract_payload()
+            
+            # Pydantic v2 .to_json_payload() veya v1 fallback
+            if hasattr(contract_payload_obj, "to_json_payload"):
+                contract_payload = contract_payload_obj.to_json_payload()
+            elif hasattr(contract_payload_obj, "model_dump"):
+                contract_payload = contract_payload_obj.model_dump(by_alias=True)
+            else:
+                contract_payload = contract_payload_obj
+
+            # 3. Canvas Builder ile SVG Kartı Üret
+            svg_card_str = ""
+            svg_card_path = ""
+            try:
+                svg_card_str = CanvasBuilder.build_svg_card(contract_payload)
+                contract_payload["svgCard"] = svg_card_str
+                svg_card_path = CanvasBuilder.save_svg_card(svg_card_str, ctx.ticker)
+                final_decision.metadata["svg_card"] = svg_card_str
+                final_decision.metadata["svg_card_path"] = svg_card_path
+            except Exception as e:
+                print(f"⚠️ [Orchestrator] CanvasBuilder SVG kart üretim hatası: {e}")
+
+            # 4. server/publisher/ modülüne ilet (Node.js Gateway)
+            try:
+                publisher_result = transmit_to_publisher(contract_payload)
+                final_decision.metadata["publisher_status"] = publisher_result.get("status", "QUEUED")
+                print(f"📡 [Orchestrator] Sosyal Medya Yayınına İletildi (#{ctx.ticker}): {final_decision.metadata['publisher_status']}")
+            except Exception as e:
+                print(f"⚠️ [Orchestrator] Yayın iletim uyarısı: {e}")
+
+        except Exception as e:
+            print(f"⚠️ [Orchestrator] Data Contract dönüşüm hatası: {e}")
+
+        return final_decision
 
 
 def load_openrouter_key() -> str:

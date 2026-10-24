@@ -67,9 +67,9 @@
   ],
   "samples": [
     {
-      "id": "EVT_CIMSA.IS_20241102",
+      "id": "EVT_CIMSA.IS_20241104",
       "ticker": "CIMSA.IS",
-      "date": "2024-11-02",
+      "date": "2024-11-04",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.1,
@@ -94,9 +94,9 @@
       }
     },
     {
-      "id": "EVT_GUBRF.IS_20241110",
+      "id": "EVT_GUBRF.IS_20241112",
       "ticker": "GUBRF.IS",
-      "date": "2024-11-10",
+      "date": "2024-11-12",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 7.52,
@@ -121,9 +121,9 @@
       }
     },
     {
-      "id": "EVT_CIMSA.IS_20241119",
+      "id": "EVT_CIMSA.IS_20241121",
       "ticker": "CIMSA.IS",
-      "date": "2024-11-19",
+      "date": "2024-11-21",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 2.67,
@@ -148,9 +148,9 @@
       }
     },
     {
-      "id": "EVT_SISE.IS_20241119",
+      "id": "EVT_SISE.IS_20241121",
       "ticker": "SISE.IS",
-      "date": "2024-11-19",
+      "date": "2024-11-21",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 9.7,
@@ -175,9 +175,9 @@
       }
     },
     {
-      "id": "EVT_FROTO.IS_20241127",
+      "id": "EVT_FROTO.IS_20241129",
       "ticker": "FROTO.IS",
-      "date": "2024-11-27",
+      "date": "2024-11-29",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 2.87,
@@ -202,9 +202,9 @@
       }
     },
     {
-      "id": "EVT_ISDMR.IS_20241204",
+      "id": "EVT_ISDMR.IS_20241206",
       "ticker": "ISDMR.IS",
-      "date": "2024-12-04",
+      "date": "2024-12-06",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 4.29,
@@ -229,9 +229,9 @@
       }
     },
     {
-      "id": "EVT_ARCLK.IS_20241212",
+      "id": "EVT_ARCLK.IS_20241214",
       "ticker": "ARCLK.IS",
-      "date": "2024-12-12",
+      "date": "2024-12-14",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 9.14,
@@ -256,9 +256,9 @@
       }
     },
     {
-      "id": "EVT_ARCLK.IS_20241222",
+      "id": "EVT_ARCLK.IS_20241224",
       "ticker": "ARCLK.IS",
-      "date": "2024-12-22",
+      "date": "2024-12-24",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 12.87,
@@ -283,9 +283,9 @@
       }
     },
     {
-      "id": "EVT_KONTR.IS_20241226",
+      "id": "EVT_KONTR.IS_20241228",
       "ticker": "KONTR.IS",
-      "date": "2024-12-26",
+      "date": "2024-12-28",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 12.61,
@@ -310,9 +310,9 @@
       }
     },
     {
-      "id": "EVT_GUBRF.IS_20250105",
+      "id": "EVT_GUBRF.IS_20250107",
       "ticker": "GUBRF.IS",
-      "date": "2025-01-05",
+      "date": "2025-01-07",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 2.7,
@@ -337,9 +337,9 @@
       }
     },
     {
-      "id": "EVT_ASTOR.IS_20250212",
+      "id": "EVT_ASTOR.IS_20250214",
       "ticker": "ASTOR.IS",
-      "date": "2025-02-12",
+      "date": "2025-02-14",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 2.99,
@@ -364,9 +364,9 @@
       }
     },
     {
-      "id": "EVT_ALARK.IS_20250218",
+      "id": "EVT_ALARK.IS_20250220",
       "ticker": "ALARK.IS",
-      "date": "2025-02-18",
+      "date": "2025-02-20",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.97,
@@ -391,9 +391,9 @@
       }
     },
     {
-      "id": "EVT_ISCTR.IS_20250219",
+      "id": "EVT_ISCTR.IS_20250221",
       "ticker": "ISCTR.IS",
-      "date": "2025-02-19",
+      "date": "2025-02-21",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.58,
@@ -418,9 +418,9 @@
       }
     },
     {
-      "id": "EVT_BIMAS.IS_20250227",
+      "id": "EVT_BIMAS.IS_20250301",
       "ticker": "BIMAS.IS",
-      "date": "2025-02-27",
+      "date": "2025-03-01",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 12.59,
@@ -445,9 +445,9 @@
       }
     },
     {
-      "id": "EVT_KONTR.IS_20250302",
+      "id": "EVT_KONTR.IS_20250304",
       "ticker": "KONTR.IS",
-      "date": "2025-03-02",
+      "date": "2025-03-04",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.3,
@@ -472,9 +472,9 @@
       }
     },
     {
-      "id": "EVT_AKBNK.IS_20250306",
+      "id": "EVT_AKBNK.IS_20250308",
       "ticker": "AKBNK.IS",
-      "date": "2025-03-06",
+      "date": "2025-03-08",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.89,
@@ -499,9 +499,9 @@
       }
     },
     {
-      "id": "EVT_FROTO.IS_20250323",
+      "id": "EVT_FROTO.IS_20250325",
       "ticker": "FROTO.IS",
-      "date": "2025-03-23",
+      "date": "2025-03-25",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.48,
@@ -526,9 +526,9 @@
       }
     },
     {
-      "id": "EVT_EREGL.IS_20250325",
+      "id": "EVT_EREGL.IS_20250327",
       "ticker": "EREGL.IS",
-      "date": "2025-03-25",
+      "date": "2025-03-27",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 3.43,
@@ -553,9 +553,9 @@
       }
     },
     {
-      "id": "EVT_MGROS.IS_20250325",
+      "id": "EVT_MGROS.IS_20250327",
       "ticker": "MGROS.IS",
-      "date": "2025-03-25",
+      "date": "2025-03-27",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.55,
@@ -580,9 +580,9 @@
       }
     },
     {
-      "id": "EVT_SISE.IS_20250406",
+      "id": "EVT_SISE.IS_20250408",
       "ticker": "SISE.IS",
-      "date": "2025-04-06",
+      "date": "2025-04-08",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 10.05,
@@ -607,9 +607,9 @@
       }
     },
     {
-      "id": "EVT_SISE.IS_20250407",
+      "id": "EVT_SISE.IS_20250409",
       "ticker": "SISE.IS",
-      "date": "2025-04-07",
+      "date": "2025-04-09",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.64,
@@ -634,9 +634,9 @@
       }
     },
     {
-      "id": "EVT_AKCNS.IS_20250413",
+      "id": "EVT_AKCNS.IS_20250415",
       "ticker": "AKCNS.IS",
-      "date": "2025-04-13",
+      "date": "2025-04-15",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.24,
@@ -661,9 +661,9 @@
       }
     },
     {
-      "id": "EVT_THYAO.IS_20250414",
+      "id": "EVT_THYAO.IS_20250416",
       "ticker": "THYAO.IS",
-      "date": "2025-04-14",
+      "date": "2025-04-16",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 14.15,
@@ -688,9 +688,9 @@
       }
     },
     {
-      "id": "EVT_YKBNK.IS_20250418",
+      "id": "EVT_YKBNK.IS_20250420",
       "ticker": "YKBNK.IS",
-      "date": "2025-04-18",
+      "date": "2025-04-20",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.36,
@@ -715,9 +715,9 @@
       }
     },
     {
-      "id": "EVT_EREGL.IS_20250423",
+      "id": "EVT_EREGL.IS_20250425",
       "ticker": "EREGL.IS",
-      "date": "2025-04-23",
+      "date": "2025-04-25",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.32,
@@ -742,9 +742,9 @@
       }
     },
     {
-      "id": "EVT_SAHOL.IS_20250423",
+      "id": "EVT_SAHOL.IS_20250425",
       "ticker": "SAHOL.IS",
-      "date": "2025-04-23",
+      "date": "2025-04-25",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 12.77,
@@ -769,9 +769,9 @@
       }
     },
     {
-      "id": "EVT_HEKTS.IS_20250426",
+      "id": "EVT_HEKTS.IS_20250428",
       "ticker": "HEKTS.IS",
-      "date": "2025-04-26",
+      "date": "2025-04-28",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 4.44,
@@ -796,9 +796,9 @@
       }
     },
     {
-      "id": "EVT_EREGL.IS_20250429",
+      "id": "EVT_EREGL.IS_20250501",
       "ticker": "EREGL.IS",
-      "date": "2025-04-29",
+      "date": "2025-05-01",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.21,
@@ -823,9 +823,9 @@
       }
     },
     {
-      "id": "EVT_AKCNS.IS_20250506",
+      "id": "EVT_AKCNS.IS_20250508",
       "ticker": "AKCNS.IS",
-      "date": "2025-05-06",
+      "date": "2025-05-08",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 9.96,
@@ -850,9 +850,9 @@
       }
     },
     {
-      "id": "EVT_TOASO.IS_20250507",
+      "id": "EVT_TOASO.IS_20250509",
       "ticker": "TOASO.IS",
-      "date": "2025-05-07",
+      "date": "2025-05-09",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 7.32,
@@ -877,9 +877,9 @@
       }
     },
     {
-      "id": "EVT_KRDMD.IS_20250605",
+      "id": "EVT_KRDMD.IS_20250607",
       "ticker": "KRDMD.IS",
-      "date": "2025-06-05",
+      "date": "2025-06-07",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 12.45,
@@ -904,9 +904,9 @@
       }
     },
     {
-      "id": "EVT_KCHOL.IS_20250618",
+      "id": "EVT_KCHOL.IS_20250620",
       "ticker": "KCHOL.IS",
-      "date": "2025-06-18",
+      "date": "2025-06-20",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.74,
@@ -931,9 +931,9 @@
       }
     },
     {
-      "id": "EVT_OYAKC.IS_20250621",
+      "id": "EVT_OYAKC.IS_20250623",
       "ticker": "OYAKC.IS",
-      "date": "2025-06-21",
+      "date": "2025-06-23",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 9.56,
@@ -958,9 +958,9 @@
       }
     },
     {
-      "id": "EVT_ASELS.IS_20250621",
+      "id": "EVT_ASELS.IS_20250623",
       "ticker": "ASELS.IS",
-      "date": "2025-06-21",
+      "date": "2025-06-23",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 4.37,
@@ -985,9 +985,9 @@
       }
     },
     {
-      "id": "EVT_GUBRF.IS_20250628",
+      "id": "EVT_GUBRF.IS_20250630",
       "ticker": "GUBRF.IS",
-      "date": "2025-06-28",
+      "date": "2025-06-30",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.09,
@@ -1012,9 +1012,9 @@
       }
     },
     {
-      "id": "EVT_HEKTS.IS_20250704",
+      "id": "EVT_HEKTS.IS_20250706",
       "ticker": "HEKTS.IS",
-      "date": "2025-07-04",
+      "date": "2025-07-06",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 14.08,
@@ -1039,9 +1039,9 @@
       }
     },
     {
-      "id": "EVT_ALARK.IS_20250714",
+      "id": "EVT_ALARK.IS_20250716",
       "ticker": "ALARK.IS",
-      "date": "2025-07-14",
+      "date": "2025-07-16",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 2.61,
@@ -1066,9 +1066,9 @@
       }
     },
     {
-      "id": "EVT_GARAN.IS_20250722",
+      "id": "EVT_GARAN.IS_20250724",
       "ticker": "GARAN.IS",
-      "date": "2025-07-22",
+      "date": "2025-07-24",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.79,
@@ -1093,9 +1093,9 @@
       }
     },
     {
-      "id": "EVT_THYAO.IS_20250728",
+      "id": "EVT_THYAO.IS_20250730",
       "ticker": "THYAO.IS",
-      "date": "2025-07-28",
+      "date": "2025-07-30",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 3.38,
@@ -1120,9 +1120,9 @@
       }
     },
     {
-      "id": "EVT_GARAN.IS_20250728",
+      "id": "EVT_GARAN.IS_20250730",
       "ticker": "GARAN.IS",
-      "date": "2025-07-28",
+      "date": "2025-07-30",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 8.01,
@@ -1147,9 +1147,9 @@
       }
     },
     {
-      "id": "EVT_SASA.IS_20250803",
+      "id": "EVT_SASA.IS_20250805",
       "ticker": "SASA.IS",
-      "date": "2025-08-03",
+      "date": "2025-08-05",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 3.65,
@@ -1174,9 +1174,9 @@
       }
     },
     {
-      "id": "EVT_THYAO.IS_20250807",
+      "id": "EVT_THYAO.IS_20250809",
       "ticker": "THYAO.IS",
-      "date": "2025-08-07",
+      "date": "2025-08-09",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 3.12,
@@ -1201,9 +1201,9 @@
       }
     },
     {
-      "id": "EVT_FROTO.IS_20250811",
+      "id": "EVT_FROTO.IS_20250813",
       "ticker": "FROTO.IS",
-      "date": "2025-08-11",
+      "date": "2025-08-13",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 8.24,
@@ -1228,9 +1228,9 @@
       }
     },
     {
-      "id": "EVT_HEKTS.IS_20250813",
+      "id": "EVT_HEKTS.IS_20250815",
       "ticker": "HEKTS.IS",
-      "date": "2025-08-13",
+      "date": "2025-08-15",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.64,
@@ -1255,9 +1255,9 @@
       }
     },
     {
-      "id": "EVT_CIMSA.IS_20250828",
+      "id": "EVT_CIMSA.IS_20250830",
       "ticker": "CIMSA.IS",
-      "date": "2025-08-28",
+      "date": "2025-08-30",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 9.48,
@@ -1282,9 +1282,9 @@
       }
     },
     {
-      "id": "EVT_MGROS.IS_20250909",
+      "id": "EVT_MGROS.IS_20250911",
       "ticker": "MGROS.IS",
-      "date": "2025-09-09",
+      "date": "2025-09-11",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 10.53,
@@ -1309,9 +1309,9 @@
       }
     },
     {
-      "id": "EVT_SISE.IS_20250917",
+      "id": "EVT_SISE.IS_20250919",
       "ticker": "SISE.IS",
-      "date": "2025-09-17",
+      "date": "2025-09-19",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 2.97,
@@ -1336,9 +1336,9 @@
       }
     },
     {
-      "id": "EVT_AKBNK.IS_20250920",
+      "id": "EVT_AKBNK.IS_20250922",
       "ticker": "AKBNK.IS",
-      "date": "2025-09-20",
+      "date": "2025-09-22",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.24,
@@ -1363,9 +1363,9 @@
       }
     },
     {
-      "id": "EVT_CIMSA.IS_20250922",
+      "id": "EVT_CIMSA.IS_20250924",
       "ticker": "CIMSA.IS",
-      "date": "2025-09-22",
+      "date": "2025-09-24",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 10.03,
@@ -1390,9 +1390,9 @@
       }
     },
     {
-      "id": "EVT_KCHOL.IS_20251012",
+      "id": "EVT_KCHOL.IS_20251014",
       "ticker": "KCHOL.IS",
-      "date": "2025-10-12",
+      "date": "2025-10-14",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.49,
@@ -1417,9 +1417,9 @@
       }
     },
     {
-      "id": "EVT_PGSUS.IS_20251014",
+      "id": "EVT_PGSUS.IS_20251016",
       "ticker": "PGSUS.IS",
-      "date": "2025-10-14",
+      "date": "2025-10-16",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.15,
@@ -1444,9 +1444,9 @@
       }
     },
     {
-      "id": "EVT_PETKM.IS_20251021",
+      "id": "EVT_PETKM.IS_20251023",
       "ticker": "PETKM.IS",
-      "date": "2025-10-21",
+      "date": "2025-10-23",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 13.44,
@@ -1471,9 +1471,9 @@
       }
     },
     {
-      "id": "EVT_HEKTS.IS_20251030",
+      "id": "EVT_HEKTS.IS_20251101",
       "ticker": "HEKTS.IS",
-      "date": "2025-10-30",
+      "date": "2025-11-01",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.14,
@@ -1498,9 +1498,9 @@
       }
     },
     {
-      "id": "EVT_THYAO.IS_20251102",
+      "id": "EVT_THYAO.IS_20251104",
       "ticker": "THYAO.IS",
-      "date": "2025-11-02",
+      "date": "2025-11-04",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.22,
@@ -1525,9 +1525,9 @@
       }
     },
     {
-      "id": "EVT_KONTR.IS_20251107",
+      "id": "EVT_KONTR.IS_20251109",
       "ticker": "KONTR.IS",
-      "date": "2025-11-07",
+      "date": "2025-11-09",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 12.21,
@@ -1552,9 +1552,9 @@
       }
     },
     {
-      "id": "EVT_CIMSA.IS_20251114",
+      "id": "EVT_CIMSA.IS_20251116",
       "ticker": "CIMSA.IS",
-      "date": "2025-11-14",
+      "date": "2025-11-16",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.13,
@@ -1579,9 +1579,9 @@
       }
     },
     {
-      "id": "EVT_MGROS.IS_20251120",
+      "id": "EVT_MGROS.IS_20251122",
       "ticker": "MGROS.IS",
-      "date": "2025-11-20",
+      "date": "2025-11-22",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 3.59,
@@ -1606,9 +1606,9 @@
       }
     },
     {
-      "id": "EVT_TUPRS.IS_20251121",
+      "id": "EVT_TUPRS.IS_20251123",
       "ticker": "TUPRS.IS",
-      "date": "2025-11-21",
+      "date": "2025-11-23",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.59,
@@ -1633,9 +1633,9 @@
       }
     },
     {
-      "id": "EVT_AKCNS.IS_20251122",
+      "id": "EVT_AKCNS.IS_20251124",
       "ticker": "AKCNS.IS",
-      "date": "2025-11-22",
+      "date": "2025-11-24",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 8.25,
@@ -1660,9 +1660,9 @@
       }
     },
     {
-      "id": "EVT_GUBRF.IS_20251124",
+      "id": "EVT_GUBRF.IS_20251126",
       "ticker": "GUBRF.IS",
-      "date": "2025-11-24",
+      "date": "2025-11-26",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.71,
@@ -1687,9 +1687,9 @@
       }
     },
     {
-      "id": "EVT_TOASO.IS_20251126",
+      "id": "EVT_TOASO.IS_20251128",
       "ticker": "TOASO.IS",
-      "date": "2025-11-26",
+      "date": "2025-11-28",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 4.07,
@@ -1714,9 +1714,9 @@
       }
     },
     {
-      "id": "EVT_ALARK.IS_20251205",
+      "id": "EVT_ALARK.IS_20251207",
       "ticker": "ALARK.IS",
-      "date": "2025-12-05",
+      "date": "2025-12-07",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.83,
@@ -1741,9 +1741,9 @@
       }
     },
     {
-      "id": "EVT_ISCTR.IS_20251224",
+      "id": "EVT_ISCTR.IS_20251226",
       "ticker": "ISCTR.IS",
-      "date": "2025-12-24",
+      "date": "2025-12-26",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 13.88,
@@ -1768,9 +1768,9 @@
       }
     },
     {
-      "id": "EVT_YKBNK.IS_20251226",
+      "id": "EVT_YKBNK.IS_20251228",
       "ticker": "YKBNK.IS",
-      "date": "2025-12-26",
+      "date": "2025-12-28",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.22,
@@ -1795,9 +1795,9 @@
       }
     },
     {
-      "id": "EVT_GUBRF.IS_20251228",
+      "id": "EVT_GUBRF.IS_20251230",
       "ticker": "GUBRF.IS",
-      "date": "2025-12-28",
+      "date": "2025-12-30",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.32,
@@ -1822,9 +1822,9 @@
       }
     },
     {
-      "id": "EVT_KRDMD.IS_20251230",
+      "id": "EVT_KRDMD.IS_20260101",
       "ticker": "KRDMD.IS",
-      "date": "2025-12-30",
+      "date": "2026-01-01",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 10.04,
@@ -1849,9 +1849,9 @@
       }
     },
     {
-      "id": "EVT_ISDMR.IS_20260104",
+      "id": "EVT_ISDMR.IS_20260106",
       "ticker": "ISDMR.IS",
-      "date": "2026-01-04",
+      "date": "2026-01-06",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 2.99,
@@ -1876,9 +1876,9 @@
       }
     },
     {
-      "id": "EVT_SASA.IS_20260106",
+      "id": "EVT_SASA.IS_20260108",
       "ticker": "SASA.IS",
-      "date": "2026-01-06",
+      "date": "2026-01-08",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.25,
@@ -1903,9 +1903,9 @@
       }
     },
     {
-      "id": "EVT_SISE.IS_20260110",
+      "id": "EVT_SISE.IS_20260112",
       "ticker": "SISE.IS",
-      "date": "2026-01-10",
+      "date": "2026-01-12",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 12.36,
@@ -1930,9 +1930,9 @@
       }
     },
     {
-      "id": "EVT_TUPRS.IS_20260115",
+      "id": "EVT_TUPRS.IS_20260117",
       "ticker": "TUPRS.IS",
-      "date": "2026-01-15",
+      "date": "2026-01-17",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 5.42,
@@ -1957,9 +1957,9 @@
       }
     },
     {
-      "id": "EVT_CIMSA.IS_20260116",
+      "id": "EVT_CIMSA.IS_20260118",
       "ticker": "CIMSA.IS",
-      "date": "2026-01-16",
+      "date": "2026-01-18",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 3.19,
@@ -1984,9 +1984,9 @@
       }
     },
     {
-      "id": "EVT_HEKTS.IS_20260122",
+      "id": "EVT_HEKTS.IS_20260124",
       "ticker": "HEKTS.IS",
-      "date": "2026-01-22",
+      "date": "2026-01-24",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 9.31,
@@ -2011,9 +2011,9 @@
       }
     },
     {
-      "id": "EVT_SAHOL.IS_20260125",
+      "id": "EVT_SAHOL.IS_20260127",
       "ticker": "SAHOL.IS",
-      "date": "2026-01-25",
+      "date": "2026-01-27",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 10.99,
@@ -2038,9 +2038,9 @@
       }
     },
     {
-      "id": "EVT_OYAKC.IS_20260128",
+      "id": "EVT_OYAKC.IS_20260130",
       "ticker": "OYAKC.IS",
-      "date": "2026-01-28",
+      "date": "2026-01-30",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.61,
@@ -2065,9 +2065,9 @@
       }
     },
     {
-      "id": "EVT_ALARK.IS_20260130",
+      "id": "EVT_ALARK.IS_20260201",
       "ticker": "ALARK.IS",
-      "date": "2026-01-30",
+      "date": "2026-02-01",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.58,
@@ -2092,9 +2092,9 @@
       }
     },
     {
-      "id": "EVT_ASTOR.IS_20260204",
+      "id": "EVT_ASTOR.IS_20260206",
       "ticker": "ASTOR.IS",
-      "date": "2026-02-04",
+      "date": "2026-02-06",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 8.37,
@@ -2119,9 +2119,9 @@
       }
     },
     {
-      "id": "EVT_KCHOL.IS_20260214",
+      "id": "EVT_KCHOL.IS_20260216",
       "ticker": "KCHOL.IS",
-      "date": "2026-02-14",
+      "date": "2026-02-16",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 13.54,
@@ -2146,9 +2146,9 @@
       }
     },
     {
-      "id": "EVT_AKCNS.IS_20260217",
+      "id": "EVT_AKCNS.IS_20260219",
       "ticker": "AKCNS.IS",
-      "date": "2026-02-17",
+      "date": "2026-02-19",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 3.54,
@@ -2173,9 +2173,9 @@
       }
     },
     {
-      "id": "EVT_ALARK.IS_20260217",
+      "id": "EVT_ALARK.IS_20260219",
       "ticker": "ALARK.IS",
-      "date": "2026-02-17",
+      "date": "2026-02-19",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 9.89,
@@ -2200,9 +2200,9 @@
       }
     },
     {
-      "id": "EVT_ASTOR.IS_20260306",
+      "id": "EVT_ASTOR.IS_20260308",
       "ticker": "ASTOR.IS",
-      "date": "2026-03-06",
+      "date": "2026-03-08",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 11.97,
@@ -2227,9 +2227,9 @@
       }
     },
     {
-      "id": "EVT_FROTO.IS_20260308",
+      "id": "EVT_FROTO.IS_20260310",
       "ticker": "FROTO.IS",
-      "date": "2026-03-08",
+      "date": "2026-03-10",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 4.33,
@@ -2254,9 +2254,9 @@
       }
     },
     {
-      "id": "EVT_HEKTS.IS_20260322",
+      "id": "EVT_HEKTS.IS_20260324",
       "ticker": "HEKTS.IS",
-      "date": "2026-03-22",
+      "date": "2026-03-24",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 13.78,
@@ -2281,9 +2281,9 @@
       }
     },
     {
-      "id": "EVT_KONTR.IS_20260408",
+      "id": "EVT_KONTR.IS_20260410",
       "ticker": "KONTR.IS",
-      "date": "2026-04-08",
+      "date": "2026-04-10",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 4.36,
@@ -2308,9 +2308,9 @@
       }
     },
     {
-      "id": "EVT_KRDMD.IS_20260419",
+      "id": "EVT_KRDMD.IS_20260421",
       "ticker": "KRDMD.IS",
-      "date": "2026-04-19",
+      "date": "2026-04-21",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 6.25,
@@ -2335,9 +2335,9 @@
       }
     },
     {
-      "id": "EVT_MGROS.IS_20260423",
+      "id": "EVT_MGROS.IS_20260425",
       "ticker": "MGROS.IS",
-      "date": "2026-04-23",
+      "date": "2026-04-25",
       "period": "TRAIN",
       "features": {
         "volumeZScore": 2.6,
@@ -2362,9 +2362,9 @@
       }
     },
     {
-      "id": "EVT_AKBNK.IS_20260425",
+      "id": "EVT_AKBNK.IS_20260427",
       "ticker": "AKBNK.IS",
-      "date": "2026-04-25",
+      "date": "2026-04-27",
       "period": "TEST",
       "features": {
         "volumeZScore": 8.81,
@@ -2389,9 +2389,9 @@
       }
     },
     {
-      "id": "EVT_EREGL.IS_20260426",
+      "id": "EVT_EREGL.IS_20260428",
       "ticker": "EREGL.IS",
-      "date": "2026-04-26",
+      "date": "2026-04-28",
       "period": "TEST",
       "features": {
         "volumeZScore": 10.33,
@@ -2416,9 +2416,9 @@
       }
     },
     {
-      "id": "EVT_AKCNS.IS_20260430",
+      "id": "EVT_AKCNS.IS_20260502",
       "ticker": "AKCNS.IS",
-      "date": "2026-04-30",
+      "date": "2026-05-02",
       "period": "TEST",
       "features": {
         "volumeZScore": 2.74,
@@ -2443,9 +2443,9 @@
       }
     },
     {
-      "id": "EVT_PETKM.IS_20260501",
+      "id": "EVT_PETKM.IS_20260503",
       "ticker": "PETKM.IS",
-      "date": "2026-05-01",
+      "date": "2026-05-03",
       "period": "TEST",
       "features": {
         "volumeZScore": 11.42,
@@ -2470,9 +2470,9 @@
       }
     },
     {
-      "id": "EVT_TUPRS.IS_20260507",
+      "id": "EVT_TUPRS.IS_20260509",
       "ticker": "TUPRS.IS",
-      "date": "2026-05-07",
+      "date": "2026-05-09",
       "period": "TEST",
       "features": {
         "volumeZScore": 10.37,
@@ -2497,9 +2497,9 @@
       }
     },
     {
-      "id": "EVT_MGROS.IS_20260513",
+      "id": "EVT_MGROS.IS_20260515",
       "ticker": "MGROS.IS",
-      "date": "2026-05-13",
+      "date": "2026-05-15",
       "period": "TEST",
       "features": {
         "volumeZScore": 12.73,
@@ -2524,9 +2524,9 @@
       }
     },
     {
-      "id": "EVT_THYAO.IS_20260518",
+      "id": "EVT_THYAO.IS_20260520",
       "ticker": "THYAO.IS",
-      "date": "2026-05-18",
+      "date": "2026-05-20",
       "period": "TEST",
       "features": {
         "volumeZScore": 13.49,
@@ -2551,9 +2551,9 @@
       }
     },
     {
-      "id": "EVT_ENKAI.IS_20260518",
+      "id": "EVT_ENKAI.IS_20260520",
       "ticker": "ENKAI.IS",
-      "date": "2026-05-18",
+      "date": "2026-05-20",
       "period": "TEST",
       "features": {
         "volumeZScore": 7.67,
@@ -2578,9 +2578,9 @@
       }
     },
     {
-      "id": "EVT_ENKAI.IS_20260519",
+      "id": "EVT_ENKAI.IS_20260521",
       "ticker": "ENKAI.IS",
-      "date": "2026-05-19",
+      "date": "2026-05-21",
       "period": "TEST",
       "features": {
         "volumeZScore": 12.34,
@@ -2605,9 +2605,9 @@
       }
     },
     {
-      "id": "EVT_ASELS.IS_20260520",
+      "id": "EVT_ASELS.IS_20260522",
       "ticker": "ASELS.IS",
-      "date": "2026-05-20",
+      "date": "2026-05-22",
       "period": "TEST",
       "features": {
         "volumeZScore": 3.07,
@@ -2632,9 +2632,9 @@
       }
     },
     {
-      "id": "EVT_SASA.IS_20260531",
+      "id": "EVT_SASA.IS_20260602",
       "ticker": "SASA.IS",
-      "date": "2026-05-31",
+      "date": "2026-06-02",
       "period": "TEST",
       "features": {
         "volumeZScore": 4.68,
@@ -2659,9 +2659,9 @@
       }
     },
     {
-      "id": "EVT_TOASO.IS_20260531",
+      "id": "EVT_TOASO.IS_20260602",
       "ticker": "TOASO.IS",
-      "date": "2026-05-31",
+      "date": "2026-06-02",
       "period": "TEST",
       "features": {
         "volumeZScore": 8.21,
@@ -2686,9 +2686,9 @@
       }
     },
     {
-      "id": "EVT_OYAKC.IS_20260602",
+      "id": "EVT_OYAKC.IS_20260604",
       "ticker": "OYAKC.IS",
-      "date": "2026-06-02",
+      "date": "2026-06-04",
       "period": "TEST",
       "features": {
         "volumeZScore": 13.53,
@@ -2713,9 +2713,9 @@
       }
     },
     {
-      "id": "EVT_ALARK.IS_20260619",
+      "id": "EVT_ALARK.IS_20260621",
       "ticker": "ALARK.IS",
-      "date": "2026-06-19",
+      "date": "2026-06-21",
       "period": "TEST",
       "features": {
         "volumeZScore": 10.57,
@@ -2740,9 +2740,9 @@
       }
     },
     {
-      "id": "EVT_FROTO.IS_20260621",
+      "id": "EVT_FROTO.IS_20260623",
       "ticker": "FROTO.IS",
-      "date": "2026-06-21",
+      "date": "2026-06-23",
       "period": "TEST",
       "features": {
         "volumeZScore": 11.55,
@@ -2767,9 +2767,9 @@
       }
     },
     {
-      "id": "EVT_BIMAS.IS_20260622",
+      "id": "EVT_BIMAS.IS_20260624",
       "ticker": "BIMAS.IS",
-      "date": "2026-06-22",
+      "date": "2026-06-24",
       "period": "TEST",
       "features": {
         "volumeZScore": 8.48,
@@ -2794,9 +2794,9 @@
       }
     },
     {
-      "id": "EVT_ISCTR.IS_20260623",
+      "id": "EVT_ISCTR.IS_20260625",
       "ticker": "ISCTR.IS",
-      "date": "2026-06-23",
+      "date": "2026-06-25",
       "period": "TEST",
       "features": {
         "volumeZScore": 9.46,
@@ -2821,9 +2821,9 @@
       }
     },
     {
-      "id": "EVT_GUBRF.IS_20260625",
+      "id": "EVT_GUBRF.IS_20260627",
       "ticker": "GUBRF.IS",
-      "date": "2026-06-25",
+      "date": "2026-06-27",
       "period": "TEST",
       "features": {
         "volumeZScore": 3.82,
@@ -2848,9 +2848,9 @@
       }
     },
     {
-      "id": "EVT_SISE.IS_20260630",
+      "id": "EVT_SISE.IS_20260702",
       "ticker": "SISE.IS",
-      "date": "2026-06-30",
+      "date": "2026-07-02",
       "period": "TEST",
       "features": {
         "volumeZScore": 4.08,
@@ -2875,9 +2875,9 @@
       }
     },
     {
-      "id": "EVT_ISDMR.IS_20260724",
+      "id": "EVT_ISDMR.IS_20260726",
       "ticker": "ISDMR.IS",
-      "date": "2026-07-24",
+      "date": "2026-07-26",
       "period": "TEST",
       "features": {
         "volumeZScore": 3.92,
@@ -2902,9 +2902,9 @@
       }
     },
     {
-      "id": "EVT_TUPRS.IS_20260728",
+      "id": "EVT_TUPRS.IS_20260730",
       "ticker": "TUPRS.IS",
-      "date": "2026-07-28",
+      "date": "2026-07-30",
       "period": "TEST",
       "features": {
         "volumeZScore": 3.95,
@@ -2929,9 +2929,9 @@
       }
     },
     {
-      "id": "EVT_OYAKC.IS_20260814",
+      "id": "EVT_OYAKC.IS_20260816",
       "ticker": "OYAKC.IS",
-      "date": "2026-08-14",
+      "date": "2026-08-16",
       "period": "TEST",
       "features": {
         "volumeZScore": 14.18,
@@ -2956,9 +2956,9 @@
       }
     },
     {
-      "id": "EVT_PETKM.IS_20260823",
+      "id": "EVT_PETKM.IS_20260825",
       "ticker": "PETKM.IS",
-      "date": "2026-08-23",
+      "date": "2026-08-25",
       "period": "TEST",
       "features": {
         "volumeZScore": 13.19,
@@ -2983,9 +2983,9 @@
       }
     },
     {
-      "id": "EVT_PGSUS.IS_20260911",
+      "id": "EVT_PGSUS.IS_20260913",
       "ticker": "PGSUS.IS",
-      "date": "2026-09-11",
+      "date": "2026-09-13",
       "period": "TEST",
       "features": {
         "volumeZScore": 7.89,
@@ -3010,9 +3010,9 @@
       }
     },
     {
-      "id": "EVT_OYAKC.IS_20260917",
+      "id": "EVT_OYAKC.IS_20260919",
       "ticker": "OYAKC.IS",
-      "date": "2026-09-17",
+      "date": "2026-09-19",
       "period": "TEST",
       "features": {
         "volumeZScore": 8.38,
@@ -3037,9 +3037,9 @@
       }
     },
     {
-      "id": "EVT_THYAO.IS_20260917",
+      "id": "EVT_THYAO.IS_20260919",
       "ticker": "THYAO.IS",
-      "date": "2026-09-17",
+      "date": "2026-09-19",
       "period": "TEST",
       "features": {
         "volumeZScore": 6.88,
@@ -3064,9 +3064,9 @@
       }
     },
     {
-      "id": "EVT_KRDMD.IS_20261001",
+      "id": "EVT_KRDMD.IS_20261003",
       "ticker": "KRDMD.IS",
-      "date": "2026-10-01",
+      "date": "2026-10-03",
       "period": "TEST",
       "features": {
         "volumeZScore": 5.19,
@@ -3091,9 +3091,9 @@
       }
     },
     {
-      "id": "EVT_TUPRS.IS_20261004",
+      "id": "EVT_TUPRS.IS_20261006",
       "ticker": "TUPRS.IS",
-      "date": "2026-10-04",
+      "date": "2026-10-06",
       "period": "TEST",
       "features": {
         "volumeZScore": 6.84,
@@ -3118,9 +3118,9 @@
       }
     },
     {
-      "id": "EVT_TOASO.IS_20261004",
+      "id": "EVT_TOASO.IS_20261006",
       "ticker": "TOASO.IS",
-      "date": "2026-10-04",
+      "date": "2026-10-06",
       "period": "TEST",
       "features": {
         "volumeZScore": 10.29,
@@ -3145,6 +3145,6 @@
       }
     }
   ],
-  "generatedAt": "2026-10-22T21:21:52.272Z",
+  "generatedAt": "2026-10-24T22:00:56.701Z",
   "daysAnalyzed": 730
 }

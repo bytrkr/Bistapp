@@ -8,6 +8,7 @@ ve piyasa verisi bağlam (UnifiedContext) Pydantic şemaları.
 from __future__ import annotations
 import time
 from enum import Enum
+from datetime import datetime
 from typing import Dict, List, Any, Optional
 
 try:
@@ -214,6 +215,50 @@ class FinalDecision(BaseModel):
     summary: str = ""
     coach_summary: Optional[str] = None
     metadata: Dict[str, Any] = Field(default_factory=dict)
+
+    def to_contract_payload(self) -> Any:
+        """
+        FinalDecision iç mantığını, Gateway veri sözleşmesi (JuryDecisionPayload) 
+        formatına dönüştürür.
+        """
+        try:
+            from schemas.jury_contract import JuryDecisionPayload, JuryVerdict
+        except ImportError:
+            # Fallback if package structure differs
+            try:
+                from .schemas.jury_contract import JuryDecisionPayload, JuryVerdict
+            except ImportError:
+                return self.model_dump()
+
+        # 1. Verdict Mapping
+        mapping = {
+            SignalType.GUCLU_AL: JuryVerdict.STRONG_BUY,
+            SignalType.AL: JuryVerdict.BUY,
+            SignalType.NOTR: JuryVerdict.HOLD,
+            SignalType.SAT: JuryVerdict.SELL,
+            SignalType.GUCLU_SAT: JuryVerdict.STRONG_SELL,
+        }
+        mapped_verdict = mapping.get(self.verdict, JuryVerdict.HOLD)
+
+        # 2. Metadata Extraction
+        m = self.metadata or {}
+        
+        # Ensure confidence is 0-100
+        conf_score = self.composite_score
+        if conf_score < 0: conf_score = 0.0
+        if conf_score > 100: conf_score = 100.0
+
+        return JuryDecisionPayload(
+            ticker=self.ticker,
+            verdict=mapped_verdict,
+            confidenceScore=conf_score,
+            entryZone=str(m.get("entryZone") or m.get("entry_zone") or "Kademeli Giriş"),
+            targetPrice=str(m.get("targetPrice") or m.get("target_price") or "Takipte"),
+            stopLoss=str(m.get("stopLoss") or m.get("stop_loss") or "Korumalı"),
+            activeShields=m.get("activeShields") or m.get("active_shields") or [],
+            reasoning=self.coach_summary or self.summary or "Analiz tamamlandı.",
+            timestamp=datetime.fromtimestamp(self.timestamp).isoformat() if self.timestamp else None
+        )
 
 
 class BacktestRequest(BaseModel):

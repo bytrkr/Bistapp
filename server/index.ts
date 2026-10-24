@@ -96,6 +96,31 @@ import newsRouter from './routes/news.js';
 app.use('/api/news', newsRouter);
 import marketRouter from './routes/market.js';
 app.use('/api/market', marketRouter);
+import publisherRouter from './routes/publisher.js';
+app.use('/api/v1/publisher', publisherRouter);
+
+// 🏛️ Evrensel Baş Analist ve Karar Hakemi Uç Noktası
+import { UniversalAnalystEngine } from './services/universalAnalystEngine.js';
+app.get(['/api/v1/analyst/decision', '/api/analyst/evaluate'], async (req: Request, res: Response) => {
+  try {
+    const ticker = (req.query.ticker as string) || 'THYAO';
+    const market = req.query.market as string | undefined;
+    const result = await UniversalAnalystEngine.evaluateAsset(ticker, market);
+    res.json(result);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message || 'Analiz hatası' });
+  }
+});
+
+app.post(['/api/v1/analyst/decision', '/api/analyst/evaluate'], async (req: Request, res: Response) => {
+  try {
+    const { ticker, market, data } = req.body || {};
+    const result = await UniversalAnalystEngine.evaluateAsset(ticker || 'THYAO', market, data);
+    res.json(result);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message || 'Analiz hatası' });
+  }
+});
 
 // 🔍 Forensic Case Studies & Veto Guardrails API
 import { getForensicCases, getForensicCaseByTicker } from './data/forensicCases.js';

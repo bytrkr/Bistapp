@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JuryDecisionPayload",
+  "description": "BistApp MT16 Kuant Jüri Karar Veri Sözleşmesi",
+  "type": "object",
+  "properties": {
+    "ticker": {
+      "type": "string",
+      "description": "Varlık kodu (Örn: THYAO, BTCUSDT)"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["STRONG_BUY", "BUY", "HOLD", "SELL", "STRONG_SELL"],
+      "description": "Nihai jüri kararı"
+    },
+    "confidenceScore": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Karar güven skoru (0-100)"
+    },
+    "entryZone": {
+      "type": "string",
+      "description": "Önerilen giriş fiyat bölgesi"
+    },
+    "targetPrice": {
+      "type": "string",
+      "description": "Hedef fiyat seviyesi"
+    },
+    "stopLoss": {
+      "type": "string",
+      "description": "Zarar kes (Stop-loss) seviyesi"
+    },
+    "activeShields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "İşlem sırasında tetiklenen veya aktif olan kalkanlar"
+    },
+    "reasoning": {
+      "type": "string",
+      "description": "Jürinin detaylı karar gerekçesi"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Karar üretim zaman damgası (ISO 8601)"
+    }
+  },
+  "required": [
+    "ticker",
+    "verdict",
+    "confidenceScore",
+    "entryZone",
+    "targetPrice",
+    "stopLoss",
+    "activeShields",
+    "reasoning"
+  ]
+}

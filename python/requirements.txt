@@ -1,25 +1,42 @@
+# --- Temel Web ve API Çerçeveleri ---
 fastapi
-uvicorn
-pydantic
+uvicorn[standard]
+pydantic>=2.0
 requests
-beautifulsoup4
-feedparser
 aiohttp
-python-dateutil
-alpaca-py
-pytrends
 httpx
-PyMuPDF
-python-docx
-pandas
-openpyxl
-tabulate
+python-dotenv
 python-multipart
-Pillow
-pytesseract
-xlsxwriter
-apscheduler
 passlib[bcrypt]
 python-jose[cryptography]
 stripe
+apscheduler
 
+# --- Veri İşleme ve Analiz ---
+pandas
+numpy
+scipy
+scikit-learn
+tabulate
+
+# --- Finansal Veri ve Bağlantılar ---
+yfinance
+alpaca-py
+pytrends
+
+# --- Metin, NLP ve Vektör (RAG) İşlemleri ---
+beautifulsoup4
+feedparser
+python-dateutil
+sentence-transformers
+nltk
+
+# --- Belge İşleme ve OCR (Görsel/PDF okuma) ---
+python-docx
+openpyxl
+XlsxWriter
+pypdf
+pdf2image
+pytesseract
+Pillow
+PyMuPDF

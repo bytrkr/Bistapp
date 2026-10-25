@@ -21,10 +21,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY python/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy Python codebase into /app/python and set working directory to /app/python
-COPY python/ ./python/
-WORKDIR /app/python
-ENV PYTHONPATH=/app:/app/python
+# Copy Python codebase directly into /app
+COPY python/ ./
 
 EXPOSE 8001
 

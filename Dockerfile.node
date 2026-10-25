@@ -30,8 +30,9 @@ RUN npm install --include=dev && npm cache clean --force
 # Copy built frontend assets from builder
 COPY --from=builder /app/dist ./dist
 
-# Copy server code and required runtime config/modules
+# Copy server code, src data constants, and required runtime config/modules
 COPY --from=builder /app/server ./server
+COPY --from=builder /app/src ./src
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 
 # Expose Node.js Application Port

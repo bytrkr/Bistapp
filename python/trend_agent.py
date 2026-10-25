@@ -11,9 +11,15 @@ import sys
 import time
 from datetime import datetime
 from typing import Dict, Any, Optional
-import pandas as pd
+try:
+    import pandas as pd
+except ImportError:
+    pd = None
 
-from pytrends.request import TrendReq
+try:
+    from pytrends.request import TrendReq
+except ImportError:
+    TrendReq = None
 
 
 class ToonTrendResult(str):
@@ -88,6 +94,9 @@ def get_trend_momentum(keyword: str, geo: Optional[str] = None) -> ToonTrendResu
             geo = "TR"
         else:
             geo = ""
+
+    if TrendReq is None:
+        return _build_fallback_result(clean_keyword, geo)
 
     try:
         # Pytrends istemcisi (zaman aşımı ve dil ayarlarıyla)

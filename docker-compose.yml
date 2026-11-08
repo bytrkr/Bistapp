@@ -12,12 +12,7 @@ services:
       - PORT=8001
       - NODE_ENV=production
       - JIRO_URL=http://jiro:8000
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+    
     restart: always
     networks:
       - bistapp-network
@@ -50,12 +45,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
+    
     restart: always
     networks:
       - bistapp-network

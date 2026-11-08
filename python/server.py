@@ -920,7 +920,7 @@ async def analyze_stock(req: AnalyzeRequest):
 async def execute_evaluate_v2(
     req: AnalyzeRequest,
     force_fomo: bool = False,
-    background_tasks: Optional[BackgroundTasks] = None
+    background_tasks: BackgroundTasks = BackgroundTasks()
 ) -> FinalDecision:
     """
     6-Boyutlu Otonom Degerlendirme Motoru:
@@ -1031,7 +1031,7 @@ async def evaluate_v2_get(
     ticker: str = "AAPL",
     market_regime: Optional[MarketRegime] = MarketRegime.BULL,
     force_fomo: Optional[bool] = False,
-    background_tasks: Optional[BackgroundTasks] = None
+    background_tasks: BackgroundTasks = BackgroundTasks()
 ):
     """
     GET /api/agents/evaluate_v2?ticker=AAPL
@@ -1045,7 +1045,7 @@ async def evaluate_v2_get(
 async def evaluate_v2_post(
     req: AnalyzeRequest,
     force_fomo: Optional[bool] = False,
-    background_tasks: Optional[BackgroundTasks] = None
+    background_tasks: BackgroundTasks = BackgroundTasks()
 ):
     """
     POST /api/agents/evaluate_v2
